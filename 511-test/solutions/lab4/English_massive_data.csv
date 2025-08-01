@@ -1,0 +1,601 @@
+language,split,id,utt,annot_utt,scenario
+English,test,0,wake me up at five am this week,wake me up at [time : five am] [date : this week],alarm
+English,test,3,quiet,quiet,audio
+English,test,8,pink is all we need,[color_type : pink] is all we need,iot
+English,test,14,and the darkness has fallen,and the darkness has fallen,iot
+English,test,19,olly turn the lights off in the bedroom,olly turn the lights off in the [house_place : bedroom],iot
+English,test,27,it's dirty here make some noise,it's dirty here make some noise,iot
+English,test,31,hoover the hallway,hoover the [house_place : hallway],iot
+English,test,41,i want the status on my screen brightness,i want the status on my screen brightness,general
+English,test,46,what's up olly,what's up olly,general
+English,test,47,what's the time in australia,what's the time in [place_name : australia],datetime
+English,test,50,olly tell me the time in g. m. t. plus five,olly tell me the time in [time_zone : g. m. t. plus five],datetime
+English,test,59,cancel my seven am alarm,cancel my [time : seven am] alarm,alarm
+English,test,61,what alarms i have set,what alarms i have set,alarm
+English,test,63,tell me about my alarms,tell me about my alarms,alarm
+English,test,71,i like senatra songs,i like [artist_name : senatra] songs,music
+English,test,80,set lights brightness higher,set lights brightness higher,iot
+English,test,85,tell me today's date,tell me [date : today's] date,datetime
+English,test,86,what date is it today,what date is it [date : today],datetime
+English,test,89,could you order sushi for tonight dinner,could you order [food_type : sushi] for [timeofday : tonight] [meal_type : dinner],takeaway
+English,test,100,what's the week's forecast,what's the [time : week's] forecast,weather
+English,test,102,what's this week's weather,what's [date : this week's] weather,weather
+English,test,103,tell me the weather this week,tell me the weather [date : this week],weather
+English,test,122,send a giggle my way,send a giggle my way,general
+English,test,124,olly tell me a joke,olly tell me a joke,general
+English,test,128,what's the date,what's the date,datetime
+English,test,132,order a takeaway,order a [order_type : takeaway],takeaway
+English,test,150,i like this song,i like this song,music
+English,test,151,play it again please,play it again please,play
+English,test,158,lower the lights,lower the lights,iot
+English,test,168,can they provide takeaway,can they provide [order_type : takeaway],takeaway
+English,test,169,can they do delivery,can they do [order_type : delivery],takeaway
+English,test,170,do they deliver home,do they [order_type : deliver] home,takeaway
+English,test,171,olly do they deliver home,olly do they [order_type : deliver] home,takeaway
+English,test,174,set wake up thursday seven am,set wake up [date : thursday] [time : seven am],alarm
+English,test,177,tell me some business news,tell me some [news_topic : business] news,news
+English,test,178,tell me international news,tell me [place_name : international] news,news
+English,test,182,play my rock playlist,play my [music_genre : rock] playlist,play
+English,test,185,turn on my playlist and play third song in the queue,turn on my playlist and play third song in the queue,play
+English,test,189,mute volume,mute volume,audio
+English,test,197,what time is it,what time is it,datetime
+English,test,201,delete the alarm i just set,delete the alarm i just set,alarm
+English,test,216,how is the weather like today,how is the weather like [date : today],weather
+English,test,219,should i bring an umbrella tomorrow,should i bring an [weather_descriptor : umbrella] [date : tomorrow],weather
+English,test,220,play music from my rock list,play music from my [playlist_name : rock list],play
+English,test,250,i feel like jazz right now how about you,i feel like [music_genre : jazz] right now how about you,play
+English,test,254,olly play a good track from my favorite jazz player,olly play a good track from my favorite [music_genre : jazz] player,play
+English,test,258,i can't hear you,i can't hear you,audio
+English,test,261,i can barely hear you,i can barely hear you,audio
+English,test,263,let's have the lights blue,let's have the lights [color_type : blue],iot
+English,test,279,what is today's forecast for berlin,what is [date : today's] forecast for [place_name : berlin],weather
+English,test,281,what is the exchange rate of us dollar to pound sterling,what is the [news_topic : exchange rate of us dollar to pound sterling],news
+English,test,286,light up the lights in the kitchen,light up the lights in the [house_place : kitchen],iot
+English,test,290,start a vacuum cleaner,start a [device_type : vacuum cleaner],iot
+English,test,292,turn on the vacuum cleaner,turn on the [device_type : vacuum cleaner],iot
+English,test,296,play a nirvana playlist,play a [playlist_name : nirvana playlist],play
+English,test,297,shuffle songs by coldplay,[player_setting : shuffle] songs by [artist_name : coldplay],play
+English,test,299,what is the weather,what is the weather,weather
+English,test,310,what day is new year's eve this year,what day is new year's eve [date : this year],datetime
+English,test,315,please be quiet for another hour,please be quiet for [time : another hour],audio
+English,test,317,do not speak today,do not speak [date : today],audio
+English,test,319,tell me the weather in barcelona in two days from now,tell me the weather in [place_name : barcelona] in [time : two days from now],weather
+English,test,321,disable my okug,disable my [device_type : okug],iot
+English,test,322,enable my plug,enable my [device_type : plug],iot
+English,test,329,seven years,[song_name : seven years],play
+English,test,333,what is the weather condition in new york,what is the weather condition in [place_name : new york],weather
+English,test,334,i wish to know the weather in san fransico,i wish to know the weather in [place_name : san fransico],weather
+English,test,344,will it be rainy tomorrow,will it be [weather_descriptor : rainy] [date : tomorrow],weather
+English,test,348,will it rain tomorrow,will it [weather_descriptor : rain] [date : tomorrow],weather
+English,test,355,what day of the week is first april,what day of the week is [date : first april],datetime
+English,test,360,what is the current time,what is the current time,datetime
+English,test,362,play the second song from anirudh's song,play the second song from [artist_name : anirudh's] song,play
+English,test,366,please tell me the latest news,please tell me the latest news,news
+English,test,369,switch off the lights,switch off the lights,iot
+English,test,379,i want the music to be saved can you do it for me,i want the music to be saved can you do it for me,music
+English,test,385,what's sensational in time of india,what's sensational in [media_type : time of india],news
+English,test,389,turn the smart plug on,turn the [device_type : smart plug] on,iot
+English,test,391,play a random song from my playlist,play a random song from my playlist,play
+English,test,393,play a retro song in my playlist,play a [music_genre : retro] song in my playlist,play
+English,test,397,play any song by joe prsaise,play any song by [artist_name : joe prsaise],play
+English,test,399,remove the first alarm,remove the first alarm,alarm
+English,test,400,start playing,start playing,play
+English,test,407,can you play rock music for the next hour,can you play [music_genre : rock] music for the [time : next hour],play
+English,test,411,can you tell me a joke,can you tell me a joke,general
+English,test,412,tell me a funny joke,tell me a [joke_type : funny] joke,general
+English,test,424,what are the breaking news,what are the breaking news,news
+English,test,426,power up the plug socket one,power up the [device_type : plug socket one],iot
+English,test,427,turn off the lights in the bathroom,turn off the lights in the [house_place : bathroom],iot
+English,test,428,turn off the bathroom lights,turn off the [house_place : bathroom] lights,iot
+English,test,430,what is the weather like right now,what is the weather like right now,weather
+English,test,437,open bad religion folder,open [artist_name : bad religion] folder,play
+English,test,441,what are the latest news headlines,what are the latest news headlines,news
+English,test,442,what's happening in the news,what's happening in the news,news
+English,test,443,raise volume,raise volume,audio
+English,test,448,run coffee maker,run [device_type : coffee maker],iot
+English,test,451,get me the latest stock price for costco,get me the latest [news_topic : stock price for costco],news
+English,test,456,change the bedroom lights to green,change the [house_place : bedroom] lights to [color_type : green],iot
+English,test,468,change the lights to dim,change the lights to dim,iot
+English,test,473,play the weekend,play the [song_name : weekend],play
+English,test,475,what mistakes do you usually make,what mistakes do you usually make,general
+English,test,484,who is the singer of song,who is the singer of song,music
+English,test,486,what time is it in new york city,what time is it in [place_name : new york city],datetime
+English,test,491,is it cold outside,is it [weather_descriptor : cold] outside,weather
+English,test,494,what's a good joke,what's a [joke_type : good] joke,general
+English,test,506,open songs from major lazer,open songs from [artist_name : major lazer],play
+English,test,508,what alarms are set,what alarms are set,alarm
+English,test,512,by get marks,by get marks,weather
+English,test,525,prepare the order as soon as possible,prepare the order as soon as possible,takeaway
+English,test,527,do you know any jokes,do you know any jokes,general
+English,test,533,set an alarm for nine am,set an alarm for [time : nine am],alarm
+English,test,540,play the song sung by katy perry,play the song sung by [artist_name : katy perry],play
+English,test,555,play mf doom anything,play [artist_name : mf doom] anything,play
+English,test,560,turn off eight am alarm,turn off [time : eight am] alarm,alarm
+English,test,564,change light color,change light color,iot
+English,test,576,play all by playlist,play all by playlist,play
+English,test,585,show latest news,show latest news,news
+English,test,588,what is new news for today,what is new news for [date : today],news
+English,test,590,what is the current weather,what is the current weather,weather
+English,test,608,unmute after,unmute after,audio
+English,test,612,please ring the wake up alarm at eight am next saturday,please ring the [alarm_type : wake up] alarm at [time : eight am] next [date : saturday],alarm
+English,test,614,start playlist,start playlist,play
+English,test,625,please play the radio gaga song,please play the radio [artist_name : gaga] song,play
+English,test,631,set notification for news about the dakota pipeline,set notification for news about the [news_topic : dakota pipeline],news
+English,test,635,please start vacuum cleaner,please start [device_type : vacuum cleaner],iot
+English,test,651,turn off room lights,turn off [house_place : room] lights,iot
+English,test,660,current time in japan,current time in [place_name : japan],datetime
+English,test,665,can you lower the lights,can you lower the lights,iot
+English,test,668,i want two burgers and one coke order it fast,i want two [food_type : burgers] and one [food_type : coke] order it fast,takeaway
+English,test,680,keep me informed about bitcoin price,keep me informed about [news_topic : bitcoin price],news
+English,test,686,what is the time now in new york,what is the time now in [place_name : new york],datetime
+English,test,702,hi can you please turn lower the lights,hi can you please turn lower the lights,iot
+English,test,712,i want to hear the last news from c. n. n.,i want to hear the last news from [media_type : c. n. n.],news
+English,test,726,summarize week's weather details,summarize [time : week's] weather details,weather
+English,test,730,turn the lights off,turn the lights off,iot
+English,test,738,how cold is it outside today,how [weather_descriptor : cold] is it outside [date : today],weather
+English,test,751,don't talk until i ask you to,don't talk until i ask you to,audio
+English,test,761,i want to know about this song,i want to know about this song,music
+English,test,764,what is the weather forecast for this week,what is the weather forecast for [date : this week],weather
+English,test,765,could you please give me up to date news headlines from my newest provider,could you please give me up to date news headlines from my [media_type : newest provider],news
+English,test,767,could you please find me the latest news from a source that i do not usually go to,could you please find me the latest news from a source that i do not usually go to,news
+English,test,768,tell me about the latest political news,tell me about the latest [news_topic : political] news,news
+English,test,779,i want to hear snow by red hot chili peppers,i want to hear [song_name : snow] by [artist_name : red hot chili peppers],play
+English,test,781,play bilando,play [song_name : bilando],play
+English,test,782,play let me love you by ariana grande,play [song_name : let me love you] by [artist_name : ariana grande],play
+English,test,783,play love songs,play [song_name : love songs],play
+English,test,790,mild or heavy weather,[weather_descriptor : mild] or [weather_descriptor : heavy] weather,weather
+English,test,796,confirm my alarm settings,confirm my alarm settings,alarm
+English,test,804,hey siri mute the speakers,hey siri mute the speakers,audio
+English,test,826,what is the current temperature outside,what is the current [weather_descriptor : temperature] outside,weather
+English,test,827,play bob dylan playlist,play [artist_name : bob dylan] playlist,play
+English,test,832,hey what will be the predicted weather for tomorrow,hey what will be the predicted weather for [date : tomorrow],weather
+English,test,837,what are the b. b. c. poll predictions for the upcoming us elections,what are the [media_type : b. b. c. poll] predictions for the [news_topic : upcoming us elections],news
+English,test,843,start the robot roomba,start the [device_type : robot roomba],iot
+English,test,861,my set alarms,my set alarms,alarm
+English,test,862,alarm settings,alarm settings,alarm
+English,test,864,robot vacuum the living room now,robot vacuum the [house_place : living room] now,iot
+English,test,870,opinion save,opinion save,music
+English,test,884,set alarm for eight am,set alarm for [time : eight am],alarm
+English,test,891,play some christian music,play some [music_descriptor : christian] music,play
+English,test,897,make the house lights amber at six p. m.,make the [house_place : house] lights [color_type : amber] at [time : six p. m.],iot
+English,test,914,please turn lights off,please turn lights off,iot
+English,test,920,please remove my alarm,please remove my alarm,alarm
+English,test,931,i like this song please save,i like this song please save,music
+English,test,936,open up and play music from my jogging playlist,open up and play music from my [playlist_name : jogging playlist],play
+English,test,939,set my alarm for seven am,set my alarm for [time : seven am],alarm
+English,test,940,turn my morning alarm on,turn my [timeofday : morning] alarm on,alarm
+English,test,944,what is the time difference between here and japan,what is the time difference between here and [place_name : japan],datetime
+English,test,951,what's the weather like right now in new york,what's the weather like right now in [place_name : new york],weather
+English,test,962,increase the brightness of the lights,increase the brightness of the lights,iot
+English,test,964,i want dimmer lights,i want dimmer lights,iot
+English,test,967,can i get take-out from pf changs,can i get [order_type : take-out] from [business_name : pf changs],takeaway
+English,test,969,news articles on a particular subject,news articles on a particular subject,news
+English,test,974,what time is it in new york now,what time is it in [place_name : new york] now,datetime
+English,test,997,turn the living room's light off,turn the [house_place : living room's] light off,iot
+English,test,999,could you turn the light off,could you turn the light off,iot
+English,test,1007,play creed from my rock playlist,play [artist_name : creed] from my [music_genre : rock] playlist,play
+English,test,1014,what time is it in london right now,what time is it in [place_name : london] right now,datetime
+English,test,1030,dim the lights in the living room,dim the lights in the [house_place : living room],iot
+English,test,1042,open the folder app please,open the folder app please,takeaway
+English,test,1043,call the nearest thai restaurant with delivery,call the nearest [food_type : thai] [business_type : restaurant] with [order_type : delivery],takeaway
+English,test,1047,i need a good cry can you play me sad rock songs,i need a good cry can you play me [music_descriptor : sad] [music_genre : rock] songs,play
+English,test,1048,lower the speaker volume,lower the speaker volume,audio
+English,test,1059,turn on the robot vacuum cleaner,turn on the [device_type : robot vacuum cleaner],iot
+English,test,1061,give me up to date on sports news,give me up to date on [news_topic : sports] news,news
+English,test,1063,get hourly notification on sports news,get [general_frequency : hourly] notification on [news_topic : sports] news,news
+English,test,1065,where is volume setting,where is volume setting,audio
+English,test,1071,brighten the lights in the hallway,brighten the lights in the [house_place : hallway],iot
+English,test,1072,please turn up the screen brightness all the way,please turn up the [device_type : screen] brightness [change_amount : all the way],iot
+English,test,1076,do not play rock metal,do not play [music_genre : rock metal],music
+English,test,1084,user friendly,user friendly,news
+English,test,1090,can you increase the brightness in the room,can you increase the brightness in the [house_place : room],iot
+English,test,1093,go to the washington post website,go to the [media_type : washington post] website,news
+English,test,1098,what day of the week does the fifteenth of march fall on,what day of the week does the [date : fifteenth of march] fall on,datetime
+English,test,1108,my desire is to listen to some country music,my desire is to listen to some [music_genre : country] music,play
+English,test,1115,coordinate all pop song genres,coordinate all [music_genre : pop] song genres,play
+English,test,1120,is there any special in politic,is there any special in [news_topic : politic],news
+English,test,1121,play lady by kenny roger,play [song_name : lady] by [artist_name : kenny roger],play
+English,test,1123,next play justin bieber's sorry,next play [artist_name : justin bieber's] [song_name : sorry],play
+English,test,1124,get sia's cheap thrills ready to play next,get [artist_name : sia's] [song_name : cheap thrills] ready to play next,play
+English,test,1127,play all songs on shuffle,play all songs on [player_setting : shuffle],play
+English,test,1144,i need some rap,i need some [music_genre : rap],play
+English,train,1,wake me up at nine am on friday,wake me up at [time : nine am] on [date : friday],alarm
+English,train,2,set an alarm for two hours from now,set an alarm for [time : two hours from now],alarm
+English,train,4,olly quiet,olly quiet,audio
+English,train,5,stop,stop,audio
+English,train,6,olly pause for ten seconds,olly pause for [time : ten seconds],audio
+English,train,7,pause for ten seconds,pause for [time : ten seconds],audio
+English,train,9,make the lighting bit more warm here,make the lighting bit more [color_type : warm] here,iot
+English,train,10,please set the lighting suitable for reading,please set the lighting [color_type : suitable for reading],iot
+English,train,12,time to sleep,time to sleep,iot
+English,train,13,time to sleep olly,time to sleep olly,iot
+English,train,15,turn off the light in the bathroom,turn off the light in the [house_place : bathroom],iot
+English,train,16,olly dim the lights in the hall,olly dim the lights in the [house_place : hall],iot
+English,train,18,turn the lights off in the bedroom,turn the lights off in the [house_place : bedroom],iot
+English,train,20,set lights to twenty percent,set lights [change_amount : to twenty percent],iot
+English,train,21,olly set lights to twenty percent,olly set lights [change_amount : to twenty percent],iot
+English,train,22,dim the lights in the kitchen olly,dim the lights in the [house_place : kitchen] olly,iot
+English,train,23,dim the lights in the kitchen,dim the lights in the [house_place : kitchen],iot
+English,train,25,olly clean the flat,olly clean the [house_place : flat],iot
+English,train,28,vacuum the house,vacuum the [house_place : house],iot
+English,train,29,vacuum the house olly,vacuum the [house_place : house] olly,iot
+English,train,32,hoover the carpets around,hoover the [house_place : carpets] around,iot
+English,train,33,check when the show starts,check when the show starts,calendar
+English,train,34,i want to listen arijit singh song once again,i want to listen [artist_name : arijit singh] song once again,play
+English,train,35,i want to play that music one again,i want to play that [media_type : music] one again,play
+English,train,36,check my car is ready,check my car is ready,general
+English,train,37,check my laptop is working,check my laptop is working,general
+English,train,38,is the brightness of my screen running low,is the brightness of my screen running low,general
+English,train,39,i need to have location services on can you check,i need to have location services on can you check,general
+English,train,40,check the status of my power usage,check the status of my power usage,general
+English,train,43,i am not tired i am actually happy,i am not tired i am actually happy,general
+English,train,44,olly i am not tired i am actually happy,olly i am not tired i am actually happy,general
+English,train,45,what's up,what's up,general
+English,train,48,tell me the time in moscow,tell me the time in [place_name : moscow],datetime
+English,train,49,tell me the time in g. m. t. plus five,tell me the time in [time_zone : g. m. t. plus five],datetime
+English,train,51,olly list most rated delivery options for chinese food,olly list most rated [order_type : delivery] options for [food_type : chinese] food,takeaway
+English,train,52,most rated delivery options for chinese food,most rated [order_type : delivery] options for [food_type : chinese] food,takeaway
+English,train,54,olly most rated delivery options for chinese food,olly most rated [order_type : delivery] options for [food_type : chinese] food,takeaway
+English,train,55,i want some curry to go any recommendations,i want some [food_type : curry] to go any recommendations,takeaway
+English,train,56,i want some curry to go any recommendations olly,i want some [food_type : curry] to go any recommendations olly,takeaway
+English,train,57,find my thai takeaways around grassmarket,find my [food_type : thai] [order_type : takeaways] around [place_name : grassmarket],takeaway
+English,train,60,stop seven am alarm,stop [time : seven am] alarm,alarm
+English,train,62,please list active alarms,please list active alarms,alarm
+English,train,65,what's happening in football today,what's happening in [news_topic : football] [date : today],news
+English,train,66,please play yesterday from beatles,please play [song_name : yesterday] from [artist_name : beatles],play
+English,train,69,i like rock music,i like [music_genre : rock] music,music
+English,train,70,my favorite music band is queen,my favorite music band is [artist_name : queen],music
+English,train,72,start playing music from favorites,start playing music from favorites,play
+English,train,73,please play my best music,please play my best music,play
+English,train,75,who's current music's author,who's current music's author,music
+English,train,76,what's that the album is current music from,what's that the album is current music from,music
+English,train,77,olly i'm really enjoying this song,olly i'm really enjoying this song,music
+English,train,78,the song you are playing is amazing,the song you are playing is amazing,music
+English,train,79,this is one of the best songs for me,this is one of the best songs for me,music
+English,train,81,make lights brightener,make lights brightener,iot
+English,train,82,please raise the lights to max,please raise the lights [change_amount : to max],iot
+English,train,83,hey start vacuum cleaner robot,hey start [device_type : vacuum cleaner robot],iot
+English,train,84,turn cleaner robot on,turn [device_type : cleaner robot] on,iot
+English,train,87,please order some sushi for dinner,please order some [food_type : sushi] for [meal_type : dinner],takeaway
+English,train,88,hey i'd like you to order burger,hey i'd like you to order [food_type : burger],takeaway
+English,train,91,can i order takeaway dinner from byron's,can i order [order_type : takeaway] [meal_type : dinner] from [business_name : byron's],takeaway
+English,train,92,does byron's supports takeaways,does [business_name : byron's] supports [order_type : takeaways],takeaway
+English,train,93,set an alarm for twelve,set an alarm for [time : twelve],alarm
+English,train,94,set an alarm forty minutes from now,set an alarm [time : forty minutes from now],alarm
+English,train,95,set alarm for eight every weekday,set alarm for [time : eight] [general_frequency : every weekday],alarm
+English,train,96,is it raining,is it [weather_descriptor : raining],weather
+English,train,97,is it going to rain,is it going to [weather_descriptor : rain],weather
+English,train,98,is it currently snowing,is it currently [weather_descriptor : snowing],weather
+English,train,101,what's this weeks weather,what's [date : this weeks] weather,weather
+English,train,104,tell me b. b. c. news,tell me [media_type : b. b. c.] news,news
+English,train,105,what's the news on b. b. c. news,what's the news on [media_type : b. b. c.] news,news
+English,train,106,what is the b. b. c.'s latest news,what is the [media_type : b. b. c.'s] latest news,news
+English,train,108,play a song i like,play a song i like,play
+English,train,110,play daft punk,play [artist_name : daft punk],play
+English,train,111,put on some coldplay,put on some [artist_name : coldplay],play
+English,train,114,shuffle this playlist,[player_setting : shuffle] this playlist,music
+English,train,116,what's playing,what's playing,music
+English,train,117,what music is this,what music is this,music
+English,train,118,tell me the artist of this song,tell me the artist of this song,music
+English,train,119,make me laugh,make me laugh,general
+English,train,120,olly make me laugh,olly make me laugh,general
+English,train,121,tell me a good joke,tell me a [joke_type : good] joke,general
+English,train,123,tell me a joke,tell me a joke,general
+English,train,125,alexa tell me a joke,alexa tell me a joke,general
+English,train,126,cheer me up,cheer me up,general
+English,train,129,tell me about today,tell me about [date : today],general
+English,train,130,order a pizza,order a [food_type : pizza],takeaway
+English,train,131,order me a byron from deliveroo,order me a [food_type : byron] from [business_name : deliveroo],takeaway
+English,train,133,when is my order arriving,when is my order arriving,takeaway
+English,train,134,how long until my takeaway,how long until my [order_type : takeaway],takeaway
+English,train,135,domino's delivery status,[business_name : domino's] [order_type : delivery] status,takeaway
+English,train,136,what's playing,what's playing,music
+English,train,137,tell me the name of the song,tell me the name of the song,music
+English,train,139,play my jazz playlist,play my [music_genre : jazz] playlist,play
+English,train,140,start my jazz playlist,start my [music_genre : jazz] playlist,play
+English,train,141,play my favorite playlist,play my favorite playlist,play
+English,train,142,that's a good song,that's a good song,music
+English,train,143,i don't like it,i don't like it,music
+English,train,144,i like it,i like it,music
+English,train,145,i like jazz,i like [music_genre : jazz],music
+English,train,146,can you play some jazz,can you play some [music_genre : jazz],play
+English,train,149,this song was very good,this song was very good,music
+English,train,152,change the volume,change the volume,audio
+English,train,153,enable shuffle,enable [player_setting : shuffle],music
+English,train,154,save settings,save settings,music
+English,train,155,set brightness to fifty percent,set brightness [change_amount : to fifty percent],iot
+English,train,156,turn down the brightness,turn down the brightness,iot
+English,train,157,reduce the brightness,reduce the brightness,iot
+English,train,159,decrease brightness,decrease brightness,iot
+English,train,160,dim the lights,dim the lights,iot
+English,train,161,olly dim the lights,olly dim the lights,iot
+English,train,162,make me a coffee,make me a coffee,iot
+English,train,163,olly make me a coffee,olly make me a coffee,iot
+English,train,164,i need a coffee,i need a coffee,iot
+English,train,165,i fancy some coffee now,i fancy some coffee now,iot
+English,train,166,how are you,how are you,general
+English,train,172,set alarm at ten am,set alarm at [time : ten am],alarm
+English,train,175,tell me the latest technology news,tell me the latest [news_topic : technology] news,news
+English,train,176,tell me latest technology news,tell me latest [news_topic : technology] news,news
+English,train,179,tell me the weather,tell me the weather,weather
+English,train,180,what is the weather now,what is the weather now,weather
+English,train,181,is it raining now,is it [weather_descriptor : raining] now,weather
+English,train,183,turn on my michael jackson playlist,turn on my [artist_name : michael jackson] playlist,play
+English,train,184,play michael jackson from my playlist,play [artist_name : michael jackson] from my playlist,play
+English,train,186,play last song from my favorite playlist,play [song_name : last song] from my favorite playlist,play
+English,train,187,turn up the volume,turn up the volume,audio
+English,train,190,turn on the plug,turn on the [device_type : plug],iot
+English,train,191,switch on the plug,switch on the [device_type : plug],iot
+English,train,192,turn on my plug,turn on my [device_type : plug],iot
+English,train,193,tell me some joke,tell me some joke,general
+English,train,194,do you know any joke,do you know any joke,general
+English,train,195,what is the time,what is the time,datetime
+English,train,196,tell me the time,tell me the time,datetime
+English,train,198,does dominoes do takeaway,does [food_type : dominoes] do [order_type : takeaway],takeaway
+English,train,199,does my favorite pizza place available for takeaway,does my favorite [food_type : pizza] place available for [order_type : takeaway],takeaway
+English,train,200,can i order takeaway from spanish place,can i order [order_type : takeaway] from [food_type : spanish] place,takeaway
+English,train,202,remove the alarm,remove the alarm,alarm
+English,train,203,show me the alarms i set,show me the alarms i set,alarm
+English,train,204,do i have any alarms,do i have any alarms,alarm
+English,train,205,show alarms,show alarms,alarm
+English,train,206,how's the weather like in beijing,how's the weather like in [place_name : beijing],weather
+English,train,207,tell me the weather in shanghai,tell me the weather in [place_name : shanghai],weather
+English,train,209,please make the lights reading friendly,please make the lights [color_type : reading friendly],iot
+English,train,210,please make the lights watching friendly,please make the lights [color_type : watching friendly],iot
+English,train,211,make the room brighter,make the [house_place : room] brighter,iot
+English,train,212,and the light began,and the light began,iot
+English,train,213,what's date today,what's date [date : today],datetime
+English,train,214,what day is today,what day is [date : today],datetime
+English,train,215,tell me a date,tell me a date,datetime
+English,train,218,is it raining outside olly,is it [weather_descriptor : raining] outside olly,weather
+English,train,221,change the lights into green,change the lights into [color_type : green],iot
+English,train,222,add this song to my favorite list,add this song to my favorite list,music
+English,train,223,what is this song,what is this song,music
+English,train,224,olly lights off,olly lights off,iot
+English,train,225,lights off,lights off,iot
+English,train,226,clean the floor please,clean the [house_place : floor] please,iot
+English,train,227,turn on the rice cooker socket,turn on the [device_type : rice cooker socket],iot
+English,train,228,turn off the rice cooker socket,turn off the [device_type : rice cooker socket],iot
+English,train,231,could you please help me to order some sushi from deliveroo,could you please help me to order some [food_type : sushi] from [business_name : deliveroo],takeaway
+English,train,233,set an alarm for four in the afternoon,set an alarm for [time : four] in the [timeofday : afternoon],alarm
+English,train,234,olly alert me at three p. m. to go to the concert,olly alert me at [time : three p. m.] to go to the [event_name : concert],alarm
+English,train,235,alert me at three p. m. to go to the concert,alert me at [time : three p. m.] to go to the [event_name : concert],alarm
+English,train,236,do i have an alarm set for morning flight,do i have an alarm set for [timeofday : morning] [event_name : flight],alarm
+English,train,238,are there any alarms,are there any alarms,alarm
+English,train,239,is it raining in barcelona,is it [weather_descriptor : raining] in [place_name : barcelona],weather
+English,train,240,will it rain today,will it [weather_descriptor : rain] [date : today],weather
+English,train,241,what's going on outside,what's going on outside,weather
+English,train,243,what's going on in the world,what's going on in the [place_name : world],news
+English,train,244,what's happening in cambridge,what's happening in [place_name : cambridge],news
+English,train,245,show me some news from b. b. c.,show me some news from [media_type : b. b. c.],news
+English,train,246,olly show me some news from b. b. c.,olly show me some news from [media_type : b. b. c.],news
+English,train,247,play c. n. n. news,play [media_type : c. n. n.] news,news
+English,train,248,olly hackernews,olly [media_type : hackernews],news
+English,train,249,play me some hihop,play me some [music_genre : hihop],play
+English,train,252,death metal now,death [music_genre : metal] now,play
+English,train,255,olly what music do i usually like after work,olly what music do i usually like after work,music
+English,train,257,olly play music from my favorite pianist,olly play music from my favorite [music_genre : pianist],play
+English,train,259,you're too loud,you're too loud,audio
+English,train,260,i can barely hear you olly,i can barely hear you olly,audio
+English,train,262,turn the lights blue,turn the lights [color_type : blue],iot
+English,train,264,make the lights shine blue,make the lights [color_type : shine blue],iot
+English,train,265,olly good night lights off,olly good night lights off,iot
+English,train,267,it's awfully dark here,it's awfully dark here,iot
+English,train,268,make the lights brighter,make the lights brighter,iot
+English,train,269,olly it's too dark i can't even see my hands,olly it's too dark i can't even see my hands,iot
+English,train,270,what's the time,what's the time,datetime
+English,train,273,what is the song,what is the song,music
+English,train,274,olly what is the song,olly what is the song,music
+English,train,275,what the singer meant by the title of the song bohemian rhapsody,what the singer meant by the title of the song [song_name : bohemian rhapsody],music
+English,train,276,who covered the song one more cup of coffee,who covered the song [song_name : one more cup of coffee],music
+English,train,277,what is the weather in paris,what is the weather in [place_name : paris],weather
+English,train,278,what is the weather like in toronto,what is the weather like in [place_name : toronto],weather
+English,train,280,what is the current state of brexit negotiations,what is the current state of [news_topic : brexit negotiations],news
+English,train,282,who is going to win the next elections in the france,who is going to win the next [news_topic : elections] in the [place_name : france],news
+English,train,283,do you expect sun on sunday,do you expect [weather_descriptor : sun] on [date : sunday],weather
+English,train,284,is it going to rain in the evening,is it going to [weather_descriptor : rain] in the [timeofday : evening],weather
+English,train,285,is it going to be windy tomorrow,is it going to be [weather_descriptor : windy] [date : tomorrow],weather
+English,train,287,brighten the lamp next to the sofa,brighten the [device_type : lamp next to the sofa],iot
+English,train,288,lighten the light,lighten the light,iot
+English,train,289,what time is it in moscow now,what time is it in [place_name : moscow] now,datetime
+English,train,291,vacuum the kitchen,vacuum the [house_place : kitchen],iot
+English,validation,11,turn the lights off please,turn the lights off please,iot
+English,validation,17,dim the lights in the hall,dim the lights in the [house_place : hall],iot
+English,validation,24,make a room darker,make a [house_place : room] darker,iot
+English,validation,26,clean the flat,clean the [house_place : flat],iot
+English,validation,30,cleaning is good dust is so bad do now your magic clean my carpet,cleaning is good dust is so bad do now your magic clean my [house_place : carpet],iot
+English,validation,42,give me the status on my available memory,give me the status on my available memory,general
+English,validation,53,list most rated delivery options for chinese food,list most rated [order_type : delivery] options for [food_type : chinese] food,takeaway
+English,validation,58,find my thai takeaways around grassmarket,find my [food_type : thai] [order_type : takeaways] around [place_name : grassmarket],takeaway
+English,validation,67,i'd like to hear queen's barcelona,i'd like to hear [artist_name : queen's] [song_name : barcelona],play
+English,validation,68,play me barcelona by queen,play me [song_name : barcelona] by [artist_name : queen],play
+English,validation,74,what's the band is playing now,what's the band is playing now,music
+English,validation,90,what's with my dinner order,what's with my dinner order,takeaway
+English,validation,99,what's the weeks forecast,what's the [time : weeks] forecast,weather
+English,validation,107,play hurts like heaven,play [song_name : hurts like heaven],play
+English,validation,109,put on cannibal queen,put on [song_name : cannibal queen],play
+English,validation,112,play some david bowie,play some [artist_name : david bowie],play
+English,validation,113,loop this track,[player_setting : loop] this track,music
+English,validation,115,set the volume to low,set the volume [change_amount : to low],audio
+English,validation,127,what's the day today,what's the day [date : today],datetime
+English,validation,138,which song is that,which song is that,music
+English,validation,147,i like to listen to jazz,i like to listen to [music_genre : jazz],play
+English,validation,148,olly i like to listen to jazz,olly i like to listen to [music_genre : jazz],play
+English,validation,167,hey hey,hey hey,general
+English,validation,173,set alarm tomorrow at six am,set alarm [date : tomorrow] at [time : six am],alarm
+English,validation,188,volume up,volume up,audio
+English,validation,217,is it raining outside,is it [weather_descriptor : raining] outside,weather
+English,validation,229,what time is it in las vegas,what time is it in [place_name : las vegas],datetime
+English,validation,230,what time is it in beijing,what time is it in [place_name : beijing],datetime
+English,validation,232,set an alarm at six in the morning,set an alarm at [time : six] in the [timeofday : morning],alarm
+English,validation,237,did i set an alarm to wake up in the morning,did i set an alarm to [alarm_type : wake up] in the [timeofday : morning],alarm
+English,validation,242,what's happening in america,what's happening in [place_name : america],news
+English,validation,251,olly death metal now,olly death [music_genre : metal] now,play
+English,validation,271,what's the time in tokyo now,what's the time in [place_name : tokyo] now,datetime
+English,validation,295,tell me today's newspaper's headlines,tell me [date : today's] [media_type : newspaper's] headlines,news
+English,validation,298,play chopin,play [artist_name : chopin],play
+English,validation,311,what day is memorial day this year,what day is memorial day [date : this year],datetime
+English,validation,312,it's too dark here,it's too dark here,iot
+English,validation,318,is it going to rain tomorrow,is it going to [weather_descriptor : rain] [date : tomorrow],weather
+English,validation,331,softer,softer,audio
+English,validation,345,what will be the temperature out there tomorrow,what will be the [weather_descriptor : temperature] out there [date : tomorrow],weather
+English,validation,346,what is tomorrows weather predictions,what is [date : tomorrows] weather predictions,weather
+English,validation,353,what day of the week is the twenty second march,what day of the week is the [date : twenty second march],datetime
+English,validation,365,is it monday today,is it [date : monday today],datetime
+English,validation,368,what's the weather like in new york city,what's the weather like in [place_name : new york city],weather
+English,validation,375,is it sunny in gonbad now,is it [weather_descriptor : sunny] in [place_name : gonbad] now,weather
+English,validation,387,let me know as soon as there is more news on brexit,let me know as soon as there is more news on [news_topic : brexit],news
+English,validation,388,turn off the smart plug,turn off the [device_type : smart plug],iot
+English,validation,392,play a song from my favorites,play a song from my favorites,play
+English,validation,406,i would like to listen to pop music please,i would like to listen to [music_genre : pop] music please,play
+English,validation,415,change my room lights so that i can get a good sleep,change my room lights so that i can get a [color_type : good sleep],iot
+English,validation,431,what's the weather like on friday,what's the weather like on [date : friday],weather
+English,validation,434,what day is it today,what day is it [date : today],datetime
+English,validation,439,should i wear a jacket today,should i wear a [weather_descriptor : jacket] [date : today],weather
+English,validation,444,disable shuffle,[player_setting : disable shuffle],music
+English,validation,465,what's the date,what's the date,datetime
+English,validation,476,what things can't you do,what things can't you do,general
+English,validation,480,tell me the hour,tell me the hour,datetime
+English,validation,490,is it hot outside,is it [weather_descriptor : hot] outside,weather
+English,validation,510,do i have an alarm set,do i have an alarm set,alarm
+English,validation,511,by proper formula,by proper formula,weather
+English,validation,516,mute for the next hour please,mute for the [time : next hour] please,audio
+English,validation,517,play my favorite song,play my favorite song,play
+English,validation,523,its very dangerous one,its very dangerous one,weather
+English,validation,532,please tell me some international news,please tell me some [place_name : international] news,news
+English,validation,534,set a wake up call for ten am,set a wake up call for [time : ten am],alarm
+English,validation,536,make an alarm for three p. m.,make an alarm for [time : three p. m.],alarm
+English,validation,538,set an alarm for one p. m.,set an alarm for [time : one p. m.],alarm
+English,validation,541,play the song immediately,play the song [song_name : immediately],play
+English,validation,552,email me the lyrics to this song,email me the lyrics to this song,music
+English,validation,562,get rid of my eight am alarm,get rid of my [time : eight am] alarm,alarm
+English,validation,582,will it be raining tomorrow,will it be [weather_descriptor : raining] [date : tomorrow],weather
+English,validation,595,please i want to hear we will rock you from queen,please i want to hear [song_name : we will rock you] from [artist_name : queen],play
+English,validation,601,start alarm,start alarm,alarm
+English,validation,610,i want to wake up at six am tomorrow please,i want to wake up at [time : six am] [date : tomorrow] please,alarm
+English,validation,616,olly play songs from my playlist,olly play songs from my playlist,play
+English,validation,617,what day of the week is thanksgiving,what day of the week is [event_name : thanksgiving],datetime
+English,validation,626,please let me hear six hundred and sixty six the number of the beast,please let me hear [song_name : six hundred and sixty six the number of the beast],play
+English,validation,638,can you find an animal joke for me,can you find an [joke_type : animal] joke for me,general
+English,validation,657,what is status of current weather,what is status of current weather,weather
+English,validation,658,what is time now in california,what is time now in [place_name : california],datetime
+English,validation,676,set time zone,set time zone,datetime
+English,validation,678,turn on the t. v. socket when i arrive home,turn on the [device_type : t. v.] socket when i arrive home,iot
+English,validation,682,follow news about hilary email issue in future,follow news about [news_topic : hilary email issue] in [time : future],news
+English,validation,689,lower the volume,lower the volume,audio
+English,validation,691,i can't hear just increase the volume,i can't hear just increase the volume,audio
+English,validation,697,can you bright the lights please,can you bright the lights please,iot
+English,validation,707,i want to hear chopin now,i want to hear [artist_name : chopin] now,play
+English,validation,708,who is leading the formula one race right now,who is leading the [news_topic : formula one] race right now,news
+English,validation,710,prepare coffee,prepare coffee,iot
+English,validation,711,read the headlines from new york times,read the headlines from [media_type : new york times],news
+English,validation,718,can i know the breaking news from c. n. n.,can i know the breaking news from [media_type : c. n. n.],news
+English,validation,737,could you please lower the tone,could you please lower the tone,audio
+English,validation,741,play songs from the r. & b. and soul genre,play songs from the [artist_name : r. & b.] and [music_genre : soul] genre,play
+English,validation,756,can you turn off wemo plug socket,can you turn off [device_type : wemo plug socket],iot
+English,validation,762,what does the weather look like this week,what does the weather look like [date : this week],weather
+English,validation,763,what is the weather supposed to be like this week,what is the weather supposed to be like [date : this week],weather
+English,validation,776,tell me if an earthquake happens in the world,tell me if an [news_topic : earthquake] happens in the world,news
+English,validation,778,play boogie in your butt by eddie murphy,play [song_name : boogie in your butt] by [artist_name : eddie murphy],play
+English,validation,803,hey olly mute the speakers,hey olly mute the speakers,audio
+English,validation,806,lower all volume on speakers please,lower all volume on speakers please,audio
+English,validation,807,make coffee now,make coffee now,iot
+English,validation,817,ok google play some music,ok google play some music,play
+English,validation,835,what is the latest gossip of hollywood going on,what is the latest gossip of [news_topic : hollywood] going on,news
+English,validation,851,brighten lights,brighten lights,iot
+English,validation,885,alarm set eight am,alarm set [time : eight am],alarm
+English,validation,895,turn off the six am alarm for wednesday,turn off the [time : six am] alarm for [date : wednesday],alarm
+English,validation,896,turn off any morning alarms after friday,turn off any [timeofday : morning] alarms [date : after friday],alarm
+English,validation,906,look up next week weather for me please,look up [date : next week] weather for me please,weather
+English,validation,921,play music from my favorite artist,play music from my favorite artist,play
+English,validation,925,please lower the lights a little bit,please lower the lights [change_amount : a little bit],iot
+English,validation,937,phones,phones,alarm
+English,validation,943,if it's eight p. m. on the east coast what time is it in sacramento california,if it's [time : eight p. m.] on the [place_name : east coast] what time is it in [place_name : sacramento california],datetime
+English,validation,966,does pf changs accept take-out orders,does [business_name : pf changs] accept [order_type : take-out] orders,takeaway
+English,validation,975,can you tell me what time is it in new york,can you tell me what time is it in [place_name : new york],datetime
+English,validation,984,current news c. n. n.,current news [media_type : c. n. n.],news
+English,validation,1012,take me to the huffington post website,take me to the [media_type : huffington post] website,social
+English,validation,1015,pull up the headlines please,pull up the headlines please,news
+English,validation,1016,what are the headlines from the new york times,what are the headlines from the [media_type : new york times],news
+English,validation,1023,find out if the olive garden will let me do takeaway,find out if the [business_name : olive garden] will let me do [order_type : takeaway],takeaway
+English,validation,1027,can i have today's date,can i have [date : today's] date,datetime
+English,validation,1038,is my school alarm set,is my school alarm set,alarm
+English,validation,1051,how hot is it outside,how [weather_descriptor : hot] is it outside,weather
+English,validation,1058,at one p. m. today start the robot vacuum cleaner,at [time : one p. m.] [date : today] start the [device_type : robot vacuum cleaner],iot
+English,validation,1085,good assistants,good assistants,news
+English,validation,1094,send me current news for the day,send me current news for the day,news
+English,validation,1122,play lady by kenny rogers now,play [song_name : lady] by [artist_name : kenny rogers] now,play
+English,validation,1125,today date,[date : today] date,datetime
+English,validation,1177,what are the lyrics to the song i will always love you by dolly parton,what are the lyrics to the song [song_name : i will always love you] by [artist_name : dolly parton],music
+English,validation,1179,never ever play me any country,never ever play me any [music_genre : country],music
+English,validation,1189,if it's ten p. m. in california what time is it in alabama,if it's [time : ten p. m.] in [place_name : california] what time is it in [place_name : alabama],datetime
+English,validation,1192,i need to hear notorious thugs by bone thugs now,i need to hear [song_name : notorious thugs] by [artist_name : bone thugs] now,play
+English,validation,1196,what is the weather condition today,what is the weather condition [date : today],weather
+English,validation,1197,will it rain,will it [weather_descriptor : rain],weather
+English,validation,1201,what is the current time in new york,what is the current time in [place_name : new york],datetime
+English,validation,1209,can you suggest me a healthy foods for dinner,can you suggest me a [food_type : healthy foods] for dinner,cooking
+English,validation,1210,order a meal from a nice restaurant,order a meal from a nice [business_type : restaurant],takeaway
+English,validation,1211,convert new york time to london,convert [place_name : new york] time to [place_name : london],datetime
+English,validation,1215,olly make the living room blue,olly make the [house_place : living room] [color_type : blue],iot
+English,validation,1216,make the living room blue,make the [house_place : living room] [color_type : blue],iot
+English,validation,1222,please play leviathan,please play [song_name : leviathan],play
+English,validation,1223,what is the weather update for tuesday,what is the weather update for [date : tuesday],weather
+English,validation,1224,what will be the weather update for monday noon,what will be the weather update for [date : monday] [timeofday : noon],weather
+English,validation,1225,what will be day on fifteenth march,what will be day on [date : fifteenth march],datetime
+English,validation,1227,i want the date of last monday of this month,i want the date of [date : last monday of this month],datetime
+English,validation,1234,what is the time in india when the time in us is twelve p. m.,what is the time in [place_name : india] when the time in [place_name : us] is [time : twelve p. m.],datetime
+English,validation,1241,tell me what time it is,tell me what time it is,datetime
+English,validation,1257,find me the best knock knock joke on the internet,find me the best [joke_type : knock knock] joke on the internet,general
+English,validation,1259,what will be the weather on monday this week,what will be the weather on [date : monday this week],weather
+English,validation,1268,your recipe of steak was superb,your recipe of [food_type : steak] was superb,cooking
+English,validation,1271,what's happening in the world today,what's happening in the world [date : today],news
+English,validation,1272,what day is it on fifth december,what day is it on [date : fifth december],datetime
+English,validation,1277,hey,hey,general
+English,validation,1295,i want the news about academy awards,i want the news about [news_topic : academy awards],news
+English,validation,1312,tell me the current time in ottawa,tell me the current time in [place_name : ottawa],datetime
+English,validation,1327,what is weather today,what is weather [date : today],weather
+English,validation,1333,it is hot today is not it,it is [weather_descriptor : hot] [date : today] is not it,weather
+English,validation,1334,it is very hot today is not it,it is very [weather_descriptor : hot] [date : today] is not it,weather
+English,validation,1346,one hundred thousand two hundred and seventeenth,one hundred thousand two hundred and seventeenth,datetime
+English,validation,1349,what will the weather be like this week,what will the weather be like [date : this week],weather
+English,validation,1357,switch to night light setting,switch to night light setting,iot
+English,validation,1365,just increase the volume a little,just increase the volume a little,audio
+English,validation,1380,can i get an order delivered from romero's,can i get an order [order_type : delivered] from [business_name : romero's],takeaway
+English,validation,1416,order some takeaway food,order some [order_type : takeaway] food,takeaway
+English,validation,1430,find and queue all songs of kate perry and play all without shuffling,find and queue all songs of [artist_name : kate perry] and play all [player_setting : without shuffling],play
+English,validation,1446,make a playlist of all songs of eminem and play with shuffle,make a playlist of all songs of [artist_name : eminem] and play with [player_setting : shuffle],play
+English,validation,1466,is it going to snow this week,is it going to [weather_descriptor : snow] [date : this week],weather
+English,validation,1468,music on,music on,play
+English,validation,1478,search for new jokes,search for [joke_type : new] jokes,general
+English,validation,1525,i want to listen to soft rock,i want to listen to [music_genre : soft rock],play
+English,validation,1544,i want to listen to up beat music,i want to listen to [music_descriptor : up beat] music,play
+English,validation,1545,play the billboard top ten,play the billboard top ten,play
+English,validation,1548,can i have the ten day forecast for me area,can i have the [time : ten day] forecast for me area,weather
+English,validation,1557,get the weather forecast for this week please,get the weather forecast for [date : this week] please,weather
+English,validation,1558,play me something pop,play me something [music_genre : pop],play
+English,validation,1566,play music from the playlist,play music from the playlist,play
+English,validation,1569,can i have an espresso please,can i have an [coffee_type : espresso] please,iot
+English,validation,1576,olly start the vacuum cleaner,olly start the [device_type : vacuum cleaner],iot
+English,validation,1599,can you start the roomba,can you start the [device_type : roomba],iot
+English,validation,1615,send me alert on any new topic on politics,send me alert on any new topic on [news_topic : politics],news
+English,validation,1621,rating,rating,music
+English,validation,1625,am or p. m.,am or p. m.,alarm
+English,validation,1637,what are the latest articles from yahoo news,what are the latest articles from [media_type : yahoo news],news
+English,validation,1664,find me any news from so clean the last six hours,find me any news from [media_type : so clean] the [time : last six hours],news
+English,validation,1678,nine hundred and ninety nine f. m. is currently playing what music,nine hundred and ninety nine f. m. is currently playing what music,music
+English,validation,1680,increase the volume of the music to ninety,increase the volume of the music [change_amount : to ninety],audio
+English,validation,1687,is it a yes or a no that tomorrow's temperature will be hot,is it a yes or a no that [date : tomorrow's] [weather_descriptor : temperature] will be [weather_descriptor : hot],weather
+English,validation,1688,what is this week's weather forecast,what is [date : this week's] weather forecast,weather
+English,validation,1696,who is the artist of the song playing now,who is the artist of the song playing now,music
+English,validation,1698,i don't like that song turn it off,i don't like that song turn it off,music
+English,validation,1702,by ten to eleven am daily start my vacuum cleaner,by [time : ten] to [time : eleven am] [general_frequency : daily] start my [device_type : vacuum cleaner],iot
+English,validation,1726,what will be the highest temperature in coming week,what will be the highest [weather_descriptor : temperature] in [date : coming week],weather
+English,validation,1732,checkout today set alarm of ten am,checkout [date : today] set alarm of [time : ten am],alarm
+English,validation,1770,play enrique,play [artist_name : enrique],play
+English,validation,1771,play michael jackson,play [artist_name : michael jackson],play
+English,validation,1791,is it possible for you to provide the likes of my music,is it possible for you to provide the likes of my music,music
+English,validation,1793,what is the latest news from syria,what is the latest news from [place_name : syria],news
+English,validation,1805,i need some more lights,i need some more lights,iot
+English,validation,1818,tell me current time,tell me current time,datetime
+English,validation,1823,my favorite singer is shakira,my favorite singer is [artist_name : shakira],music
+English,validation,1827,what's going on in new york,what's going on in [place_name : new york],news

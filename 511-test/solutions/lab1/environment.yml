@@ -1,0 +1,15 @@
+name: otter-env
+channels:
+    - conda-forge
+    - defaults
+dependencies:
+    - python
+    - pip
+    - altair
+    - ipykernel
+    - jupyter_client
+    - nb_conda_kernels
+    - openpyxl
+    - otter-grader
+    - pandas
+    - numpy
