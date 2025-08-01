@@ -1,0 +1,5875 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="../" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>Lecture 2: Reshaping data &#8212; DSCI 511 Python Programming for Data Science</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../_static/styles/theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../_static/styles/bootstrap.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../_static/styles/pydata-sphinx-theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+
+  
+  <link href="../_static/vendor/fontawesome/6.5.2/css/all.min.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=03e43079" />
+    <link rel="stylesheet" type="text/css" href="../_static/styles/sphinx-book-theme.css?v=eba8b062" />
+    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css?v=13237357" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.8ecb98da25f57f5357bf6f572d296f466b2cfe2517ffebfabe82451661e28f02.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css?v=4fa983c6" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-design.min.css?v=95c83b7e" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b" />
+<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b" />
+  <script src="../_static/vendor/fontawesome/6.5.2/js/all.min.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+    <script src="../_static/documentation_options.js?v=9eb32ce0"></script>
+    <script src="../_static/doctools.js?v=9a2dae69"></script>
+    <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="../_static/copybutton.js?v=f281be69"></script>
+    <script src="../_static/scripts/sphinx-book-theme.js?v=887ef09a"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../_static/togglebutton.js?v=4a39c7ea"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="../_static/design-tabs.js?v=f930bc37"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script async="async" src="../_static/sphinx-thebe.js?v=c100c467"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'lecture-notes/lecture2_data-types-operators-and-tidy-data';</script>
+    <link rel="canonical" href="/MDS-Lecture-Notes/DSCI_511_py-prog_students/lecture-notes/lecture2_data-types-operators-and-tidy-data.html" />
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Lecture 3: Advanced data wrangling with Pandas" href="lecture3_advanced-data-wrangling-with-pandas.html" />
+    <link rel="prev" title="Lecture 1: Introduction to Pandas" href="lecture1_intro-to-python-via-pandas.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-primary-sidebar-checkbox"/>
+  <label class="overlay overlay-primary" for="pst-primary-sidebar-checkbox"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-secondary-sidebar-checkbox"/>
+  <label class="overlay overlay-secondary" for="pst-secondary-sidebar-checkbox"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="../README.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="../_static/hex_sticker_small.png" class="logo__image only-light" alt="DSCI 511 Python Programming for Data Science - Home"/>
+    <script>document.write(`<img src="../_static/hex_sticker_small.png" class="logo__image only-dark" alt="DSCI 511 Python Programming for Data Science - Home"/>`);</script>
+  
+  
+</a></div>
+        <div class="sidebar-primary-item">
+
+ <script>
+ document.write(`
+   <button class="btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="../README.html">
+                    DSCI 511: Python Programming for Data Science
+                </a>
+            </li>
+        </ul>
+        <p aria-level="2" class="caption" role="heading"><span class="caption-text">Lectures</span></p>
+<ul class="current nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="lecture1_intro-to-python-via-pandas.html">Lecture 1: Introduction to Pandas</a></li>
+
+
+
+
+
+
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">Lecture 2: Reshaping data</a></li>
+
+
+
+
+
+<li class="toctree-l1"><a class="reference internal" href="lecture3_advanced-data-wrangling-with-pandas.html">Lecture 3: Advanced data wrangling with Pandas</a></li>
+<li class="toctree-l1"><a class="reference internal" href="lecture4_plotting-merging-and-grouping.html">Lecture 4: Plotting, Merging and Grouping</a></li>
+<li class="toctree-l1"><a class="reference internal" href="lecture5_numpy.html">Lecture 5: Numpy</a></li>
+<li class="toctree-l1"><a class="reference internal" href="lecture6-data-types-review-conditionals-loops.html">Lecture 6: Review of data types, conditionals and iteration</a></li>
+<li class="toctree-l1"><a class="reference internal" href="lecture7-functions_testing.html">Lecture 7: Functions &amp; Testing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="lecture8-classes-and-style.html">Lecture 8: Classes and Style</a></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><button class="sidebar-toggle primary-toggle btn btn-sm" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</button></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-source-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Source repositories">
+    <i class="fab fa-github"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://github.ubc.ca/mds-2024-25/DSCI_511_py-prog_students" target="_blank"
+   class="btn btn-sm btn-source-repository-button dropdown-item"
+   title="Source repository"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+<span class="btn__text-container">Repository</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://github.ubc.ca/mds-2024-25/DSCI_511_py-prog_students/issues/new?title=Issue%20on%20page%20%2Flecture-notes/lecture2_data-types-operators-and-tidy-data.html&body=Your%20issue%20content%20here." target="_blank"
+   class="btn btn-sm btn-source-issues-button dropdown-item"
+   title="Open an issue"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-lightbulb"></i>
+  </span>
+<span class="btn__text-container">Open issue</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="../_sources/lecture-notes/lecture2_data-types-operators-and-tidy-data.ipynb" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.ipynb</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="theme-switch fa-solid fa-sun fa-lg" data-mode="light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg" data-mode="dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"></i>
+  </button>
+`);
+</script>
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm pst-navbar-icon search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+  </button>
+`);
+</script>
+<button class="sidebar-toggle secondary-toggle btn btn-sm" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</button>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>Lecture 2: Reshaping data</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">Lecture 2: Reshaping data</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#lecture-learning-objectives">Lecture learning objectives</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#data-types">Data types</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#practice">Practice</a></li>
+</ul>
+</li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#changing-values-based-on-conditions">Changing values based on conditions</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#empty-cells-missing-values">Empty cells/missing values</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#renaming-columns">Renaming columns</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#data-type-cheatsheet">Data type cheatsheet</a></li>
+</ul>
+</li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#dataframe-reshaping">DataFrame reshaping</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#tidy-data">Tidy data</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#wide-vs-long-tables">Wide vs. long tables</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#transpose">Transpose</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#pivot">Pivot</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id1">Practice</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#pivot-table"><code class="docutils literal notranslate"><span class="pre">.pivot_table()</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#melt">Melt</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#reseting-the-index">Reseting the index</a></li>
+</ul>
+</li>
+</ul>
+
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <a class="reference internal image-reference" href="../_images/dsci511_header.png"><img alt="../_images/dsci511_header.png" src="../_images/dsci511_header.png" style="width: 600px;" />
+</a>
+<section id="lecture-2-reshaping-data">
+<h1>Lecture 2: Reshaping data<a class="headerlink" href="#lecture-2-reshaping-data" title="Link to this heading">#</a></h1>
+</section>
+<section id="lecture-learning-objectives">
+<h1>Lecture learning objectives<a class="headerlink" href="#lecture-learning-objectives" title="Link to this heading">#</a></h1>
+<ul class="simple">
+<li><p>Filter columns in a DataFrame using logical operators or the <code class="docutils literal notranslate"><span class="pre">.query()</span></code> method</p></li>
+<li><p>Remove or fill missing values in a dataframe with <code class="docutils literal notranslate"><span class="pre">.dropna()</span></code> and <code class="docutils literal notranslate"><span class="pre">.fillna()</span></code>.</p></li>
+<li><p>Rename columns of a dataframe using the <code class="docutils literal notranslate"><span class="pre">.rename()</span></code> function or by accessing the <code class="docutils literal notranslate"><span class="pre">.columns</span></code> attribute.</p></li>
+<li><p>Use <code class="docutils literal notranslate"><span class="pre">.melt()</span></code>, <code class="docutils literal notranslate"><span class="pre">.pivot()</span></code> and <code class="docutils literal notranslate"><span class="pre">.pivot_table()</span></code> to reshape dataframes, specifically to make tidy dataframes.</p></li>
+</ul>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">pandas</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pd</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="data-types">
+<h1>Data types<a class="headerlink" href="#data-types" title="Link to this heading">#</a></h1>
+<ul class="simple">
+<li><p>In lecture 1 you learned about the following types: DataFrame (table), Series (column), integer (whole number), and string (text)</p></li>
+<li><p>A new type for this lecture is ‘boolean’. There are only two boolean values: True or False (note the first letter is capitalized in Python code).</p></li>
+<li><p>Booleans are useful when you want to search/filter through a DataFrame, i.e. find all the data where some particular condition is True. Load the file <code class="docutils literal notranslate"><span class="pre">data/YVR_weather_data.csv</span></code> into pandas to experiment with some filters.</p></li>
+</ul>
+<p>Each row is a day, and each column is a weather measurement. Let’s find all the days when the mean temperature is greater than 15. We’ll start by creating a Series of boolean values like this:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">weather</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s1">&#39;data/YVR_weather_data.csv&#39;</span><span class="p">)</span>
+<span class="n">weather</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>Date/Time</th>
+      <th>Year</th>
+      <th>Month</th>
+      <th>Mean Max Temp (°C)</th>
+      <th>Mean Max Temp Flag</th>
+      <th>Mean Min Temp (°C)</th>
+      <th>Mean Min Temp Flag</th>
+      <th>Mean Temp (°C)</th>
+      <th>Mean Temp Flag</th>
+      <th>Extr Max Temp (°C)</th>
+      <th>...</th>
+      <th>Total Snow (cm)</th>
+      <th>Total Snow Flag</th>
+      <th>Total Precip (mm)</th>
+      <th>Total Precip Flag</th>
+      <th>Snow Grnd Last Day (cm)</th>
+      <th>Snow Grnd Last Day Flag</th>
+      <th>Dir of Max Gust (10's deg)</th>
+      <th>Dir of Max Gust Flag</th>
+      <th>Spd of Max Gust (km/h)</th>
+      <th>Spd of Max Gust Flag</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>Jan-37</td>
+      <td>1937</td>
+      <td>1</td>
+      <td>0.6</td>
+      <td>NaN</td>
+      <td>-8.1</td>
+      <td>NaN</td>
+      <td>-3.8</td>
+      <td>NaN</td>
+      <td>6.1</td>
+      <td>...</td>
+      <td>NaN</td>
+      <td>M</td>
+      <td>NaN</td>
+      <td>M</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>Feb-37</td>
+      <td>1937</td>
+      <td>2</td>
+      <td>5.2</td>
+      <td>NaN</td>
+      <td>-1.3</td>
+      <td>NaN</td>
+      <td>2.0</td>
+      <td>NaN</td>
+      <td>10.0</td>
+      <td>...</td>
+      <td>NaN</td>
+      <td>M</td>
+      <td>NaN</td>
+      <td>M</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>Mar-37</td>
+      <td>1937</td>
+      <td>3</td>
+      <td>11.7</td>
+      <td>NaN</td>
+      <td>2.9</td>
+      <td>NaN</td>
+      <td>7.3</td>
+      <td>NaN</td>
+      <td>17.2</td>
+      <td>...</td>
+      <td>0.0</td>
+      <td>NaN</td>
+      <td>59.7</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>Apr-37</td>
+      <td>1937</td>
+      <td>4</td>
+      <td>11.9</td>
+      <td>NaN</td>
+      <td>4.8</td>
+      <td>NaN</td>
+      <td>8.4</td>
+      <td>NaN</td>
+      <td>16.1</td>
+      <td>...</td>
+      <td>0.0</td>
+      <td>NaN</td>
+      <td>114.0</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>May-37</td>
+      <td>1937</td>
+      <td>5</td>
+      <td>16.3</td>
+      <td>NaN</td>
+      <td>6.6</td>
+      <td>NaN</td>
+      <td>11.5</td>
+      <td>NaN</td>
+      <td>20.6</td>
+      <td>...</td>
+      <td>0.0</td>
+      <td>NaN</td>
+      <td>44.2</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+    </tr>
+  </tbody>
+</table>
+<p>5 rows × 25 columns</p>
+</div></div></div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">condition</span> <span class="o">=</span> <span class="n">weather</span><span class="p">[</span><span class="s1">&#39;Mean Temp (°C)&#39;</span><span class="p">]</span> <span class="o">&gt;</span> <span class="mi">15</span>
+<span class="n">condition</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0      False
+1      False
+2      False
+3      False
+4      False
+       ...  
+912    False
+913    False
+914    False
+915    False
+916     True
+Name: Mean Temp (°C), Length: 917, dtype: bool
+</pre></div>
+</div>
+</div>
+</div>
+<p>The Series has True if that row has a value of greater than 15 in the mean temperature column, and False otherwise. Take a moment to compare the output of the code with the actual CSV file, to convince yourself this is what’s happening.</p>
+<p>You can then ‘apply’ this to your DataFrame using the  <code class="docutils literal notranslate"><span class="pre">[</span> <span class="pre">]</span></code> notation you learned in Lecture 1.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">weather</span><span class="p">[</span><span class="n">condition</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>Date/Time</th>
+      <th>Year</th>
+      <th>Month</th>
+      <th>Mean Max Temp (°C)</th>
+      <th>Mean Max Temp Flag</th>
+      <th>Mean Min Temp (°C)</th>
+      <th>Mean Min Temp Flag</th>
+      <th>Mean Temp (°C)</th>
+      <th>Mean Temp Flag</th>
+      <th>Extr Max Temp (°C)</th>
+      <th>...</th>
+      <th>Total Snow (cm)</th>
+      <th>Total Snow Flag</th>
+      <th>Total Precip (mm)</th>
+      <th>Total Precip Flag</th>
+      <th>Snow Grnd Last Day (cm)</th>
+      <th>Snow Grnd Last Day Flag</th>
+      <th>Dir of Max Gust (10's deg)</th>
+      <th>Dir of Max Gust Flag</th>
+      <th>Spd of Max Gust (km/h)</th>
+      <th>Spd of Max Gust Flag</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>5</th>
+      <td>Jun-37</td>
+      <td>1937</td>
+      <td>6</td>
+      <td>20.1</td>
+      <td>NaN</td>
+      <td>10.4</td>
+      <td>NaN</td>
+      <td>15.3</td>
+      <td>NaN</td>
+      <td>26.1</td>
+      <td>...</td>
+      <td>0.0</td>
+      <td>NaN</td>
+      <td>100.6</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <th>6</th>
+      <td>Jul-37</td>
+      <td>1937</td>
+      <td>7</td>
+      <td>22.5</td>
+      <td>NaN</td>
+      <td>11.6</td>
+      <td>NaN</td>
+      <td>17.1</td>
+      <td>NaN</td>
+      <td>27.8</td>
+      <td>...</td>
+      <td>0.0</td>
+      <td>NaN</td>
+      <td>1.8</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <th>7</th>
+      <td>Aug-37</td>
+      <td>1937</td>
+      <td>8</td>
+      <td>20.6</td>
+      <td>NaN</td>
+      <td>10.7</td>
+      <td>NaN</td>
+      <td>15.7</td>
+      <td>NaN</td>
+      <td>24.4</td>
+      <td>...</td>
+      <td>0.0</td>
+      <td>NaN</td>
+      <td>58.4</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <th>17</th>
+      <td>Jun-38</td>
+      <td>1938</td>
+      <td>6</td>
+      <td>20.8</td>
+      <td>NaN</td>
+      <td>9.8</td>
+      <td>NaN</td>
+      <td>15.3</td>
+      <td>NaN</td>
+      <td>25.6</td>
+      <td>...</td>
+      <td>0.0</td>
+      <td>NaN</td>
+      <td>14.7</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <th>18</th>
+      <td>Jul-38</td>
+      <td>1938</td>
+      <td>7</td>
+      <td>22.8</td>
+      <td>NaN</td>
+      <td>12.1</td>
+      <td>NaN</td>
+      <td>17.5</td>
+      <td>NaN</td>
+      <td>28.9</td>
+      <td>...</td>
+      <td>0.0</td>
+      <td>NaN</td>
+      <td>10.2</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <th>...</th>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+    </tr>
+    <tr>
+      <th>895</th>
+      <td>Sep-11</td>
+      <td>2011</td>
+      <td>9</td>
+      <td>20.4</td>
+      <td>NaN</td>
+      <td>12.3</td>
+      <td>NaN</td>
+      <td>16.4</td>
+      <td>NaN</td>
+      <td>25.2</td>
+      <td>...</td>
+      <td>0.0</td>
+      <td>NaN</td>
+      <td>69.6</td>
+      <td>NaN</td>
+      <td>0.0</td>
+      <td>NaN</td>
+      <td>13.0</td>
+      <td>B</td>
+      <td>50.0</td>
+      <td>B</td>
+    </tr>
+    <tr>
+      <th>905</th>
+      <td>Jul-12</td>
+      <td>2012</td>
+      <td>7</td>
+      <td>21.7</td>
+      <td>NaN</td>
+      <td>13.7</td>
+      <td>NaN</td>
+      <td>17.7</td>
+      <td>NaN</td>
+      <td>26.0</td>
+      <td>...</td>
+      <td>0.0</td>
+      <td>NaN</td>
+      <td>27.8</td>
+      <td>NaN</td>
+      <td>0.0</td>
+      <td>NaN</td>
+      <td>22.0</td>
+      <td>NaN</td>
+      <td>48.0</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <th>906</th>
+      <td>Aug-12</td>
+      <td>2012</td>
+      <td>8</td>
+      <td>23.5</td>
+      <td>NaN</td>
+      <td>14.4</td>
+      <td>NaN</td>
+      <td>19.0</td>
+      <td>NaN</td>
+      <td>28.6</td>
+      <td>...</td>
+      <td>0.0</td>
+      <td>NaN</td>
+      <td>2.9</td>
+      <td>NaN</td>
+      <td>0.0</td>
+      <td>NaN</td>
+      <td>14.0</td>
+      <td>B</td>
+      <td>37.0</td>
+      <td>B</td>
+    </tr>
+    <tr>
+      <th>907</th>
+      <td>Sep-12</td>
+      <td>2012</td>
+      <td>9</td>
+      <td>19.6</td>
+      <td>NaN</td>
+      <td>11.1</td>
+      <td>NaN</td>
+      <td>15.4</td>
+      <td>NaN</td>
+      <td>25.3</td>
+      <td>...</td>
+      <td>0.0</td>
+      <td>NaN</td>
+      <td>5.0</td>
+      <td>NaN</td>
+      <td>0.0</td>
+      <td>NaN</td>
+      <td>28.0</td>
+      <td>NaN</td>
+      <td>56.0</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <th>916</th>
+      <td>Jun-13</td>
+      <td>2013</td>
+      <td>6</td>
+      <td>19.3</td>
+      <td>I</td>
+      <td>11.5</td>
+      <td>I</td>
+      <td>15.4</td>
+      <td>I</td>
+      <td>22.0</td>
+      <td>...</td>
+      <td>0.0</td>
+      <td>I</td>
+      <td>2.8</td>
+      <td>I</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>29.0</td>
+      <td>I</td>
+      <td>44.0</td>
+      <td>I</td>
+    </tr>
+  </tbody>
+</table>
+<p>216 rows × 25 columns</p>
+</div></div></div>
+</div>
+<p>The following comparisons are supported:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">&gt;</span></code> greater than</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">&lt;</span></code> less than</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">&gt;=</span></code> greater than or equal to</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">&lt;=</span></code> less than or equal to</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">==</span></code> exactly equal to</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">!=</span></code> not equal to</p></li>
+</ul>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">condition</span> <span class="o">=</span> <span class="n">weather</span><span class="p">[</span><span class="s1">&#39;Mean Temp (°C)&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="mf">19.0</span>
+<span class="n">exactly_19_degrees</span> <span class="o">=</span> <span class="n">weather</span><span class="p">[</span><span class="n">condition</span><span class="p">]</span>
+<span class="n">exactly_19_degrees</span><span class="p">[[</span><span class="s1">&#39;Mean Temp (°C)&#39;</span><span class="p">]]</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>Mean Temp (°C)</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>295</th>
+      <td>19.0</td>
+    </tr>
+    <tr>
+      <th>643</th>
+      <td>19.0</td>
+    </tr>
+    <tr>
+      <th>727</th>
+      <td>19.0</td>
+    </tr>
+    <tr>
+      <th>823</th>
+      <td>19.0</td>
+    </tr>
+    <tr>
+      <th>906</th>
+      <td>19.0</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">condition</span> <span class="o">=</span> <span class="n">weather</span><span class="p">[</span><span class="s1">&#39;Month&#39;</span><span class="p">]</span> <span class="o">!=</span> <span class="mi">1</span>
+<span class="n">not_january</span> <span class="o">=</span> <span class="n">weather</span><span class="p">[</span><span class="n">condition</span><span class="p">]</span>
+<span class="n">not_january</span><span class="p">[[</span><span class="s1">&#39;Month&#39;</span><span class="p">]]</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>Month</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>1</th>
+      <td>2</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>3</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>4</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>5</td>
+    </tr>
+    <tr>
+      <th>5</th>
+      <td>6</td>
+    </tr>
+    <tr>
+      <th>...</th>
+      <td>...</td>
+    </tr>
+    <tr>
+      <th>912</th>
+      <td>2</td>
+    </tr>
+    <tr>
+      <th>913</th>
+      <td>3</td>
+    </tr>
+    <tr>
+      <th>914</th>
+      <td>4</td>
+    </tr>
+    <tr>
+      <th>915</th>
+      <td>5</td>
+    </tr>
+    <tr>
+      <th>916</th>
+      <td>6</td>
+    </tr>
+  </tbody>
+</table>
+<p>840 rows × 1 columns</p>
+</div></div></div>
+</div>
+<p>In practice, most people do not write out the condition on its own line. Code is usually combined into one line like this:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">not_january</span> <span class="o">=</span> <span class="n">weather</span><span class="p">[</span><span class="n">weather</span><span class="p">[</span><span class="s1">&#39;Month&#39;</span><span class="p">]</span> <span class="o">!=</span> <span class="mi">1</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Python ignores extra blank spaces inside brackets, and some people prefer to spread their code over multiple lines for increased readability.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">not_january</span> <span class="o">=</span> <span class="n">weather</span><span class="p">[</span>
+                    <span class="n">weather</span><span class="p">[</span><span class="s1">&#39;Month&#39;</span><span class="p">]</span> <span class="o">!=</span> <span class="mi">1</span>
+                    <span class="p">]</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>You can combine multiple conditions using the symbols <code class="docutils literal notranslate"><span class="pre">&amp;</span></code>, <code class="docutils literal notranslate"><span class="pre">|</span></code>, and <code class="docutils literal notranslate"><span class="pre">^</span></code>. Note that each condition must be enclosed in parentheses.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1">#Use &amp; to match BOTH conditions</span>
+<span class="c1">#find every day in May when it snowed</span>
+<span class="n">condition</span> <span class="o">=</span> <span class="p">(</span><span class="n">weather</span><span class="p">[</span><span class="s1">&#39;Month&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="mi">5</span><span class="p">)</span> <span class="o">&amp;</span> <span class="p">(</span><span class="n">weather</span><span class="p">[</span><span class="s1">&#39;Total Snow (cm)&#39;</span><span class="p">]</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">)</span>
+<span class="n">weather</span><span class="p">[</span><span class="n">condition</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>Date/Time</th>
+      <th>Year</th>
+      <th>Month</th>
+      <th>Mean Max Temp (°C)</th>
+      <th>Mean Max Temp Flag</th>
+      <th>Mean Min Temp (°C)</th>
+      <th>Mean Min Temp Flag</th>
+      <th>Mean Temp (°C)</th>
+      <th>Mean Temp Flag</th>
+      <th>Extr Max Temp (°C)</th>
+      <th>...</th>
+      <th>Total Snow (cm)</th>
+      <th>Total Snow Flag</th>
+      <th>Total Precip (mm)</th>
+      <th>Total Precip Flag</th>
+      <th>Snow Grnd Last Day (cm)</th>
+      <th>Snow Grnd Last Day Flag</th>
+      <th>Dir of Max Gust (10's deg)</th>
+      <th>Dir of Max Gust Flag</th>
+      <th>Spd of Max Gust (km/h)</th>
+      <th>Spd of Max Gust Flag</th>
+    </tr>
+  </thead>
+  <tbody>
+  </tbody>
+</table>
+<p>0 rows × 25 columns</p>
+</div></div></div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1">#Use | to match AT LEAST ONE condition</span>
+<span class="c1">#find every day when it rained or snowed or both</span>
+<span class="n">condition</span> <span class="o">=</span> <span class="p">(</span><span class="n">weather</span><span class="p">[</span><span class="s1">&#39;Total Snow (cm)&#39;</span><span class="p">]</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">)</span> <span class="o">|</span> <span class="p">(</span><span class="n">weather</span><span class="p">[</span><span class="s1">&#39;Total Rain (mm)&#39;</span><span class="p">]</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">)</span>
+<span class="n">weather</span><span class="p">[</span><span class="n">condition</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>Date/Time</th>
+      <th>Year</th>
+      <th>Month</th>
+      <th>Mean Max Temp (°C)</th>
+      <th>Mean Max Temp Flag</th>
+      <th>Mean Min Temp (°C)</th>
+      <th>Mean Min Temp Flag</th>
+      <th>Mean Temp (°C)</th>
+      <th>Mean Temp Flag</th>
+      <th>Extr Max Temp (°C)</th>
+      <th>...</th>
+      <th>Total Snow (cm)</th>
+      <th>Total Snow Flag</th>
+      <th>Total Precip (mm)</th>
+      <th>Total Precip Flag</th>
+      <th>Snow Grnd Last Day (cm)</th>
+      <th>Snow Grnd Last Day Flag</th>
+      <th>Dir of Max Gust (10's deg)</th>
+      <th>Dir of Max Gust Flag</th>
+      <th>Spd of Max Gust (km/h)</th>
+      <th>Spd of Max Gust Flag</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>Jan-37</td>
+      <td>1937</td>
+      <td>1</td>
+      <td>0.6</td>
+      <td>NaN</td>
+      <td>-8.1</td>
+      <td>NaN</td>
+      <td>-3.8</td>
+      <td>NaN</td>
+      <td>6.1</td>
+      <td>...</td>
+      <td>NaN</td>
+      <td>M</td>
+      <td>NaN</td>
+      <td>M</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>Feb-37</td>
+      <td>1937</td>
+      <td>2</td>
+      <td>5.2</td>
+      <td>NaN</td>
+      <td>-1.3</td>
+      <td>NaN</td>
+      <td>2.0</td>
+      <td>NaN</td>
+      <td>10.0</td>
+      <td>...</td>
+      <td>NaN</td>
+      <td>M</td>
+      <td>NaN</td>
+      <td>M</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>Mar-37</td>
+      <td>1937</td>
+      <td>3</td>
+      <td>11.7</td>
+      <td>NaN</td>
+      <td>2.9</td>
+      <td>NaN</td>
+      <td>7.3</td>
+      <td>NaN</td>
+      <td>17.2</td>
+      <td>...</td>
+      <td>0.0</td>
+      <td>NaN</td>
+      <td>59.7</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>Apr-37</td>
+      <td>1937</td>
+      <td>4</td>
+      <td>11.9</td>
+      <td>NaN</td>
+      <td>4.8</td>
+      <td>NaN</td>
+      <td>8.4</td>
+      <td>NaN</td>
+      <td>16.1</td>
+      <td>...</td>
+      <td>0.0</td>
+      <td>NaN</td>
+      <td>114.0</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>May-37</td>
+      <td>1937</td>
+      <td>5</td>
+      <td>16.3</td>
+      <td>NaN</td>
+      <td>6.6</td>
+      <td>NaN</td>
+      <td>11.5</td>
+      <td>NaN</td>
+      <td>20.6</td>
+      <td>...</td>
+      <td>0.0</td>
+      <td>NaN</td>
+      <td>44.2</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <th>...</th>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+    </tr>
+    <tr>
+      <th>912</th>
+      <td>Feb-13</td>
+      <td>2013</td>
+      <td>2</td>
+      <td>7.8</td>
+      <td>NaN</td>
+      <td>3.0</td>
+      <td>NaN</td>
+      <td>5.4</td>
+      <td>NaN</td>
+      <td>10.4</td>
+      <td>...</td>
+      <td>0.0</td>
+      <td>NaN</td>
+      <td>74.4</td>
+      <td>NaN</td>
+      <td>0.0</td>
+      <td>NaN</td>
+      <td>28.0</td>
+      <td>E</td>
+      <td>63.0</td>
+      <td>E</td>
+    </tr>
+    <tr>
+      <th>913</th>
+      <td>Mar-13</td>
+      <td>2013</td>
+      <td>3</td>
+      <td>10.5</td>
+      <td>NaN</td>
+      <td>3.9</td>
+      <td>NaN</td>
+      <td>7.2</td>
+      <td>NaN</td>
+      <td>15.7</td>
+      <td>...</td>
+      <td>0.0</td>
+      <td>NaN</td>
+      <td>108.0</td>
+      <td>NaN</td>
+      <td>0.0</td>
+      <td>NaN</td>
+      <td>27.0</td>
+      <td>NaN</td>
+      <td>80.0</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <th>914</th>
+      <td>Apr-13</td>
+      <td>2013</td>
+      <td>4</td>
+      <td>12.8</td>
+      <td>NaN</td>
+      <td>6.2</td>
+      <td>NaN</td>
+      <td>9.5</td>
+      <td>NaN</td>
+      <td>17.2</td>
+      <td>...</td>
+      <td>0.0</td>
+      <td>T</td>
+      <td>115.8</td>
+      <td>NaN</td>
+      <td>0.0</td>
+      <td>NaN</td>
+      <td>29.0</td>
+      <td>E</td>
+      <td>76.0</td>
+      <td>E</td>
+    </tr>
+    <tr>
+      <th>915</th>
+      <td>May-13</td>
+      <td>2013</td>
+      <td>5</td>
+      <td>17.1</td>
+      <td>NaN</td>
+      <td>9.5</td>
+      <td>NaN</td>
+      <td>13.3</td>
+      <td>NaN</td>
+      <td>22.2</td>
+      <td>...</td>
+      <td>0.0</td>
+      <td>NaN</td>
+      <td>66.0</td>
+      <td>NaN</td>
+      <td>0.0</td>
+      <td>NaN</td>
+      <td>30.0</td>
+      <td>E</td>
+      <td>54.0</td>
+      <td>E</td>
+    </tr>
+    <tr>
+      <th>916</th>
+      <td>Jun-13</td>
+      <td>2013</td>
+      <td>6</td>
+      <td>19.3</td>
+      <td>I</td>
+      <td>11.5</td>
+      <td>I</td>
+      <td>15.4</td>
+      <td>I</td>
+      <td>22.0</td>
+      <td>...</td>
+      <td>0.0</td>
+      <td>I</td>
+      <td>2.8</td>
+      <td>I</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>29.0</td>
+      <td>I</td>
+      <td>44.0</td>
+      <td>I</td>
+    </tr>
+  </tbody>
+</table>
+<p>912 rows × 25 columns</p>
+</div></div></div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1">#Use ^ to match EXACTLY ONE condition</span>
+<span class="c1">#find every day when it was either very windy or very cold, but not both</span>
+<span class="n">condition</span> <span class="o">=</span> <span class="p">(</span><span class="n">weather</span><span class="p">[</span><span class="s1">&#39;Spd of Max Gust (km/h)&#39;</span><span class="p">]</span> <span class="o">&gt;</span> <span class="mi">75</span><span class="p">)</span> <span class="o">^</span> <span class="p">(</span><span class="n">weather</span><span class="p">[</span><span class="s1">&#39;Mean Temp (°C)&#39;</span><span class="p">]</span> <span class="o">&lt;=</span> <span class="o">-</span><span class="mi">10</span><span class="p">)</span>
+<span class="n">weather</span><span class="p">[</span><span class="n">condition</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>Date/Time</th>
+      <th>Year</th>
+      <th>Month</th>
+      <th>Mean Max Temp (°C)</th>
+      <th>Mean Max Temp Flag</th>
+      <th>Mean Min Temp (°C)</th>
+      <th>Mean Min Temp Flag</th>
+      <th>Mean Temp (°C)</th>
+      <th>Mean Temp Flag</th>
+      <th>Extr Max Temp (°C)</th>
+      <th>...</th>
+      <th>Total Snow (cm)</th>
+      <th>Total Snow Flag</th>
+      <th>Total Precip (mm)</th>
+      <th>Total Precip Flag</th>
+      <th>Snow Grnd Last Day (cm)</th>
+      <th>Snow Grnd Last Day Flag</th>
+      <th>Dir of Max Gust (10's deg)</th>
+      <th>Dir of Max Gust Flag</th>
+      <th>Spd of Max Gust (km/h)</th>
+      <th>Spd of Max Gust Flag</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>241</th>
+      <td>Feb-57</td>
+      <td>1957</td>
+      <td>2</td>
+      <td>5.9</td>
+      <td>NaN</td>
+      <td>-1.5</td>
+      <td>NaN</td>
+      <td>2.2</td>
+      <td>NaN</td>
+      <td>11.1</td>
+      <td>...</td>
+      <td>23.6</td>
+      <td>NaN</td>
+      <td>84.3</td>
+      <td>NaN</td>
+      <td>0.0</td>
+      <td>NaN</td>
+      <td>27.0</td>
+      <td>NaN</td>
+      <td>76.0</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <th>243</th>
+      <td>Apr-57</td>
+      <td>1957</td>
+      <td>4</td>
+      <td>13.8</td>
+      <td>NaN</td>
+      <td>5.9</td>
+      <td>NaN</td>
+      <td>9.9</td>
+      <td>NaN</td>
+      <td>21.7</td>
+      <td>...</td>
+      <td>0.0</td>
+      <td>NaN</td>
+      <td>44.7</td>
+      <td>NaN</td>
+      <td>0.0</td>
+      <td>NaN</td>
+      <td>14.0</td>
+      <td>NaN</td>
+      <td>79.0</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <th>249</th>
+      <td>Oct-57</td>
+      <td>1957</td>
+      <td>10</td>
+      <td>13.7</td>
+      <td>NaN</td>
+      <td>6.1</td>
+      <td>NaN</td>
+      <td>9.9</td>
+      <td>NaN</td>
+      <td>20.6</td>
+      <td>...</td>
+      <td>0.0</td>
+      <td>T</td>
+      <td>81.0</td>
+      <td>NaN</td>
+      <td>0.0</td>
+      <td>NaN</td>
+      <td>29.0</td>
+      <td>NaN</td>
+      <td>87.0</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <th>250</th>
+      <td>Nov-57</td>
+      <td>1957</td>
+      <td>11</td>
+      <td>9.4</td>
+      <td>NaN</td>
+      <td>2.5</td>
+      <td>NaN</td>
+      <td>6.0</td>
+      <td>NaN</td>
+      <td>14.4</td>
+      <td>...</td>
+      <td>0.0</td>
+      <td>NaN</td>
+      <td>76.2</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>M</td>
+      <td>29.0</td>
+      <td>NaN</td>
+      <td>129.0</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <th>251</th>
+      <td>Dec-57</td>
+      <td>1957</td>
+      <td>12</td>
+      <td>8.5</td>
+      <td>NaN</td>
+      <td>2.8</td>
+      <td>NaN</td>
+      <td>5.7</td>
+      <td>NaN</td>
+      <td>13.3</td>
+      <td>...</td>
+      <td>0.0</td>
+      <td>T</td>
+      <td>181.4</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>M</td>
+      <td>14.0</td>
+      <td>NaN</td>
+      <td>100.0</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <th>...</th>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+    </tr>
+    <tr>
+      <th>899</th>
+      <td>Jan-12</td>
+      <td>2012</td>
+      <td>1</td>
+      <td>6.3</td>
+      <td>NaN</td>
+      <td>0.8</td>
+      <td>NaN</td>
+      <td>3.6</td>
+      <td>NaN</td>
+      <td>11.3</td>
+      <td>...</td>
+      <td>5.6</td>
+      <td>NaN</td>
+      <td>135.6</td>
+      <td>NaN</td>
+      <td>0.0</td>
+      <td>NaN</td>
+      <td>29.0</td>
+      <td>E</td>
+      <td>80.0</td>
+      <td>E</td>
+    </tr>
+    <tr>
+      <th>900</th>
+      <td>Feb-12</td>
+      <td>2012</td>
+      <td>2</td>
+      <td>7.7</td>
+      <td>NaN</td>
+      <td>2.0</td>
+      <td>NaN</td>
+      <td>4.8</td>
+      <td>NaN</td>
+      <td>12.6</td>
+      <td>...</td>
+      <td>1.8</td>
+      <td>NaN</td>
+      <td>133.6</td>
+      <td>NaN</td>
+      <td>0.0</td>
+      <td>NaN</td>
+      <td>29.0</td>
+      <td>E</td>
+      <td>82.0</td>
+      <td>E</td>
+    </tr>
+    <tr>
+      <th>901</th>
+      <td>Mar-12</td>
+      <td>2012</td>
+      <td>3</td>
+      <td>8.7</td>
+      <td>NaN</td>
+      <td>2.3</td>
+      <td>NaN</td>
+      <td>5.6</td>
+      <td>NaN</td>
+      <td>14.3</td>
+      <td>...</td>
+      <td>0.0</td>
+      <td>T</td>
+      <td>111.6</td>
+      <td>NaN</td>
+      <td>0.0</td>
+      <td>NaN</td>
+      <td>13.0</td>
+      <td>E</td>
+      <td>89.0</td>
+      <td>E</td>
+    </tr>
+    <tr>
+      <th>913</th>
+      <td>Mar-13</td>
+      <td>2013</td>
+      <td>3</td>
+      <td>10.5</td>
+      <td>NaN</td>
+      <td>3.9</td>
+      <td>NaN</td>
+      <td>7.2</td>
+      <td>NaN</td>
+      <td>15.7</td>
+      <td>...</td>
+      <td>0.0</td>
+      <td>NaN</td>
+      <td>108.0</td>
+      <td>NaN</td>
+      <td>0.0</td>
+      <td>NaN</td>
+      <td>27.0</td>
+      <td>NaN</td>
+      <td>80.0</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <th>914</th>
+      <td>Apr-13</td>
+      <td>2013</td>
+      <td>4</td>
+      <td>12.8</td>
+      <td>NaN</td>
+      <td>6.2</td>
+      <td>NaN</td>
+      <td>9.5</td>
+      <td>NaN</td>
+      <td>17.2</td>
+      <td>...</td>
+      <td>0.0</td>
+      <td>T</td>
+      <td>115.8</td>
+      <td>NaN</td>
+      <td>0.0</td>
+      <td>NaN</td>
+      <td>29.0</td>
+      <td>E</td>
+      <td>76.0</td>
+      <td>E</td>
+    </tr>
+  </tbody>
+</table>
+<p>124 rows × 25 columns</p>
+</div></div></div>
+</div>
+<p>As an alternative, you can use the <code class="docutils literal notranslate"><span class="pre">.query()</span></code> function on your DataFrame. In this case, you write the condition out as a string, enclosed in double-quotes.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1">#Find days with cool temperatures and with trace amounts of snowfall in either January or February</span>
+<span class="n">condition</span> <span class="o">=</span> <span class="s2">&quot;`Total Snow Flag` == &#39;T&#39; &amp;  `Mean Temp (°C)` &lt;= 5 &amp; Month == 1 | Month == 2&quot;</span> 
+<span class="n">snowy_days</span> <span class="o">=</span> <span class="n">weather</span><span class="o">.</span><span class="n">query</span><span class="p">(</span><span class="n">condition</span><span class="p">)</span>
+<span class="n">snowy_days</span><span class="o">.</span><span class="n">tail</span><span class="p">(</span><span class="mi">5</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>Date/Time</th>
+      <th>Year</th>
+      <th>Month</th>
+      <th>Mean Max Temp (°C)</th>
+      <th>Mean Max Temp Flag</th>
+      <th>Mean Min Temp (°C)</th>
+      <th>Mean Min Temp Flag</th>
+      <th>Mean Temp (°C)</th>
+      <th>Mean Temp Flag</th>
+      <th>Extr Max Temp (°C)</th>
+      <th>...</th>
+      <th>Total Snow (cm)</th>
+      <th>Total Snow Flag</th>
+      <th>Total Precip (mm)</th>
+      <th>Total Precip Flag</th>
+      <th>Snow Grnd Last Day (cm)</th>
+      <th>Snow Grnd Last Day Flag</th>
+      <th>Dir of Max Gust (10's deg)</th>
+      <th>Dir of Max Gust Flag</th>
+      <th>Spd of Max Gust (km/h)</th>
+      <th>Spd of Max Gust Flag</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>877</th>
+      <td>Feb-10</td>
+      <td>2010</td>
+      <td>2</td>
+      <td>10.3</td>
+      <td>NaN</td>
+      <td>3.9</td>
+      <td>NaN</td>
+      <td>7.1</td>
+      <td>NaN</td>
+      <td>13.1</td>
+      <td>...</td>
+      <td>0.0</td>
+      <td>NaN</td>
+      <td>102.2</td>
+      <td>NaN</td>
+      <td>0.0</td>
+      <td>NaN</td>
+      <td>13.0</td>
+      <td>E</td>
+      <td>54.0</td>
+      <td>E</td>
+    </tr>
+    <tr>
+      <th>888</th>
+      <td>Feb-11</td>
+      <td>2011</td>
+      <td>2</td>
+      <td>6.3</td>
+      <td>NaN</td>
+      <td>0.5</td>
+      <td>NaN</td>
+      <td>3.4</td>
+      <td>NaN</td>
+      <td>13.4</td>
+      <td>...</td>
+      <td>7.0</td>
+      <td>NaN</td>
+      <td>89.4</td>
+      <td>NaN</td>
+      <td>0.0</td>
+      <td>NaN</td>
+      <td>29.0</td>
+      <td>E</td>
+      <td>70.0</td>
+      <td>E</td>
+    </tr>
+    <tr>
+      <th>900</th>
+      <td>Feb-12</td>
+      <td>2012</td>
+      <td>2</td>
+      <td>7.7</td>
+      <td>NaN</td>
+      <td>2.0</td>
+      <td>NaN</td>
+      <td>4.8</td>
+      <td>NaN</td>
+      <td>12.6</td>
+      <td>...</td>
+      <td>1.8</td>
+      <td>NaN</td>
+      <td>133.6</td>
+      <td>NaN</td>
+      <td>0.0</td>
+      <td>NaN</td>
+      <td>29.0</td>
+      <td>E</td>
+      <td>82.0</td>
+      <td>E</td>
+    </tr>
+    <tr>
+      <th>911</th>
+      <td>Jan-13</td>
+      <td>2013</td>
+      <td>1</td>
+      <td>5.4</td>
+      <td>NaN</td>
+      <td>0.2</td>
+      <td>NaN</td>
+      <td>2.8</td>
+      <td>NaN</td>
+      <td>10.0</td>
+      <td>...</td>
+      <td>0.0</td>
+      <td>T</td>
+      <td>100.4</td>
+      <td>NaN</td>
+      <td>0.0</td>
+      <td>NaN</td>
+      <td>8.0</td>
+      <td>NaN</td>
+      <td>39.0</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <th>912</th>
+      <td>Feb-13</td>
+      <td>2013</td>
+      <td>2</td>
+      <td>7.8</td>
+      <td>NaN</td>
+      <td>3.0</td>
+      <td>NaN</td>
+      <td>5.4</td>
+      <td>NaN</td>
+      <td>10.4</td>
+      <td>...</td>
+      <td>0.0</td>
+      <td>NaN</td>
+      <td>74.4</td>
+      <td>NaN</td>
+      <td>0.0</td>
+      <td>NaN</td>
+      <td>28.0</td>
+      <td>E</td>
+      <td>63.0</td>
+      <td>E</td>
+    </tr>
+  </tbody>
+</table>
+<p>5 rows × 25 columns</p>
+</div></div></div>
+</div>
+<p>Notes on using <code class="docutils literal notranslate"><span class="pre">.query()</span></code></p>
+<ul class="simple">
+<li><p>You don’t have to mention your DataFrame specifically inside the condition, you only need the column names</p></li>
+<li><p>If a column name has spaces in it (like Total Snow Flag), you must enclose it in backticks (<em>not</em> quotes!)</p></li>
+<li><p>If you are trying to match against a string (like ‘T’) you must enclose it in single-quotes</p></li>
+<li><p>Parentheses are not required around each condition, though you can choose to add them if you need to group certain conditions together.</p></li>
+</ul>
+<section id="practice">
+<h2>Practice<a class="headerlink" href="#practice" title="Link to this heading">#</a></h2>
+<ul class="simple">
+<li><p>Filter for every day in 1937.</p></li>
+<li><p>Filter for months from August to December (inclusive)</p></li>
+<li><p>Find days when it snowed less than 10cm</p></li>
+<li><p>Find all the days when it was at least 20 degrees and it didn’t rain</p></li>
+<li><p>Filter for days when the mean temperature is between 5 and 15 degrees (exclusive)</p></li>
+<li><p>Find days when it was either windy (max gust of at least 75) or rainy (more than 50mm) but not both</p></li>
+<li><p>Filter for anything that’s not in 2012</p></li>
+</ul>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1">#PRACTICE CELL</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+</section>
+<section id="changing-values-based-on-conditions">
+<h1>Changing values based on conditions<a class="headerlink" href="#changing-values-based-on-conditions" title="Link to this heading">#</a></h1>
+<p>You can combine boolean conditionals with <code class="docutils literal notranslate"><span class="pre">.loc[]</span></code> from Lecture 1 to update your DataFrame. Let’s open up the language database from the previous lecture and make a change to it. Some languages have an unknown genetic grouping (‘family’), which is indicated by a ‘?’ in the data. Let’s find all instances of ‘?’ and replace it with the string ‘Isolate’, which is the more common technical term for such languages.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">languages</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s1">&#39;data/WACL.csv&#39;</span><span class="p">)</span>
+<span class="n">languages</span><span class="o">.</span><span class="n">tail</span><span class="p">(</span><span class="mi">5</span><span class="p">)</span> <span class="c1">#Check the &#39;family&#39; column of the Zuni language (row 3336)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>iso_code</th>
+      <th>language_name</th>
+      <th>longitude</th>
+      <th>latitude</th>
+      <th>area</th>
+      <th>continent</th>
+      <th>status</th>
+      <th>family</th>
+      <th>source</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>3333</th>
+      <td>zom</td>
+      <td>Zou</td>
+      <td>93.9253</td>
+      <td>24.0649</td>
+      <td>Eurasia</td>
+      <td>Asia</td>
+      <td>threatened</td>
+      <td>Sino-Tibetan</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <th>3334</th>
+      <td>gnd</td>
+      <td>Zulgo-Gemzek</td>
+      <td>14.0578</td>
+      <td>10.827</td>
+      <td>Africa</td>
+      <td>Africa</td>
+      <td>not endangered</td>
+      <td>Afro-Asiatic</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <th>3335</th>
+      <td>zul</td>
+      <td>Zulu</td>
+      <td>31.3512</td>
+      <td>-25.3305</td>
+      <td>Africa</td>
+      <td>Africa</td>
+      <td>not endangered</td>
+      <td>Atlantic-Congo</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <th>3336</th>
+      <td>zun</td>
+      <td>Zuni</td>
+      <td>-108.782</td>
+      <td>35.0056</td>
+      <td>North America</td>
+      <td>Americas</td>
+      <td>shifting</td>
+      <td>?</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <th>3337</th>
+      <td>zzj</td>
+      <td>Zuojiang Zhuang</td>
+      <td>107.3622</td>
+      <td>21.83753</td>
+      <td>Eurasia</td>
+      <td>Asia</td>
+      <td>not endangered</td>
+      <td>Tai-Kadai</td>
+      <td>NaN</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">column</span> <span class="o">=</span> <span class="s1">&#39;family&#39;</span>
+<span class="n">condition</span> <span class="o">=</span> <span class="n">languages</span><span class="p">[</span><span class="n">column</span><span class="p">]</span> <span class="o">==</span> <span class="s1">&#39;?&#39;</span>
+<span class="n">languages</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">condition</span><span class="p">,</span> <span class="n">column</span><span class="p">]</span> <span class="o">=</span> <span class="s1">&#39;Isolate&#39;</span>
+<span class="n">languages</span><span class="o">.</span><span class="n">tail</span><span class="p">(</span><span class="mi">5</span><span class="p">)</span> <span class="c1">#Now check the &#39;family&#39; column for Zuni</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>iso_code</th>
+      <th>language_name</th>
+      <th>longitude</th>
+      <th>latitude</th>
+      <th>area</th>
+      <th>continent</th>
+      <th>status</th>
+      <th>family</th>
+      <th>source</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>3333</th>
+      <td>zom</td>
+      <td>Zou</td>
+      <td>93.9253</td>
+      <td>24.0649</td>
+      <td>Eurasia</td>
+      <td>Asia</td>
+      <td>threatened</td>
+      <td>Sino-Tibetan</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <th>3334</th>
+      <td>gnd</td>
+      <td>Zulgo-Gemzek</td>
+      <td>14.0578</td>
+      <td>10.827</td>
+      <td>Africa</td>
+      <td>Africa</td>
+      <td>not endangered</td>
+      <td>Afro-Asiatic</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <th>3335</th>
+      <td>zul</td>
+      <td>Zulu</td>
+      <td>31.3512</td>
+      <td>-25.3305</td>
+      <td>Africa</td>
+      <td>Africa</td>
+      <td>not endangered</td>
+      <td>Atlantic-Congo</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <th>3336</th>
+      <td>zun</td>
+      <td>Zuni</td>
+      <td>-108.782</td>
+      <td>35.0056</td>
+      <td>North America</td>
+      <td>Americas</td>
+      <td>shifting</td>
+      <td>Isolate</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <th>3337</th>
+      <td>zzj</td>
+      <td>Zuojiang Zhuang</td>
+      <td>107.3622</td>
+      <td>21.83753</td>
+      <td>Eurasia</td>
+      <td>Asia</td>
+      <td>not endangered</td>
+      <td>Tai-Kadai</td>
+      <td>NaN</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<p>This can be condensed to a single line:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">languages</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">languages</span><span class="p">[</span><span class="s1">&#39;family&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="s1">&#39;?&#39;</span><span class="p">,</span> <span class="s1">&#39;family&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="s1">&#39;Isolate&#39;</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="empty-cells-missing-values">
+<h1>Empty cells/missing values<a class="headerlink" href="#empty-cells-missing-values" title="Link to this heading">#</a></h1>
+<p>Sometimes a cell in a spreadsheet will be missing values. In the language data, some rows have an entry for source material, but others do not. Pandas represents empty cells with the special value <code class="docutils literal notranslate"><span class="pre">NaN</span></code>, meaning “not a number”. You can check if your dataset has missing values like this:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1">#Check the entire DataFrame for Nan</span>
+<span class="n">languages</span><span class="o">.</span><span class="n">isna</span><span class="p">()</span> 
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>iso_code</th>
+      <th>language_name</th>
+      <th>longitude</th>
+      <th>latitude</th>
+      <th>area</th>
+      <th>continent</th>
+      <th>status</th>
+      <th>family</th>
+      <th>source</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>False</td>
+      <td>False</td>
+      <td>False</td>
+      <td>False</td>
+      <td>False</td>
+      <td>False</td>
+      <td>False</td>
+      <td>False</td>
+      <td>False</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>False</td>
+      <td>False</td>
+      <td>False</td>
+      <td>False</td>
+      <td>False</td>
+      <td>False</td>
+      <td>False</td>
+      <td>False</td>
+      <td>False</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>False</td>
+      <td>False</td>
+      <td>False</td>
+      <td>False</td>
+      <td>False</td>
+      <td>False</td>
+      <td>False</td>
+      <td>False</td>
+      <td>False</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>False</td>
+      <td>False</td>
+      <td>False</td>
+      <td>False</td>
+      <td>False</td>
+      <td>False</td>
+      <td>False</td>
+      <td>False</td>
+      <td>False</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>False</td>
+      <td>False</td>
+      <td>False</td>
+      <td>False</td>
+      <td>False</td>
+      <td>False</td>
+      <td>False</td>
+      <td>False</td>
+      <td>False</td>
+    </tr>
+    <tr>
+      <th>...</th>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+    </tr>
+    <tr>
+      <th>3333</th>
+      <td>False</td>
+      <td>False</td>
+      <td>False</td>
+      <td>False</td>
+      <td>False</td>
+      <td>False</td>
+      <td>False</td>
+      <td>False</td>
+      <td>True</td>
+    </tr>
+    <tr>
+      <th>3334</th>
+      <td>False</td>
+      <td>False</td>
+      <td>False</td>
+      <td>False</td>
+      <td>False</td>
+      <td>False</td>
+      <td>False</td>
+      <td>False</td>
+      <td>True</td>
+    </tr>
+    <tr>
+      <th>3335</th>
+      <td>False</td>
+      <td>False</td>
+      <td>False</td>
+      <td>False</td>
+      <td>False</td>
+      <td>False</td>
+      <td>False</td>
+      <td>False</td>
+      <td>True</td>
+    </tr>
+    <tr>
+      <th>3336</th>
+      <td>False</td>
+      <td>False</td>
+      <td>False</td>
+      <td>False</td>
+      <td>False</td>
+      <td>False</td>
+      <td>False</td>
+      <td>False</td>
+      <td>True</td>
+    </tr>
+    <tr>
+      <th>3337</th>
+      <td>False</td>
+      <td>False</td>
+      <td>False</td>
+      <td>False</td>
+      <td>False</td>
+      <td>False</td>
+      <td>False</td>
+      <td>False</td>
+      <td>True</td>
+    </tr>
+  </tbody>
+</table>
+<p>3338 rows × 9 columns</p>
+</div></div></div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1">#Check specific columns</span>
+<span class="n">languages</span><span class="p">[</span><span class="s1">&#39;source&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">isna</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0       False
+1       False
+2       False
+3       False
+4       False
+        ...  
+3333     True
+3334     True
+3335     True
+3336     True
+3337     True
+Name: source, Length: 3338, dtype: bool
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1">#Use Python&#39;s any() function to find out if there is at least one NaN value in the DataFrame</span>
+<span class="nb">any</span><span class="p">(</span><span class="n">languages</span><span class="o">.</span><span class="n">isna</span><span class="p">())</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>True
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1">#Or check just a specific column</span>
+<span class="nb">any</span><span class="p">(</span><span class="n">languages</span><span class="p">[</span><span class="s1">&#39;family&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">isna</span><span class="p">())</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>False
+</pre></div>
+</div>
+</div>
+</div>
+<p>If you want to get rid of  any rows with <code class="docutils literal notranslate"><span class="pre">NaN</span></code> use <code class="docutils literal notranslate"><span class="pre">.dropna()</span></code></p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">languages</span><span class="o">.</span><span class="n">dropna</span><span class="p">()</span> <span class="c1">#This returns a copy, it doesn&#39;t modify your original!</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>iso_code</th>
+      <th>language_name</th>
+      <th>longitude</th>
+      <th>latitude</th>
+      <th>area</th>
+      <th>continent</th>
+      <th>status</th>
+      <th>family</th>
+      <th>source</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>aiw</td>
+      <td>Aari</td>
+      <td>36.5721</td>
+      <td>5.95034</td>
+      <td>Africa</td>
+      <td>Africa</td>
+      <td>not endangered</td>
+      <td>South Omotic</td>
+      <td>daniel_aberra_aberra_1994</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>kbt</td>
+      <td>Abadi</td>
+      <td>146.992</td>
+      <td>-9.03389</td>
+      <td>Papunesia</td>
+      <td>Pacific</td>
+      <td>not endangered</td>
+      <td>Austronesian</td>
+      <td>oa_tentative_nodate</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>mij</td>
+      <td>Mungbam</td>
+      <td>10.2267</td>
+      <td>6.5805</td>
+      <td>Africa</td>
+      <td>Africa</td>
+      <td>shifting</td>
+      <td>Atlantic-Congo</td>
+      <td>das_gupta_phrase_1977</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>aau</td>
+      <td>Abau</td>
+      <td>141.324</td>
+      <td>-3.97222</td>
+      <td>Papunesia</td>
+      <td>Pacific</td>
+      <td>shifting</td>
+      <td>Sepik</td>
+      <td>lock_abau_2011</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>abq</td>
+      <td>Abaza</td>
+      <td>42.7273</td>
+      <td>41.1214</td>
+      <td>Eurasia</td>
+      <td>Europe</td>
+      <td>threatened</td>
+      <td>Abkhaz-Adyge</td>
+      <td>ketevan_lomtatidze_lomtatidze_1989</td>
+    </tr>
+    <tr>
+      <th>...</th>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+    </tr>
+    <tr>
+      <th>3287</th>
+      <td>zyn</td>
+      <td>Yongnan Zhuang</td>
+      <td>107.3622</td>
+      <td>21.83753</td>
+      <td>Eurasia</td>
+      <td>Asia</td>
+      <td>not endangered</td>
+      <td>Tai-Kadai</td>
+      <td>pan_verb_2010</td>
+    </tr>
+    <tr>
+      <th>3296</th>
+      <td>buh</td>
+      <td>Younuo Bunu</td>
+      <td>110.474</td>
+      <td>25.7638</td>
+      <td>Eurasia</td>
+      <td>Asia</td>
+      <td>shifting</td>
+      <td>Hmong-Mien</td>
+      <td>mao_brief_1972</td>
+    </tr>
+    <tr>
+      <th>3302</th>
+      <td>yuk</td>
+      <td>Yuki</td>
+      <td>-123.296</td>
+      <td>39.8389</td>
+      <td>North America</td>
+      <td>Americas</td>
+      <td>extinct</td>
+      <td>Yuki-Wappo</td>
+      <td>balodis_yuki_2011</td>
+    </tr>
+    <tr>
+      <th>3318</th>
+      <td>kxk</td>
+      <td>Lahta-Zayein Karen</td>
+      <td>96.908</td>
+      <td>20.16</td>
+      <td>Eurasia</td>
+      <td>Asia</td>
+      <td>not endangered</td>
+      <td>Sino-Tibetan</td>
+      <td>naw_grammar_2013</td>
+    </tr>
+    <tr>
+      <th>3328</th>
+      <td>zil</td>
+      <td>Zialo</td>
+      <td>-9.51</td>
+      <td>8.43</td>
+      <td>Africa</td>
+      <td>?</td>
+      <td>threatened</td>
+      <td>Mande</td>
+      <td>babaev_zialo_2010</td>
+    </tr>
+  </tbody>
+</table>
+<p>1754 rows × 9 columns</p>
+</div></div></div>
+</div>
+<p>You can replace all occurences of <code class="docutils literal notranslate"><span class="pre">NaN</span></code> with a different value using <code class="docutils literal notranslate"><span class="pre">.fillna()</span></code></p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">languages</span><span class="o">.</span><span class="n">fillna</span><span class="p">(</span><span class="s1">&#39;No source&#39;</span><span class="p">)</span> <span class="c1">#This returns a copy, it doesn&#39;t modify the original!</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>iso_code</th>
+      <th>language_name</th>
+      <th>longitude</th>
+      <th>latitude</th>
+      <th>area</th>
+      <th>continent</th>
+      <th>status</th>
+      <th>family</th>
+      <th>source</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>aiw</td>
+      <td>Aari</td>
+      <td>36.5721</td>
+      <td>5.95034</td>
+      <td>Africa</td>
+      <td>Africa</td>
+      <td>not endangered</td>
+      <td>South Omotic</td>
+      <td>daniel_aberra_aberra_1994</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>kbt</td>
+      <td>Abadi</td>
+      <td>146.992</td>
+      <td>-9.03389</td>
+      <td>Papunesia</td>
+      <td>Pacific</td>
+      <td>not endangered</td>
+      <td>Austronesian</td>
+      <td>oa_tentative_nodate</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>mij</td>
+      <td>Mungbam</td>
+      <td>10.2267</td>
+      <td>6.5805</td>
+      <td>Africa</td>
+      <td>Africa</td>
+      <td>shifting</td>
+      <td>Atlantic-Congo</td>
+      <td>das_gupta_phrase_1977</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>aau</td>
+      <td>Abau</td>
+      <td>141.324</td>
+      <td>-3.97222</td>
+      <td>Papunesia</td>
+      <td>Pacific</td>
+      <td>shifting</td>
+      <td>Sepik</td>
+      <td>lock_abau_2011</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>abq</td>
+      <td>Abaza</td>
+      <td>42.7273</td>
+      <td>41.1214</td>
+      <td>Eurasia</td>
+      <td>Europe</td>
+      <td>threatened</td>
+      <td>Abkhaz-Adyge</td>
+      <td>ketevan_lomtatidze_lomtatidze_1989</td>
+    </tr>
+    <tr>
+      <th>...</th>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+    </tr>
+    <tr>
+      <th>3333</th>
+      <td>zom</td>
+      <td>Zou</td>
+      <td>93.9253</td>
+      <td>24.0649</td>
+      <td>Eurasia</td>
+      <td>Asia</td>
+      <td>threatened</td>
+      <td>Sino-Tibetan</td>
+      <td>No source</td>
+    </tr>
+    <tr>
+      <th>3334</th>
+      <td>gnd</td>
+      <td>Zulgo-Gemzek</td>
+      <td>14.0578</td>
+      <td>10.827</td>
+      <td>Africa</td>
+      <td>Africa</td>
+      <td>not endangered</td>
+      <td>Afro-Asiatic</td>
+      <td>No source</td>
+    </tr>
+    <tr>
+      <th>3335</th>
+      <td>zul</td>
+      <td>Zulu</td>
+      <td>31.3512</td>
+      <td>-25.3305</td>
+      <td>Africa</td>
+      <td>Africa</td>
+      <td>not endangered</td>
+      <td>Atlantic-Congo</td>
+      <td>No source</td>
+    </tr>
+    <tr>
+      <th>3336</th>
+      <td>zun</td>
+      <td>Zuni</td>
+      <td>-108.782</td>
+      <td>35.0056</td>
+      <td>North America</td>
+      <td>Americas</td>
+      <td>shifting</td>
+      <td>Isolate</td>
+      <td>No source</td>
+    </tr>
+    <tr>
+      <th>3337</th>
+      <td>zzj</td>
+      <td>Zuojiang Zhuang</td>
+      <td>107.3622</td>
+      <td>21.83753</td>
+      <td>Eurasia</td>
+      <td>Asia</td>
+      <td>not endangered</td>
+      <td>Tai-Kadai</td>
+      <td>No source</td>
+    </tr>
+  </tbody>
+</table>
+<p>3338 rows × 9 columns</p>
+</div></div></div>
+</div>
+<section id="renaming-columns">
+<h2>Renaming columns<a class="headerlink" href="#renaming-columns" title="Link to this heading">#</a></h2>
+<p>To rename all the columns at once, you can directly set the <code class="docutils literal notranslate"><span class="pre">columns</span></code> attribute of your DataFrame. You’ll need to use a data type called a <em>list</em> which contains all of your column names between square brackets.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">scores</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s1">&#39;data/student_scores.csv&#39;</span><span class="p">,</span> <span class="n">index_col</span><span class="o">=</span><span class="s1">&#39;Student_ID&#39;</span><span class="p">)</span>
+<span class="n">scores</span><span class="o">.</span><span class="n">columns</span><span class="o">.</span><span class="n">to_list</span><span class="p">()</span> <span class="c1">#check the original columns</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[&#39;Biology&#39;, &#39;Chemistry&#39;, &#39;Physics&#39;, &#39;English&#39;, &#39;Drama&#39;, &#39;Art&#39;]
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1">#Create a list of new names</span>
+<span class="n">scores</span><span class="o">.</span><span class="n">columns</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;BIOL-101&#39;</span><span class="p">,</span> <span class="s1">&#39;CHEM-200&#39;</span><span class="p">,</span> <span class="s1">&#39;PHYS-132&#39;</span><span class="p">,</span> <span class="s1">&#39;ENGL-100&#39;</span><span class="p">,</span> <span class="s1">&#39;DRAM-301&#39;</span><span class="p">,</span> <span class="s1">&#39;ART-216&#39;</span><span class="p">]</span> <span class="c1">#this is a list type variable</span>
+<span class="n">scores</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>BIOL-101</th>
+      <th>CHEM-200</th>
+      <th>PHYS-132</th>
+      <th>ENGL-100</th>
+      <th>DRAM-301</th>
+      <th>ART-216</th>
+    </tr>
+    <tr>
+      <th>Student_ID</th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>23583</th>
+      <td>97</td>
+      <td>71</td>
+      <td>67</td>
+      <td>62</td>
+      <td>72</td>
+      <td>54</td>
+    </tr>
+    <tr>
+      <th>69204</th>
+      <td>88</td>
+      <td>74</td>
+      <td>97</td>
+      <td>53</td>
+      <td>67</td>
+      <td>97</td>
+    </tr>
+    <tr>
+      <th>74763</th>
+      <td>74</td>
+      <td>64</td>
+      <td>68</td>
+      <td>57</td>
+      <td>70</td>
+      <td>64</td>
+    </tr>
+    <tr>
+      <th>79080</th>
+      <td>81</td>
+      <td>25</td>
+      <td>81</td>
+      <td>94</td>
+      <td>91</td>
+      <td>88</td>
+    </tr>
+    <tr>
+      <th>61824</th>
+      <td>71</td>
+      <td>69</td>
+      <td>83</td>
+      <td>97</td>
+      <td>98</td>
+      <td>75</td>
+    </tr>
+    <tr>
+      <th>49915</th>
+      <td>58</td>
+      <td>54</td>
+      <td>54</td>
+      <td>78</td>
+      <td>87</td>
+      <td>74</td>
+    </tr>
+    <tr>
+      <th>16055</th>
+      <td>63</td>
+      <td>72</td>
+      <td>58</td>
+      <td>67</td>
+      <td>91</td>
+      <td>92</td>
+    </tr>
+    <tr>
+      <th>47192</th>
+      <td>70</td>
+      <td>54</td>
+      <td>70</td>
+      <td>94</td>
+      <td>94</td>
+      <td>52</td>
+    </tr>
+    <tr>
+      <th>48641</th>
+      <td>70</td>
+      <td>66</td>
+      <td>96</td>
+      <td>91</td>
+      <td>53</td>
+      <td>64</td>
+    </tr>
+    <tr>
+      <th>65083</th>
+      <td>90</td>
+      <td>27</td>
+      <td>93</td>
+      <td>76</td>
+      <td>72</td>
+      <td>88</td>
+    </tr>
+    <tr>
+      <th>56645</th>
+      <td>99</td>
+      <td>37</td>
+      <td>66</td>
+      <td>76</td>
+      <td>86</td>
+      <td>71</td>
+    </tr>
+    <tr>
+      <th>62012</th>
+      <td>92</td>
+      <td>59</td>
+      <td>86</td>
+      <td>63</td>
+      <td>96</td>
+      <td>81</td>
+    </tr>
+    <tr>
+      <th>92865</th>
+      <td>67</td>
+      <td>29</td>
+      <td>50</td>
+      <td>74</td>
+      <td>75</td>
+      <td>78</td>
+    </tr>
+    <tr>
+      <th>13367</th>
+      <td>99</td>
+      <td>44</td>
+      <td>79</td>
+      <td>90</td>
+      <td>61</td>
+      <td>51</td>
+    </tr>
+    <tr>
+      <th>69346</th>
+      <td>58</td>
+      <td>42</td>
+      <td>73</td>
+      <td>60</td>
+      <td>76</td>
+      <td>98</td>
+    </tr>
+    <tr>
+      <th>41169</th>
+      <td>56</td>
+      <td>69</td>
+      <td>75</td>
+      <td>55</td>
+      <td>85</td>
+      <td>68</td>
+    </tr>
+    <tr>
+      <th>68390</th>
+      <td>79</td>
+      <td>62</td>
+      <td>94</td>
+      <td>96</td>
+      <td>55</td>
+      <td>79</td>
+    </tr>
+    <tr>
+      <th>98353</th>
+      <td>68</td>
+      <td>38</td>
+      <td>70</td>
+      <td>84</td>
+      <td>68</td>
+      <td>51</td>
+    </tr>
+    <tr>
+      <th>58887</th>
+      <td>82</td>
+      <td>54</td>
+      <td>92</td>
+      <td>53</td>
+      <td>81</td>
+      <td>56</td>
+    </tr>
+    <tr>
+      <th>69618</th>
+      <td>94</td>
+      <td>32</td>
+      <td>88</td>
+      <td>81</td>
+      <td>96</td>
+      <td>62</td>
+    </tr>
+    <tr>
+      <th>51213</th>
+      <td>87</td>
+      <td>34</td>
+      <td>50</td>
+      <td>69</td>
+      <td>75</td>
+      <td>52</td>
+    </tr>
+    <tr>
+      <th>79018</th>
+      <td>96</td>
+      <td>64</td>
+      <td>55</td>
+      <td>59</td>
+      <td>99</td>
+      <td>54</td>
+    </tr>
+    <tr>
+      <th>46410</th>
+      <td>56</td>
+      <td>30</td>
+      <td>77</td>
+      <td>99</td>
+      <td>92</td>
+      <td>55</td>
+    </tr>
+    <tr>
+      <th>90278</th>
+      <td>74</td>
+      <td>73</td>
+      <td>82</td>
+      <td>98</td>
+      <td>89</td>
+      <td>82</td>
+    </tr>
+    <tr>
+      <th>34549</th>
+      <td>93</td>
+      <td>65</td>
+      <td>61</td>
+      <td>79</td>
+      <td>59</td>
+      <td>92</td>
+    </tr>
+    <tr>
+      <th>52230</th>
+      <td>58</td>
+      <td>70</td>
+      <td>59</td>
+      <td>55</td>
+      <td>99</td>
+      <td>54</td>
+    </tr>
+    <tr>
+      <th>13918</th>
+      <td>98</td>
+      <td>51</td>
+      <td>77</td>
+      <td>76</td>
+      <td>75</td>
+      <td>81</td>
+    </tr>
+    <tr>
+      <th>14379</th>
+      <td>77</td>
+      <td>56</td>
+      <td>55</td>
+      <td>87</td>
+      <td>57</td>
+      <td>77</td>
+    </tr>
+    <tr>
+      <th>54578</th>
+      <td>94</td>
+      <td>45</td>
+      <td>51</td>
+      <td>88</td>
+      <td>58</td>
+      <td>70</td>
+    </tr>
+    <tr>
+      <th>79496</th>
+      <td>80</td>
+      <td>66</td>
+      <td>51</td>
+      <td>69</td>
+      <td>66</td>
+      <td>53</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<p>You can choose to rename only some columns with the <code class="docutils literal notranslate"><span class="pre">rename()</span></code> function. To illustrate this, let’s rename some columns from the languges dataset.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">languages</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s1">&#39;data/WACL.csv&#39;</span><span class="p">)</span>
+<span class="n">languages</span><span class="o">.</span><span class="n">columns</span><span class="o">.</span><span class="n">to_list</span><span class="p">()</span> <span class="c1">#remind yourself what the current headers are</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[&#39;iso_code&#39;,
+ &#39;language_name&#39;,
+ &#39;longitude&#39;,
+ &#39;latitude&#39;,
+ &#39;area&#39;,
+ &#39;continent&#39;,
+ &#39;status&#39;,
+ &#39;family&#39;,
+ &#39;source&#39;]
+</pre></div>
+</div>
+</div>
+</div>
+<p>For this function, you need to create a <em>dictionary</em> which is another basic type of object in Python. This type is used when you want to map, associate, or pair together two peices of information. Dictionaries are surrounded by curly braces, and each pair in the dictionary is separated by a colon. For example:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">old_to_new</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;language_name&quot;</span><span class="p">:</span> <span class="s2">&quot;name&quot;</span><span class="p">,</span> 
+               <span class="s2">&quot;area&quot;</span><span class="p">:</span> <span class="s2">&quot;region&quot;</span><span class="p">,</span> 
+               <span class="s2">&quot;source&quot;</span><span class="p">:</span> <span class="s2">&quot;bibliography&quot;</span><span class="p">}</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>The first item in each pair is called a ‘key’, and second item is called a ‘value’. Here the keys are <code class="docutils literal notranslate"><span class="pre">language_name</span></code>, <code class="docutils literal notranslate"><span class="pre">area</span></code>, and <code class="docutils literal notranslate"><span class="pre">source</span></code>, and the corresponding values are <code class="docutils literal notranslate"><span class="pre">name</span></code>, <code class="docutils literal notranslate"><span class="pre">region</span></code>, and <code class="docutils literal notranslate"><span class="pre">bibliography</span></code>.</p>
+<p>Once you have the dictionary, you pass it to the <code class="docutils literal notranslate"><span class="pre">columns</span></code> argument of the <code class="docutils literal notranslate"><span class="pre">.rename()</span></code> function on your DataFrame.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">languages</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s1">&#39;data/WACL.csv&#39;</span><span class="p">)</span>
+<span class="n">languages</span> <span class="o">=</span> <span class="n">languages</span><span class="o">.</span><span class="n">rename</span><span class="p">(</span><span class="n">columns</span> <span class="o">=</span> <span class="n">old_to_new</span><span class="p">)</span> <span class="c1">#this returns a copy!</span>
+<span class="n">languages</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>iso_code</th>
+      <th>name</th>
+      <th>longitude</th>
+      <th>latitude</th>
+      <th>region</th>
+      <th>continent</th>
+      <th>status</th>
+      <th>family</th>
+      <th>bibliography</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>aiw</td>
+      <td>Aari</td>
+      <td>36.5721</td>
+      <td>5.95034</td>
+      <td>Africa</td>
+      <td>Africa</td>
+      <td>not endangered</td>
+      <td>South Omotic</td>
+      <td>daniel_aberra_aberra_1994</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>kbt</td>
+      <td>Abadi</td>
+      <td>146.992</td>
+      <td>-9.03389</td>
+      <td>Papunesia</td>
+      <td>Pacific</td>
+      <td>not endangered</td>
+      <td>Austronesian</td>
+      <td>oa_tentative_nodate</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>mij</td>
+      <td>Mungbam</td>
+      <td>10.2267</td>
+      <td>6.5805</td>
+      <td>Africa</td>
+      <td>Africa</td>
+      <td>shifting</td>
+      <td>Atlantic-Congo</td>
+      <td>das_gupta_phrase_1977</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>aau</td>
+      <td>Abau</td>
+      <td>141.324</td>
+      <td>-3.97222</td>
+      <td>Papunesia</td>
+      <td>Pacific</td>
+      <td>shifting</td>
+      <td>Sepik</td>
+      <td>lock_abau_2011</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>abq</td>
+      <td>Abaza</td>
+      <td>42.7273</td>
+      <td>41.1214</td>
+      <td>Eurasia</td>
+      <td>Europe</td>
+      <td>threatened</td>
+      <td>Abkhaz-Adyge</td>
+      <td>ketevan_lomtatidze_lomtatidze_1989</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<p>We will discuss how to use dictionaries in more detail in a future lecture. For now, you’ll just need to memorize this syntax for renaming columns.</p>
+</section>
+<section id="data-type-cheatsheet">
+<h2>Data type cheatsheet<a class="headerlink" href="#data-type-cheatsheet" title="Link to this heading">#</a></h2>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Type name</p></th>
+<th class="head"><p>Data format</p></th>
+<th class="head"><p>Example</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>string</p></td>
+<td><p>text</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">words</span> <span class="pre">=</span> <span class="pre">'this</span> <span class="pre">is</span> <span class="pre">a</span> <span class="pre">string'</span></code></p></td>
+</tr>
+<tr class="row-odd"><td><p>integer</p></td>
+<td><p>whole number</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">fifteen</span> <span class="pre">=</span> <span class="pre">15</span></code></p></td>
+</tr>
+<tr class="row-even"><td><p>float</p></td>
+<td><p>decimal number</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">two_and_a_half</span> <span class="pre">=</span> <span class="pre">2.5</span></code></p></td>
+</tr>
+<tr class="row-odd"><td><p>list</p></td>
+<td><p>sequence</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">groceries</span> <span class="pre">=</span> <span class="pre">['apples',</span> <span class="pre">'pears',</span> <span class="pre">'oranges']</span></code></p></td>
+</tr>
+<tr class="row-even"><td><p>dictionary</p></td>
+<td><p>mapping</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">english_to_french</span> <span class="pre">=</span> <span class="pre">{'house':</span> <span class="pre">'maison',</span> <span class="pre">'chair':</span> <span class="pre">'chaise'}</span></code></p></td>
+</tr>
+<tr class="row-odd"><td><p>boolean</p></td>
+<td><p>true/false</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">not_false</span> <span class="pre">=</span> <span class="pre">True</span></code></p></td>
+</tr>
+<tr class="row-even"><td><p>DataFrame</p></td>
+<td><p>table</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">results</span> <span class="pre">=</span> <span class="pre">pd.read_csv('experiment.csv')</span></code></p></td>
+</tr>
+<tr class="row-odd"><td><p>Series</p></td>
+<td><p>column</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">scores</span> <span class="pre">=</span> <span class="pre">results['scores']</span></code></p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</section>
+</section>
+<section id="dataframe-reshaping">
+<h1>DataFrame reshaping<a class="headerlink" href="#dataframe-reshaping" title="Link to this heading">#</a></h1>
+<section id="tidy-data">
+<h2>Tidy data<a class="headerlink" href="#tidy-data" title="Link to this heading">#</a></h2>
+<ul class="simple">
+<li><p><a class="reference external" href="https://vita.had.co.nz/papers/tidy-data.pdf">Tidy data</a> is about “linking the structure of a dataset with its semantics (its meaning)”</p></li>
+<li><p>It is defined by:</p>
+<ol class="arabic simple">
+<li><p>Each variable forms a column</p></li>
+<li><p>Each observation forms a row</p></li>
+<li><p>Each type of observational unit forms a table</p></li>
+</ol>
+</li>
+<li><p>Often you’ll need to reshape a dataframe to make it tidy (or for some other purpose)</p></li>
+<li><p>We’ll look at four different ways to do this: <code class="docutils literal notranslate"><span class="pre">.transpose()</span></code>, <code class="docutils literal notranslate"><span class="pre">.pivot()</span></code>, <code class="docutils literal notranslate"><span class="pre">.pivot_table()</span></code>, and <code class="docutils literal notranslate"><span class="pre">.melt()</span></code></p></li>
+</ul>
+<p><img alt="" src="../_images/tidy.png" /></p>
+<p>Source: <a class="reference external" href="https://r4ds.had.co.nz/tidy-data.html#fig:tidy-structure">r4ds</a></p>
+</section>
+<section id="wide-vs-long-tables">
+<h2>Wide vs. long tables<a class="headerlink" href="#wide-vs-long-tables" title="Link to this heading">#</a></h2>
+<a class="reference internal image-reference" href="https://www.statology.org/wp-content/uploads/2021/12/wideLong1-1.png"><img alt="https://www.statology.org/wp-content/uploads/2021/12/wideLong1-1.png" src="https://www.statology.org/wp-content/uploads/2021/12/wideLong1-1.png" style="width: 600px;" />
+</a>
+<p><a class="reference external" href="https://www.statology.org/wp-content/uploads/2021/12/wideLong1-1.png">Image source</a></p>
+</section>
+<section id="transpose">
+<h2>Transpose<a class="headerlink" href="#transpose" title="Link to this heading">#</a></h2>
+<p>Transposing a table means swapping the rows and columns. DataFrames have a <code class="docutils literal notranslate"><span class="pre">.transpose()</span></code> function for this. Run the next two cells and compare the output.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">scores</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s1">&#39;data/student_scores.csv&#39;</span><span class="p">)</span>
+<span class="n">scores</span><span class="o">.</span><span class="n">head</span><span class="p">(</span><span class="mi">5</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>Student_ID</th>
+      <th>Biology</th>
+      <th>Chemistry</th>
+      <th>Physics</th>
+      <th>English</th>
+      <th>Drama</th>
+      <th>Art</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>23583</td>
+      <td>97</td>
+      <td>71</td>
+      <td>67</td>
+      <td>62</td>
+      <td>72</td>
+      <td>54</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>69204</td>
+      <td>88</td>
+      <td>74</td>
+      <td>97</td>
+      <td>53</td>
+      <td>67</td>
+      <td>97</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>74763</td>
+      <td>74</td>
+      <td>64</td>
+      <td>68</td>
+      <td>57</td>
+      <td>70</td>
+      <td>64</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>79080</td>
+      <td>81</td>
+      <td>25</td>
+      <td>81</td>
+      <td>94</td>
+      <td>91</td>
+      <td>88</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>61824</td>
+      <td>71</td>
+      <td>69</td>
+      <td>83</td>
+      <td>97</td>
+      <td>98</td>
+      <td>75</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">scores_T</span> <span class="o">=</span> <span class="n">scores</span><span class="o">.</span><span class="n">transpose</span><span class="p">()</span> <span class="c1">#This returns a copy!</span>
+<span class="n">scores_T</span><span class="o">.</span><span class="n">head</span><span class="p">(</span><span class="mi">5</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>0</th>
+      <th>1</th>
+      <th>2</th>
+      <th>3</th>
+      <th>4</th>
+      <th>5</th>
+      <th>6</th>
+      <th>7</th>
+      <th>8</th>
+      <th>9</th>
+      <th>...</th>
+      <th>20</th>
+      <th>21</th>
+      <th>22</th>
+      <th>23</th>
+      <th>24</th>
+      <th>25</th>
+      <th>26</th>
+      <th>27</th>
+      <th>28</th>
+      <th>29</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>Student_ID</th>
+      <td>23583</td>
+      <td>69204</td>
+      <td>74763</td>
+      <td>79080</td>
+      <td>61824</td>
+      <td>49915</td>
+      <td>16055</td>
+      <td>47192</td>
+      <td>48641</td>
+      <td>65083</td>
+      <td>...</td>
+      <td>51213</td>
+      <td>79018</td>
+      <td>46410</td>
+      <td>90278</td>
+      <td>34549</td>
+      <td>52230</td>
+      <td>13918</td>
+      <td>14379</td>
+      <td>54578</td>
+      <td>79496</td>
+    </tr>
+    <tr>
+      <th>Biology</th>
+      <td>97</td>
+      <td>88</td>
+      <td>74</td>
+      <td>81</td>
+      <td>71</td>
+      <td>58</td>
+      <td>63</td>
+      <td>70</td>
+      <td>70</td>
+      <td>90</td>
+      <td>...</td>
+      <td>87</td>
+      <td>96</td>
+      <td>56</td>
+      <td>74</td>
+      <td>93</td>
+      <td>58</td>
+      <td>98</td>
+      <td>77</td>
+      <td>94</td>
+      <td>80</td>
+    </tr>
+    <tr>
+      <th>Chemistry</th>
+      <td>71</td>
+      <td>74</td>
+      <td>64</td>
+      <td>25</td>
+      <td>69</td>
+      <td>54</td>
+      <td>72</td>
+      <td>54</td>
+      <td>66</td>
+      <td>27</td>
+      <td>...</td>
+      <td>34</td>
+      <td>64</td>
+      <td>30</td>
+      <td>73</td>
+      <td>65</td>
+      <td>70</td>
+      <td>51</td>
+      <td>56</td>
+      <td>45</td>
+      <td>66</td>
+    </tr>
+    <tr>
+      <th>Physics</th>
+      <td>67</td>
+      <td>97</td>
+      <td>68</td>
+      <td>81</td>
+      <td>83</td>
+      <td>54</td>
+      <td>58</td>
+      <td>70</td>
+      <td>96</td>
+      <td>93</td>
+      <td>...</td>
+      <td>50</td>
+      <td>55</td>
+      <td>77</td>
+      <td>82</td>
+      <td>61</td>
+      <td>59</td>
+      <td>77</td>
+      <td>55</td>
+      <td>51</td>
+      <td>51</td>
+    </tr>
+    <tr>
+      <th>English</th>
+      <td>62</td>
+      <td>53</td>
+      <td>57</td>
+      <td>94</td>
+      <td>97</td>
+      <td>78</td>
+      <td>67</td>
+      <td>94</td>
+      <td>91</td>
+      <td>76</td>
+      <td>...</td>
+      <td>69</td>
+      <td>59</td>
+      <td>99</td>
+      <td>98</td>
+      <td>79</td>
+      <td>55</td>
+      <td>76</td>
+      <td>87</td>
+      <td>88</td>
+      <td>69</td>
+    </tr>
+  </tbody>
+</table>
+<p>5 rows × 30 columns</p>
+</div></div></div>
+</div>
+</section>
+<section id="pivot">
+<h2>Pivot<a class="headerlink" href="#pivot" title="Link to this heading">#</a></h2>
+<p>Pivoting a table means changing it from long to wide format. To illustrate, we will explore a dataset of the results from the 2024 Olympics.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">olympics</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s1">&#39;data/Olympics_2024.csv&#39;</span><span class="p">)</span>
+<span class="n">olympics</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>Competitions</th>
+      <th>Rank</th>
+      <th>NOC</th>
+      <th>Gold</th>
+      <th>Silver</th>
+      <th>Bronze</th>
+      <th>Total</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>Archery</td>
+      <td>1</td>
+      <td>South Korea</td>
+      <td>5</td>
+      <td>1</td>
+      <td>1</td>
+      <td>7</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>Archery</td>
+      <td>2</td>
+      <td>France*</td>
+      <td>0</td>
+      <td>1</td>
+      <td>1</td>
+      <td>2</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>Archery</td>
+      <td>3</td>
+      <td>United States</td>
+      <td>0</td>
+      <td>1</td>
+      <td>1</td>
+      <td>2</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>Archery</td>
+      <td>4</td>
+      <td>China</td>
+      <td>0</td>
+      <td>1</td>
+      <td>0</td>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>Archery</td>
+      <td>5</td>
+      <td>Germany</td>
+      <td>0</td>
+      <td>1</td>
+      <td>0</td>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>...</th>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+    </tr>
+    <tr>
+      <th>449</th>
+      <td>Wrestling</td>
+      <td>22</td>
+      <td>Denmark</td>
+      <td>0</td>
+      <td>0</td>
+      <td>1</td>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>450</th>
+      <td>Wrestling</td>
+      <td>23</td>
+      <td>Greece</td>
+      <td>0</td>
+      <td>0</td>
+      <td>1</td>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>451</th>
+      <td>Wrestling</td>
+      <td>24</td>
+      <td>India</td>
+      <td>0</td>
+      <td>0</td>
+      <td>1</td>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>452</th>
+      <td>Wrestling</td>
+      <td>25</td>
+      <td>Norway</td>
+      <td>0</td>
+      <td>0</td>
+      <td>1</td>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>453</th>
+      <td>Wrestling</td>
+      <td>26</td>
+      <td>Puerto Rico</td>
+      <td>0</td>
+      <td>0</td>
+      <td>1</td>
+      <td>1</td>
+    </tr>
+  </tbody>
+</table>
+<p>454 rows × 7 columns</p>
+</div></div></div>
+</div>
+<p>Let’s reshape the data so each row is a country (“NOC”), each column is a sport (“Competitions”), and the cell values show the total medal count for that country in that sport.</p>
+<p>To do this, we need to use <code class="docutils literal notranslate"><span class="pre">.pivot()</span></code>, which take three arguments:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">index</span></code> is the name of an existing column that should serve as your new row index (NOC)</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">columns</span></code> is the name of an existing column whose values will be converted to new columns headers (Competitions)</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">values</span></code> is the name of an existing column whose values will be used to fill the new columns (Total)</p></li>
+</ul>
+<p>The table has a lot of <code class="docutils literal notranslate"><span class="pre">NaN</span></code> values (because not all countries win medals in all sports). We’ll replace those with zeroes for readability.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">olympics</span><span class="o">.</span><span class="n">pivot</span><span class="p">(</span><span class="n">index</span><span class="o">=</span><span class="s1">&#39;NOC&#39;</span><span class="p">,</span> <span class="n">columns</span><span class="o">=</span><span class="s1">&#39;Competitions&#39;</span><span class="p">,</span> <span class="n">values</span><span class="o">=</span><span class="s1">&#39;Total&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">fillna</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span><span class="o">.</span><span class="n">head</span><span class="p">()</span> 
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th>Competitions</th>
+      <th>Archery</th>
+      <th>Artistic swimming</th>
+      <th>Athletics</th>
+      <th>Badminton</th>
+      <th>Basketball</th>
+      <th>Boxing</th>
+      <th>Breaking</th>
+      <th>Canoeing</th>
+      <th>Cycling</th>
+      <th>Diving</th>
+      <th>...</th>
+      <th>Surfing</th>
+      <th>Swimming</th>
+      <th>Table tennis</th>
+      <th>Taekwondo</th>
+      <th>Tennis</th>
+      <th>Triathlon</th>
+      <th>Volleyball</th>
+      <th>Water polo</th>
+      <th>Weightlifting</th>
+      <th>Wrestling</th>
+    </tr>
+    <tr>
+      <th>NOC</th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>Albania</th>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>...</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>2.0</td>
+    </tr>
+    <tr>
+      <th>Algeria</th>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>1.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>1.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>...</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+    </tr>
+    <tr>
+      <th>Argentina</th>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>1.0</td>
+      <td>0.0</td>
+      <td>...</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+    </tr>
+    <tr>
+      <th>Armenia</th>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>...</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>1.0</td>
+      <td>2.0</td>
+    </tr>
+    <tr>
+      <th>Australia</th>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>7.0</td>
+      <td>0.0</td>
+      <td>1.0</td>
+      <td>2.0</td>
+      <td>0.0</td>
+      <td>5.0</td>
+      <td>8.0</td>
+      <td>1.0</td>
+      <td>...</td>
+      <td>1.0</td>
+      <td>19.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>1.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>1.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+    </tr>
+  </tbody>
+</table>
+<p>5 rows × 35 columns</p>
+</div></div></div>
+</div>
+<p>Pandas has to do some calculations when reshaping the table, which results in decimal numbers (“floats”). This is a little strange, since you can’t win a partial medal. We can ask Pandas to change the type of the entire DataFrame with the <code class="docutils literal notranslate"><span class="pre">.astype()</span></code> function.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">olympics</span><span class="o">.</span><span class="n">pivot</span><span class="p">(</span><span class="n">index</span><span class="o">=</span><span class="s1">&#39;NOC&#39;</span><span class="p">,</span> <span class="n">columns</span><span class="o">=</span><span class="s1">&#39;Competitions&#39;</span><span class="p">,</span> <span class="n">values</span><span class="o">=</span><span class="s1">&#39;Total&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">fillna</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="nb">int</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th>Competitions</th>
+      <th>Archery</th>
+      <th>Artistic swimming</th>
+      <th>Athletics</th>
+      <th>Badminton</th>
+      <th>Basketball</th>
+      <th>Boxing</th>
+      <th>Breaking</th>
+      <th>Canoeing</th>
+      <th>Cycling</th>
+      <th>Diving</th>
+      <th>...</th>
+      <th>Surfing</th>
+      <th>Swimming</th>
+      <th>Table tennis</th>
+      <th>Taekwondo</th>
+      <th>Tennis</th>
+      <th>Triathlon</th>
+      <th>Volleyball</th>
+      <th>Water polo</th>
+      <th>Weightlifting</th>
+      <th>Wrestling</th>
+    </tr>
+    <tr>
+      <th>NOC</th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>Albania</th>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>...</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>2</td>
+    </tr>
+    <tr>
+      <th>Algeria</th>
+      <td>0</td>
+      <td>0</td>
+      <td>1</td>
+      <td>0</td>
+      <td>0</td>
+      <td>1</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>...</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>Argentina</th>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>1</td>
+      <td>0</td>
+      <td>...</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>Armenia</th>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>...</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>1</td>
+      <td>2</td>
+    </tr>
+    <tr>
+      <th>Australia</th>
+      <td>0</td>
+      <td>0</td>
+      <td>7</td>
+      <td>0</td>
+      <td>1</td>
+      <td>2</td>
+      <td>0</td>
+      <td>5</td>
+      <td>8</td>
+      <td>1</td>
+      <td>...</td>
+      <td>1</td>
+      <td>19</td>
+      <td>0</td>
+      <td>0</td>
+      <td>1</td>
+      <td>0</td>
+      <td>0</td>
+      <td>1</td>
+      <td>0</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>...</th>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+    </tr>
+    <tr>
+      <th>Uganda</th>
+      <td>0</td>
+      <td>0</td>
+      <td>2</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>...</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>Ukraine</th>
+      <td>0</td>
+      <td>0</td>
+      <td>3</td>
+      <td>0</td>
+      <td>0</td>
+      <td>1</td>
+      <td>0</td>
+      <td>1</td>
+      <td>0</td>
+      <td>0</td>
+      <td>...</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>3</td>
+    </tr>
+    <tr>
+      <th>United States</th>
+      <td>2</td>
+      <td>1</td>
+      <td>34</td>
+      <td>0</td>
+      <td>3</td>
+      <td>1</td>
+      <td>1</td>
+      <td>2</td>
+      <td>6</td>
+      <td>1</td>
+      <td>...</td>
+      <td>1</td>
+      <td>28</td>
+      <td>0</td>
+      <td>1</td>
+      <td>2</td>
+      <td>1</td>
+      <td>2</td>
+      <td>1</td>
+      <td>2</td>
+      <td>7</td>
+    </tr>
+    <tr>
+      <th>Uzbekistan</th>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>5</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>...</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>2</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>1</td>
+      <td>2</td>
+    </tr>
+    <tr>
+      <th>Zambia</th>
+      <td>0</td>
+      <td>0</td>
+      <td>1</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>...</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+    </tr>
+  </tbody>
+</table>
+<p>93 rows × 35 columns</p>
+</div></div></div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1">#This format makes it easy to extract information about individual countries</span>
+<span class="n">o</span> <span class="o">=</span> <span class="n">olympics</span><span class="o">.</span><span class="n">pivot</span><span class="p">(</span><span class="n">index</span><span class="o">=</span><span class="s1">&#39;NOC&#39;</span><span class="p">,</span> <span class="n">columns</span><span class="o">=</span><span class="s1">&#39;Competitions&#39;</span><span class="p">,</span> <span class="n">values</span><span class="o">=</span><span class="s1">&#39;Total&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">fillna</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="nb">int</span><span class="p">)</span>
+<span class="n">o</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="s1">&#39;Canada&#39;</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Competitions
+Archery              0
+Artistic swimming    0
+Athletics            5
+Badminton            0
+Basketball           0
+Boxing               1
+Breaking             1
+Canoeing             2
+Cycling              0
+Diving               1
+Equestrian           0
+Fencing              1
+Field hockey         0
+Football             0
+Golf                 0
+Gymnastics           1
+Handball             0
+Judo                 1
+Modern pentathlon    0
+Rowing               1
+Rugby sevens         1
+Sailing              0
+Shooting             0
+Skateboarding        0
+Sport climbing       0
+Surfing              0
+Swimming             8
+Table tennis         0
+Taekwondo            1
+Tennis               1
+Triathlon            0
+Volleyball           1
+Water polo           0
+Weightlifting        1
+Wrestling            0
+Name: Canada, dtype: int64
+</pre></div>
+</div>
+</div>
+</div>
+<p>Now let’s pivot the other direction, so that each row is a sport, and each column is a country</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">olympics</span><span class="o">.</span><span class="n">pivot</span><span class="p">(</span><span class="n">index</span><span class="o">=</span><span class="s1">&#39;Competitions&#39;</span><span class="p">,</span> <span class="n">columns</span><span class="o">=</span><span class="s1">&#39;NOC&#39;</span><span class="p">,</span> <span class="n">values</span><span class="o">=</span><span class="s1">&#39;Total&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">fillna</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="nb">int</span><span class="p">)</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th>NOC</th>
+      <th>Albania</th>
+      <th>Algeria</th>
+      <th>Argentina</th>
+      <th>Armenia</th>
+      <th>Australia</th>
+      <th>Austria</th>
+      <th>Azerbaijan</th>
+      <th>Bahrain</th>
+      <th>Belgium</th>
+      <th>Botswana</th>
+      <th>...</th>
+      <th>Switzerland</th>
+      <th>Tajikistan</th>
+      <th>Thailand</th>
+      <th>Tunisia</th>
+      <th>Turkey</th>
+      <th>Uganda</th>
+      <th>Ukraine</th>
+      <th>United States</th>
+      <th>Uzbekistan</th>
+      <th>Zambia</th>
+    </tr>
+    <tr>
+      <th>Competitions</th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>Archery</th>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>...</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>1</td>
+      <td>0</td>
+      <td>0</td>
+      <td>2</td>
+      <td>0</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>Artistic swimming</th>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>...</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>1</td>
+      <td>0</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>Athletics</th>
+      <td>0</td>
+      <td>1</td>
+      <td>0</td>
+      <td>0</td>
+      <td>7</td>
+      <td>0</td>
+      <td>0</td>
+      <td>2</td>
+      <td>3</td>
+      <td>2</td>
+      <td>...</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>2</td>
+      <td>3</td>
+      <td>34</td>
+      <td>0</td>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>Badminton</th>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>...</td>
+      <td>0</td>
+      <td>0</td>
+      <td>1</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>Basketball</th>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>1</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>...</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>3</td>
+      <td>0</td>
+      <td>0</td>
+    </tr>
+  </tbody>
+</table>
+<p>5 rows × 93 columns</p>
+</div></div></div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1">#This format makes it easy to extract data about individual sports</span>
+<span class="n">o</span> <span class="o">=</span> <span class="n">olympics</span><span class="o">.</span><span class="n">pivot</span><span class="p">(</span><span class="n">index</span><span class="o">=</span><span class="s1">&#39;Competitions&#39;</span><span class="p">,</span> <span class="n">columns</span><span class="o">=</span><span class="s1">&#39;NOC&#39;</span><span class="p">,</span> <span class="n">values</span><span class="o">=</span><span class="s1">&#39;Total&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">fillna</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="nb">int</span><span class="p">)</span>
+<span class="n">o</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="s1">&#39;Fencing&#39;</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>NOC
+Albania          0
+Algeria          0
+Argentina        0
+Armenia          0
+Australia        0
+                ..
+Uganda           0
+Ukraine          2
+United States    4
+Uzbekistan       0
+Zambia           0
+Name: Fencing, Length: 93, dtype: int64
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="id1">
+<h2>Practice<a class="headerlink" href="#id1" title="Link to this heading">#</a></h2>
+<p>Take a few moment to play with <code class="docutils literal notranslate"><span class="pre">.pivot()</span></code> and change the parameters around</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1">#PRACTICE CELL</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="pivot-table">
+<h2><code class="docutils literal notranslate"><span class="pre">.pivot_table()</span></code><a class="headerlink" href="#pivot-table" title="Link to this heading">#</a></h2>
+<p>You can only pivot a table if it has unique combinations of row and column values. If you have duplicates, then you’ll need to use the <code class="docutils literal notranslate"><span class="pre">pivot_table()</span></code> function instead. To illustrate this, load the accent study dataset:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">results</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s1">&#39;data/accentStudyDataset.csv&#39;</span><span class="p">)</span>
+<span class="n">results</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>ID</th>
+      <th>FirstLanguage</th>
+      <th>Test</th>
+      <th>Accent</th>
+      <th>Item</th>
+      <th>ItemScore</th>
+      <th>TestScore</th>
+      <th>TestPct</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>P01</td>
+      <td>Turkish</td>
+      <td>Baikal</td>
+      <td>Chinese</td>
+      <td>Baikal1</td>
+      <td>1</td>
+      <td>5</td>
+      <td>62.5</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>P01</td>
+      <td>Turkish</td>
+      <td>Baikal</td>
+      <td>Chinese</td>
+      <td>Baikal2</td>
+      <td>1</td>
+      <td>5</td>
+      <td>62.5</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>P01</td>
+      <td>Turkish</td>
+      <td>Baikal</td>
+      <td>Chinese</td>
+      <td>Baikal3</td>
+      <td>0</td>
+      <td>5</td>
+      <td>62.5</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>P01</td>
+      <td>Turkish</td>
+      <td>Baikal</td>
+      <td>Chinese</td>
+      <td>Baikal4</td>
+      <td>0</td>
+      <td>5</td>
+      <td>62.5</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>P01</td>
+      <td>Turkish</td>
+      <td>Baikal</td>
+      <td>Chinese</td>
+      <td>Baikal5</td>
+      <td>1</td>
+      <td>5</td>
+      <td>62.5</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<p>These are partial results from an experiment studying the effects of accent on listening comprehension. Participants with different langauge backgrounds listened to passages recorded in English, spoken by people with different accents (British, Chinese, or Spanish). Participants then completed a short test, answering questions about the passage they had listened to.</p>
+<p>It would be useful to reshape this so that rows are organized by first language, columns by accent condition, with cell values showing the quiz scores. That would help us see interactions, e.g. how did first-language Turkish speakers do when listening to British accents?</p>
+<p>However, if we try to do this with <code class="docutils literal notranslate"><span class="pre">.pivot()</span></code>, we get an error.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">results</span><span class="o">.</span><span class="n">pivot</span><span class="p">(</span><span class="n">index</span><span class="o">=</span><span class="s1">&#39;FirstLanguage&#39;</span><span class="p">,</span> <span class="n">columns</span><span class="o">=</span><span class="s1">&#39;Accent&#39;</span><span class="p">,</span> <span class="n">values</span><span class="o">=</span><span class="s1">&#39;TestPct&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
+<span class="ne">ValueError</span><span class="g g-Whitespace">                                </span>Traceback (most recent call last)
+<span class="n">Cell</span> <span class="n">In</span><span class="p">[</span><span class="mi">38</span><span class="p">],</span> <span class="n">line</span> <span class="mi">1</span>
+<span class="ne">----&gt; </span><span class="mi">1</span> <span class="n">results</span><span class="o">.</span><span class="n">pivot</span><span class="p">(</span><span class="n">index</span><span class="o">=</span><span class="s1">&#39;FirstLanguage&#39;</span><span class="p">,</span> <span class="n">columns</span><span class="o">=</span><span class="s1">&#39;Accent&#39;</span><span class="p">,</span> <span class="n">values</span><span class="o">=</span><span class="s1">&#39;TestPct&#39;</span><span class="p">)</span>
+
+<span class="nn">File ~/miniforge3/envs/agrigates-test1/lib/python3.9/site-packages/pandas/core/frame.py:9025,</span> in <span class="ni">DataFrame.pivot</span><span class="nt">(self, columns, index, values)</span>
+<span class="g g-Whitespace">   </span><span class="mi">9018</span> <span class="nd">@Substitution</span><span class="p">(</span><span class="s2">&quot;&quot;</span><span class="p">)</span>
+<span class="g g-Whitespace">   </span><span class="mi">9019</span> <span class="nd">@Appender</span><span class="p">(</span><span class="n">_shared_docs</span><span class="p">[</span><span class="s2">&quot;pivot&quot;</span><span class="p">])</span>
+<span class="g g-Whitespace">   </span><span class="mi">9020</span> <span class="k">def</span><span class="w"> </span><span class="nf">pivot</span><span class="p">(</span>
+<span class="g g-Whitespace">   </span><span class="mi">9021</span>     <span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="p">,</span> <span class="n">columns</span><span class="p">,</span> <span class="n">index</span><span class="o">=</span><span class="n">lib</span><span class="o">.</span><span class="n">no_default</span><span class="p">,</span> <span class="n">values</span><span class="o">=</span><span class="n">lib</span><span class="o">.</span><span class="n">no_default</span>
+<span class="g g-Whitespace">   </span><span class="mi">9022</span> <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">DataFrame</span><span class="p">:</span>
+<span class="g g-Whitespace">   </span><span class="mi">9023</span>     <span class="kn">from</span><span class="w"> </span><span class="nn">pandas.core.reshape.pivot</span><span class="w"> </span><span class="kn">import</span> <span class="n">pivot</span>
+<span class="ne">-&gt; </span><span class="mi">9025</span>     <span class="k">return</span> <span class="n">pivot</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">index</span><span class="o">=</span><span class="n">index</span><span class="p">,</span> <span class="n">columns</span><span class="o">=</span><span class="n">columns</span><span class="p">,</span> <span class="n">values</span><span class="o">=</span><span class="n">values</span><span class="p">)</span>
+
+<span class="nn">File ~/miniforge3/envs/agrigates-test1/lib/python3.9/site-packages/pandas/core/reshape/pivot.py:553,</span> in <span class="ni">pivot</span><span class="nt">(data, columns, index, values)</span>
+<span class="g g-Whitespace">    </span><span class="mi">549</span>         <span class="n">indexed</span> <span class="o">=</span> <span class="n">data</span><span class="o">.</span><span class="n">_constructor_sliced</span><span class="p">(</span><span class="n">data</span><span class="p">[</span><span class="n">values</span><span class="p">]</span><span class="o">.</span><span class="n">_values</span><span class="p">,</span> <span class="n">index</span><span class="o">=</span><span class="n">multiindex</span><span class="p">)</span>
+<span class="g g-Whitespace">    </span><span class="mi">550</span> <span class="c1"># error: Argument 1 to &quot;unstack&quot; of &quot;DataFrame&quot; has incompatible type &quot;Union</span>
+<span class="g g-Whitespace">    </span><span class="mi">551</span> <span class="c1"># [List[Any], ExtensionArray, ndarray[Any, Any], Index, Series]&quot;; expected</span>
+<span class="g g-Whitespace">    </span><span class="mi">552</span> <span class="c1"># &quot;Hashable&quot;</span>
+<span class="ne">--&gt; </span><span class="mi">553</span> <span class="n">result</span> <span class="o">=</span> <span class="n">indexed</span><span class="o">.</span><span class="n">unstack</span><span class="p">(</span><span class="n">columns_listlike</span><span class="p">)</span>  <span class="c1"># type: ignore[arg-type]</span>
+<span class="g g-Whitespace">    </span><span class="mi">554</span> <span class="n">result</span><span class="o">.</span><span class="n">index</span><span class="o">.</span><span class="n">names</span> <span class="o">=</span> <span class="p">[</span>
+<span class="g g-Whitespace">    </span><span class="mi">555</span>     <span class="n">name</span> <span class="k">if</span> <span class="n">name</span> <span class="ow">is</span> <span class="ow">not</span> <span class="n">lib</span><span class="o">.</span><span class="n">no_default</span> <span class="k">else</span> <span class="kc">None</span> <span class="k">for</span> <span class="n">name</span> <span class="ow">in</span> <span class="n">result</span><span class="o">.</span><span class="n">index</span><span class="o">.</span><span class="n">names</span>
+<span class="g g-Whitespace">    </span><span class="mi">556</span> <span class="p">]</span>
+<span class="g g-Whitespace">    </span><span class="mi">558</span> <span class="k">return</span> <span class="n">result</span>
+
+<span class="nn">File ~/miniforge3/envs/agrigates-test1/lib/python3.9/site-packages/pandas/core/series.py:4455,</span> in <span class="ni">Series.unstack</span><span class="nt">(self, level, fill_value, sort)</span>
+<span class="g g-Whitespace">   </span><span class="mi">4410</span><span class="w"> </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="g g-Whitespace">   </span><span class="mi">4411</span><span class="sd"> Unstack, also known as pivot, Series with MultiIndex to produce DataFrame.</span>
+<span class="g g-Whitespace">   </span><span class="mi">4412</span><span class="sd"> </span>
+<span class="sd">   (...)</span>
+<span class="g g-Whitespace">   </span><span class="mi">4451</span><span class="sd"> b    2    4</span>
+<span class="g g-Whitespace">   </span><span class="mi">4452</span><span class="sd"> &quot;&quot;&quot;</span>
+<span class="g g-Whitespace">   </span><span class="mi">4453</span> <span class="kn">from</span><span class="w"> </span><span class="nn">pandas.core.reshape.reshape</span><span class="w"> </span><span class="kn">import</span> <span class="n">unstack</span>
+<span class="ne">-&gt; </span><span class="mi">4455</span> <span class="k">return</span> <span class="n">unstack</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">level</span><span class="p">,</span> <span class="n">fill_value</span><span class="p">,</span> <span class="n">sort</span><span class="p">)</span>
+
+<span class="nn">File ~/miniforge3/envs/agrigates-test1/lib/python3.9/site-packages/pandas/core/reshape/reshape.py:517,</span> in <span class="ni">unstack</span><span class="nt">(obj, level, fill_value, sort)</span>
+<span class="g g-Whitespace">    </span><span class="mi">515</span> <span class="k">if</span> <span class="n">is_1d_only_ea_dtype</span><span class="p">(</span><span class="n">obj</span><span class="o">.</span><span class="n">dtype</span><span class="p">):</span>
+<span class="g g-Whitespace">    </span><span class="mi">516</span>     <span class="k">return</span> <span class="n">_unstack_extension_series</span><span class="p">(</span><span class="n">obj</span><span class="p">,</span> <span class="n">level</span><span class="p">,</span> <span class="n">fill_value</span><span class="p">,</span> <span class="n">sort</span><span class="o">=</span><span class="n">sort</span><span class="p">)</span>
+<span class="ne">--&gt; </span><span class="mi">517</span> <span class="n">unstacker</span> <span class="o">=</span> <span class="n">_Unstacker</span><span class="p">(</span>
+<span class="g g-Whitespace">    </span><span class="mi">518</span>     <span class="n">obj</span><span class="o">.</span><span class="n">index</span><span class="p">,</span> <span class="n">level</span><span class="o">=</span><span class="n">level</span><span class="p">,</span> <span class="n">constructor</span><span class="o">=</span><span class="n">obj</span><span class="o">.</span><span class="n">_constructor_expanddim</span><span class="p">,</span> <span class="n">sort</span><span class="o">=</span><span class="n">sort</span>
+<span class="g g-Whitespace">    </span><span class="mi">519</span> <span class="p">)</span>
+<span class="g g-Whitespace">    </span><span class="mi">520</span> <span class="k">return</span> <span class="n">unstacker</span><span class="o">.</span><span class="n">get_result</span><span class="p">(</span>
+<span class="g g-Whitespace">    </span><span class="mi">521</span>     <span class="n">obj</span><span class="o">.</span><span class="n">_values</span><span class="p">,</span> <span class="n">value_columns</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">fill_value</span><span class="o">=</span><span class="n">fill_value</span>
+<span class="g g-Whitespace">    </span><span class="mi">522</span> <span class="p">)</span>
+
+<span class="nn">File ~/miniforge3/envs/agrigates-test1/lib/python3.9/site-packages/pandas/core/reshape/reshape.py:154,</span> in <span class="ni">_Unstacker.__init__</span><span class="nt">(self, index, level, constructor, sort)</span>
+<span class="g g-Whitespace">    </span><span class="mi">146</span> <span class="k">if</span> <span class="n">num_cells</span> <span class="o">&gt;</span> <span class="n">np</span><span class="o">.</span><span class="n">iinfo</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">int32</span><span class="p">)</span><span class="o">.</span><span class="n">max</span><span class="p">:</span>
+<span class="g g-Whitespace">    </span><span class="mi">147</span>     <span class="n">warnings</span><span class="o">.</span><span class="n">warn</span><span class="p">(</span>
+<span class="g g-Whitespace">    </span><span class="mi">148</span>         <span class="sa">f</span><span class="s2">&quot;The following operation may generate </span><span class="si">{</span><span class="n">num_cells</span><span class="si">}</span><span class="s2"> cells &quot;</span>
+<span class="g g-Whitespace">    </span><span class="mi">149</span>         <span class="sa">f</span><span class="s2">&quot;in the resulting pandas object.&quot;</span><span class="p">,</span>
+<span class="g g-Whitespace">    </span><span class="mi">150</span>         <span class="n">PerformanceWarning</span><span class="p">,</span>
+<span class="g g-Whitespace">    </span><span class="mi">151</span>         <span class="n">stacklevel</span><span class="o">=</span><span class="n">find_stack_level</span><span class="p">(),</span>
+<span class="g g-Whitespace">    </span><span class="mi">152</span>     <span class="p">)</span>
+<span class="ne">--&gt; </span><span class="mi">154</span> <span class="bp">self</span><span class="o">.</span><span class="n">_make_selectors</span><span class="p">()</span>
+
+<span class="nn">File ~/miniforge3/envs/agrigates-test1/lib/python3.9/site-packages/pandas/core/reshape/reshape.py:210,</span> in <span class="ni">_Unstacker._make_selectors</span><span class="nt">(self)</span>
+<span class="g g-Whitespace">    </span><span class="mi">207</span> <span class="n">mask</span><span class="o">.</span><span class="n">put</span><span class="p">(</span><span class="n">selector</span><span class="p">,</span> <span class="kc">True</span><span class="p">)</span>
+<span class="g g-Whitespace">    </span><span class="mi">209</span> <span class="k">if</span> <span class="n">mask</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span> <span class="o">&lt;</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">index</span><span class="p">):</span>
+<span class="ne">--&gt; </span><span class="mi">210</span>     <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;Index contains duplicate entries, cannot reshape&quot;</span><span class="p">)</span>
+<span class="g g-Whitespace">    </span><span class="mi">212</span> <span class="bp">self</span><span class="o">.</span><span class="n">group_index</span> <span class="o">=</span> <span class="n">comp_index</span>
+<span class="g g-Whitespace">    </span><span class="mi">213</span> <span class="bp">self</span><span class="o">.</span><span class="n">mask</span> <span class="o">=</span> <span class="n">mask</span>
+
+<span class="ne">ValueError</span>: Index contains duplicate entries, cannot reshape
+</pre></div>
+</div>
+</div>
+</div>
+<p>The error message says there are duplicate entries, so the table can’t be reshaped. This means that there are some row/column combinations that would appear twice in the new pivoted table. For example, there’s more than one person with a first language of Turkish in the Chinese accent condition.</p>
+<p>In this case, we need to use <code class="docutils literal notranslate"><span class="pre">pivot_table()</span></code>, which is similar to <code class="docutils literal notranslate"><span class="pre">.pivot()</span></code> but it can handle the duplicates.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">results</span><span class="o">.</span><span class="n">pivot_table</span><span class="p">(</span><span class="n">index</span><span class="o">=</span><span class="s1">&#39;FirstLanguage&#39;</span><span class="p">,</span> <span class="n">columns</span><span class="o">=</span><span class="s1">&#39;Accent&#39;</span><span class="p">,</span> <span class="n">values</span><span class="o">=</span><span class="s1">&#39;TestPct&#39;</span><span class="p">)</span> <span class="c1">#index, columns, and values are the same as with .pivot()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th>Accent</th>
+      <th>British</th>
+      <th>Chinese</th>
+      <th>Spanish</th>
+    </tr>
+    <tr>
+      <th>FirstLanguage</th>
+      <th></th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>Arabic</th>
+      <td>37.500000</td>
+      <td>62.500000</td>
+      <td>50.000000</td>
+    </tr>
+    <tr>
+      <th>Bengali</th>
+      <td>59.375000</td>
+      <td>46.875000</td>
+      <td>62.500000</td>
+    </tr>
+    <tr>
+      <th>Burmese</th>
+      <td>50.000000</td>
+      <td>50.000000</td>
+      <td>25.000000</td>
+    </tr>
+    <tr>
+      <th>Burmese</th>
+      <td>37.500000</td>
+      <td>50.000000</td>
+      <td>50.000000</td>
+    </tr>
+    <tr>
+      <th>Cantonese</th>
+      <td>46.428571</td>
+      <td>53.571429</td>
+      <td>55.357143</td>
+    </tr>
+    <tr>
+      <th>English</th>
+      <td>58.333333</td>
+      <td>70.833333</td>
+      <td>68.750000</td>
+    </tr>
+    <tr>
+      <th>Estonian</th>
+      <td>62.500000</td>
+      <td>37.500000</td>
+      <td>75.000000</td>
+    </tr>
+    <tr>
+      <th>French</th>
+      <td>81.250000</td>
+      <td>81.250000</td>
+      <td>75.000000</td>
+    </tr>
+    <tr>
+      <th>Hindi</th>
+      <td>75.000000</td>
+      <td>25.000000</td>
+      <td>62.500000</td>
+    </tr>
+    <tr>
+      <th>Italian</th>
+      <td>75.000000</td>
+      <td>75.000000</td>
+      <td>87.500000</td>
+    </tr>
+    <tr>
+      <th>Korean</th>
+      <td>50.000000</td>
+      <td>50.000000</td>
+      <td>50.000000</td>
+    </tr>
+    <tr>
+      <th>Luganda</th>
+      <td>62.500000</td>
+      <td>75.000000</td>
+      <td>50.000000</td>
+    </tr>
+    <tr>
+      <th>Malayalam</th>
+      <td>62.500000</td>
+      <td>25.000000</td>
+      <td>25.000000</td>
+    </tr>
+    <tr>
+      <th>Mandarin</th>
+      <td>50.961538</td>
+      <td>49.519231</td>
+      <td>42.788462</td>
+    </tr>
+    <tr>
+      <th>Montenegrin</th>
+      <td>50.000000</td>
+      <td>37.500000</td>
+      <td>50.000000</td>
+    </tr>
+    <tr>
+      <th>Pashto</th>
+      <td>68.750000</td>
+      <td>31.250000</td>
+      <td>50.000000</td>
+    </tr>
+    <tr>
+      <th>Portuguese</th>
+      <td>52.083333</td>
+      <td>35.416667</td>
+      <td>60.416667</td>
+    </tr>
+    <tr>
+      <th>Russian</th>
+      <td>62.500000</td>
+      <td>50.000000</td>
+      <td>62.500000</td>
+    </tr>
+    <tr>
+      <th>Serbian</th>
+      <td>75.000000</td>
+      <td>87.500000</td>
+      <td>37.500000</td>
+    </tr>
+    <tr>
+      <th>Spanish</th>
+      <td>51.562500</td>
+      <td>51.562500</td>
+      <td>59.375000</td>
+    </tr>
+    <tr>
+      <th>Spanish</th>
+      <td>62.500000</td>
+      <td>37.500000</td>
+      <td>37.500000</td>
+    </tr>
+    <tr>
+      <th>Swahili</th>
+      <td>68.750000</td>
+      <td>75.000000</td>
+      <td>62.500000</td>
+    </tr>
+    <tr>
+      <th>Tamil</th>
+      <td>87.500000</td>
+      <td>87.500000</td>
+      <td>87.500000</td>
+    </tr>
+    <tr>
+      <th>Turkish</th>
+      <td>56.250000</td>
+      <td>75.000000</td>
+      <td>37.500000</td>
+    </tr>
+    <tr>
+      <th>Vietnamese</th>
+      <td>37.500000</td>
+      <td>50.000000</td>
+      <td>62.500000</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<p>To find the results for a particular first language, use <code class="docutils literal notranslate"><span class="pre">.loc[]</span></code></p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">r</span> <span class="o">=</span> <span class="n">results</span><span class="o">.</span><span class="n">pivot_table</span><span class="p">(</span><span class="n">index</span><span class="o">=</span><span class="s1">&#39;FirstLanguage&#39;</span><span class="p">,</span> <span class="n">columns</span><span class="o">=</span><span class="s1">&#39;Accent&#39;</span><span class="p">,</span> <span class="n">values</span><span class="o">=</span><span class="s1">&#39;TestPct&#39;</span><span class="p">)</span>
+<span class="n">r</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="s1">&#39;Turkish&#39;</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Accent
+British    56.25
+Chinese    75.00
+Spanish    37.50
+Name: Turkish, dtype: float64
+</pre></div>
+</div>
+</div>
+</div>
+<p>By default, <code class="docutils literal notranslate"><span class="pre">.pivot_table()</span></code> combines (“aggregates”) all the duplicate values and calculates the average. The cell above shows that the average test scores for first-language Turkish speakers for passages read with British accent is 56.25% You can do other types of calculations as well, but we’ll leave that for a later lesson on grouping and aggregation.</p>
+<p>Each accent condition in this experiment contained 4 different test passages, and the code above aggregates over all of them. To see the finer details of each test within in each accent, simply provide both as column names:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">results</span><span class="o">.</span><span class="n">pivot_table</span><span class="p">(</span><span class="n">index</span><span class="o">=</span><span class="s1">&#39;FirstLanguage&#39;</span><span class="p">,</span> <span class="n">columns</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;Accent&#39;</span><span class="p">,</span> <span class="s1">&#39;Test&#39;</span><span class="p">],</span> <span class="n">values</span><span class="o">=</span><span class="s1">&#39;TestPct&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead tr th {
+        text-align: left;
+    }
+
+    .dataframe thead tr:last-of-type th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr>
+      <th>Accent</th>
+      <th colspan="3" halign="left">British</th>
+      <th colspan="3" halign="left">Chinese</th>
+      <th colspan="3" halign="left">Spanish</th>
+    </tr>
+    <tr>
+      <th>Test</th>
+      <th>Baikal</th>
+      <th>CompSci</th>
+      <th>balloon</th>
+      <th>Baikal</th>
+      <th>CompSci</th>
+      <th>balloon</th>
+      <th>Baikal</th>
+      <th>CompSci</th>
+      <th>balloon</th>
+    </tr>
+    <tr>
+      <th>FirstLanguage</th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>Arabic</th>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>37.5</td>
+      <td>62.5</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>50.00</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <th>Bengali</th>
+      <td>62.5</td>
+      <td>58.333333</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>46.875</td>
+      <td>58.333333</td>
+      <td>75.00</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <th>Burmese</th>
+      <td>50.0</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>50.00</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>25.000000</td>
+    </tr>
+    <tr>
+      <th>Burmese</th>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>37.5</td>
+      <td>NaN</td>
+      <td>50.00</td>
+      <td>NaN</td>
+      <td>50.000000</td>
+      <td>NaN</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <th>Cantonese</th>
+      <td>62.5</td>
+      <td>50.000000</td>
+      <td>37.5</td>
+      <td>50.0</td>
+      <td>56.25</td>
+      <td>NaN</td>
+      <td>68.750000</td>
+      <td>56.25</td>
+      <td>45.833333</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<p>Note that this creates a large number of <code class="docutils literal notranslate"><span class="pre">NaN</span></code> values because there are some combinations of language/accent/test that did not occur in the original data (e.g. no Burmese speakers heard the CompSci passage with a Britsh accent)</p>
+</section>
+<section id="melt">
+<h2>Melt<a class="headerlink" href="#melt" title="Link to this heading">#</a></h2>
+<p><code class="docutils literal notranslate"><span class="pre">.melt()</span></code> works as the opposite of <code class="docutils literal notranslate"><span class="pre">.pivot()</span></code>, and converts data from a wide format to a long format. To illustrate this, we’ll return to the Internet Movie Database.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">imdb</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s1">&#39;data/imdb.csv&#39;</span><span class="p">)</span>
+<span class="n">imdb</span><span class="o">.</span><span class="n">head</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span> <span class="c1">#remind yourself what this looks like</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>Series_Title</th>
+      <th>Released_Year</th>
+      <th>Certificate</th>
+      <th>Runtime</th>
+      <th>Genre</th>
+      <th>IMDB_Rating</th>
+      <th>Meta_score</th>
+      <th>Director</th>
+      <th>Star1</th>
+      <th>Star2</th>
+      <th>Star3</th>
+      <th>Star4</th>
+      <th>No_of_Votes</th>
+      <th>Gross</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>The Shawshank Redemption</td>
+      <td>1994</td>
+      <td>A</td>
+      <td>142 min</td>
+      <td>Drama</td>
+      <td>9.3</td>
+      <td>80.0</td>
+      <td>Frank Darabont</td>
+      <td>Tim Robbins</td>
+      <td>Morgan Freeman</td>
+      <td>Bob Gunton</td>
+      <td>William Sadler</td>
+      <td>2343110</td>
+      <td>28341469.0</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>The Godfather</td>
+      <td>1972</td>
+      <td>A</td>
+      <td>175 min</td>
+      <td>Crime, Drama</td>
+      <td>9.2</td>
+      <td>100.0</td>
+      <td>Francis Ford Coppola</td>
+      <td>Marlon Brando</td>
+      <td>Al Pacino</td>
+      <td>James Caan</td>
+      <td>Diane Keaton</td>
+      <td>1620367</td>
+      <td>134966411.0</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<p>Let’s reshape the table so that rows are organized by director, and there are only two columns: ‘Actor’ and ‘Billing_Order’.</p>
+<p>To do this we’ll use <code class="docutils literal notranslate"><span class="pre">.melt()</span></code>, which requires up to four arguments:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">id_vars</span></code> is a list of column names that will act as the index for creating new rows (Director)</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">value_vars</span></code> is a list of columns from your original data that you want melted (Star1, Star2, Star3, Star4)</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">var_name</span></code> is the header for a new column, which will contain the column names listed in <code class="docutils literal notranslate"><span class="pre">value_vars</span></code> (Billing_Order)</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">value_name</span></code> is the header for a new column which will contain the row values from the columns listed in <code class="docutils literal notranslate"><span class="pre">value_vars</span></code> (Actor)</p></li>
+</ul>
+<p><code class="docutils literal notranslate"><span class="pre">value_vars</span></code> is optional. If you omit it, Pandas will assume you want to melt everything that’s not listed in <code class="docutils literal notranslate"><span class="pre">id_vars</span></code></p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">imdb</span><span class="o">.</span><span class="n">melt</span><span class="p">(</span><span class="n">id_vars</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;Director&#39;</span><span class="p">],</span> <span class="n">value_vars</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;Star1&#39;</span><span class="p">,</span> <span class="s1">&#39;Star2&#39;</span><span class="p">,</span> <span class="s1">&#39;Star3&#39;</span><span class="p">,</span> <span class="s1">&#39;Star4&#39;</span><span class="p">],</span> <span class="n">var_name</span><span class="o">=</span><span class="s1">&#39;Billing_Order&#39;</span><span class="p">,</span> <span class="n">value_name</span><span class="o">=</span><span class="s1">&#39;Actor&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>Director</th>
+      <th>Billing_Order</th>
+      <th>Actor</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>Frank Darabont</td>
+      <td>Star1</td>
+      <td>Tim Robbins</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>Francis Ford Coppola</td>
+      <td>Star1</td>
+      <td>Marlon Brando</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>Christopher Nolan</td>
+      <td>Star1</td>
+      <td>Christian Bale</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>Francis Ford Coppola</td>
+      <td>Star1</td>
+      <td>Al Pacino</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>Sidney Lumet</td>
+      <td>Star1</td>
+      <td>Henry Fonda</td>
+    </tr>
+    <tr>
+      <th>...</th>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+    </tr>
+    <tr>
+      <th>3995</th>
+      <td>Blake Edwards</td>
+      <td>Star4</td>
+      <td>Buddy Ebsen</td>
+    </tr>
+    <tr>
+      <th>3996</th>
+      <td>George Stevens</td>
+      <td>Star4</td>
+      <td>Carroll Baker</td>
+    </tr>
+    <tr>
+      <th>3997</th>
+      <td>Fred Zinnemann</td>
+      <td>Star4</td>
+      <td>Donna Reed</td>
+    </tr>
+    <tr>
+      <th>3998</th>
+      <td>Alfred Hitchcock</td>
+      <td>Star4</td>
+      <td>William Bendix</td>
+    </tr>
+    <tr>
+      <th>3999</th>
+      <td>Alfred Hitchcock</td>
+      <td>Star4</td>
+      <td>Godfrey Tearle</td>
+    </tr>
+  </tbody>
+</table>
+<p>4000 rows × 3 columns</p>
+</div></div></div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1">#We can use this new format to quickly look up which actors have appears with which directors</span>
+<span class="n">i</span> <span class="o">=</span> <span class="n">imdb</span><span class="o">.</span><span class="n">melt</span><span class="p">(</span><span class="n">id_vars</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;Director&#39;</span><span class="p">],</span> <span class="n">value_vars</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;Star1&#39;</span><span class="p">,</span> <span class="s1">&#39;Star2&#39;</span><span class="p">,</span> <span class="s1">&#39;Star3&#39;</span><span class="p">,</span> <span class="s1">&#39;Star4&#39;</span><span class="p">],</span> <span class="n">var_name</span><span class="o">=</span><span class="s1">&#39;Billing_Order&#39;</span><span class="p">,</span> <span class="n">value_name</span><span class="o">=</span><span class="s1">&#39;Actor&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">set_index</span><span class="p">(</span><span class="s1">&#39;Director&#39;</span><span class="p">)</span>
+<span class="n">i</span> <span class="o">=</span> <span class="n">i</span><span class="p">[[</span><span class="s1">&#39;Actor&#39;</span><span class="p">,</span> <span class="s1">&#39;Billing_Order&#39;</span><span class="p">]]</span> <span class="c1">#I prefer this order</span>
+<span class="n">i</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="s1">&#39;Francis Ford Coppola&#39;</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>Actor</th>
+      <th>Billing_Order</th>
+    </tr>
+    <tr>
+      <th>Director</th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>Francis Ford Coppola</th>
+      <td>Marlon Brando</td>
+      <td>Star1</td>
+    </tr>
+    <tr>
+      <th>Francis Ford Coppola</th>
+      <td>Al Pacino</td>
+      <td>Star1</td>
+    </tr>
+    <tr>
+      <th>Francis Ford Coppola</th>
+      <td>Martin Sheen</td>
+      <td>Star1</td>
+    </tr>
+    <tr>
+      <th>Francis Ford Coppola</th>
+      <td>Gene Hackman</td>
+      <td>Star1</td>
+    </tr>
+    <tr>
+      <th>Francis Ford Coppola</th>
+      <td>Al Pacino</td>
+      <td>Star1</td>
+    </tr>
+    <tr>
+      <th>Francis Ford Coppola</th>
+      <td>Al Pacino</td>
+      <td>Star2</td>
+    </tr>
+    <tr>
+      <th>Francis Ford Coppola</th>
+      <td>Robert De Niro</td>
+      <td>Star2</td>
+    </tr>
+    <tr>
+      <th>Francis Ford Coppola</th>
+      <td>Marlon Brando</td>
+      <td>Star2</td>
+    </tr>
+    <tr>
+      <th>Francis Ford Coppola</th>
+      <td>John Cazale</td>
+      <td>Star2</td>
+    </tr>
+    <tr>
+      <th>Francis Ford Coppola</th>
+      <td>Diane Keaton</td>
+      <td>Star2</td>
+    </tr>
+    <tr>
+      <th>Francis Ford Coppola</th>
+      <td>James Caan</td>
+      <td>Star3</td>
+    </tr>
+    <tr>
+      <th>Francis Ford Coppola</th>
+      <td>Robert Duvall</td>
+      <td>Star3</td>
+    </tr>
+    <tr>
+      <th>Francis Ford Coppola</th>
+      <td>Robert Duvall</td>
+      <td>Star3</td>
+    </tr>
+    <tr>
+      <th>Francis Ford Coppola</th>
+      <td>Allen Garfield</td>
+      <td>Star3</td>
+    </tr>
+    <tr>
+      <th>Francis Ford Coppola</th>
+      <td>Andy Garcia</td>
+      <td>Star3</td>
+    </tr>
+    <tr>
+      <th>Francis Ford Coppola</th>
+      <td>Diane Keaton</td>
+      <td>Star4</td>
+    </tr>
+    <tr>
+      <th>Francis Ford Coppola</th>
+      <td>Diane Keaton</td>
+      <td>Star4</td>
+    </tr>
+    <tr>
+      <th>Francis Ford Coppola</th>
+      <td>Frederic Forrest</td>
+      <td>Star4</td>
+    </tr>
+    <tr>
+      <th>Francis Ford Coppola</th>
+      <td>Frederic Forrest</td>
+      <td>Star4</td>
+    </tr>
+    <tr>
+      <th>Francis Ford Coppola</th>
+      <td>Talia Shire</td>
+      <td>Star4</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+</section>
+<section id="reseting-the-index">
+<h2>Reseting the index<a class="headerlink" href="#reseting-the-index" title="Link to this heading">#</a></h2>
+<p>Reshaping a table can change the way rows are indexed. Sometimes, you may want to reset the index to use the default ordinal numbers. For example, let’s load a dataset about the Titanic, and use <code class="docutils literal notranslate"><span class="pre">.pivot_table()</span></code> to compare survival rates for men and women places in different passenger classes.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">titanic</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s1">&#39;data/titanic.csv&#39;</span><span class="p">)</span>
+<span class="n">titanic</span><span class="o">.</span><span class="n">head</span><span class="p">()</span> <span class="c1">#get quick look</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>PassengerId</th>
+      <th>Survived</th>
+      <th>Class</th>
+      <th>Name</th>
+      <th>Gender</th>
+      <th>Age</th>
+      <th>SibSp</th>
+      <th>Parch</th>
+      <th>Ticket</th>
+      <th>Fare</th>
+      <th>Cabin</th>
+      <th>Embarked</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>1</td>
+      <td>0</td>
+      <td>3</td>
+      <td>Braund, Mr. Owen Harris</td>
+      <td>male</td>
+      <td>22.0</td>
+      <td>1</td>
+      <td>0</td>
+      <td>A/5 21171</td>
+      <td>7.2500</td>
+      <td>NaN</td>
+      <td>S</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>2</td>
+      <td>1</td>
+      <td>1</td>
+      <td>Cumings, Mrs. John Bradley (Florence Briggs Th...</td>
+      <td>female</td>
+      <td>38.0</td>
+      <td>1</td>
+      <td>0</td>
+      <td>PC 17599</td>
+      <td>71.2833</td>
+      <td>C85</td>
+      <td>C</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>3</td>
+      <td>1</td>
+      <td>3</td>
+      <td>Heikkinen, Miss. Laina</td>
+      <td>female</td>
+      <td>26.0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>STON/O2. 3101282</td>
+      <td>7.9250</td>
+      <td>NaN</td>
+      <td>S</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>4</td>
+      <td>1</td>
+      <td>1</td>
+      <td>Futrelle, Mrs. Jacques Heath (Lily May Peel)</td>
+      <td>female</td>
+      <td>35.0</td>
+      <td>1</td>
+      <td>0</td>
+      <td>113803</td>
+      <td>53.1000</td>
+      <td>C123</td>
+      <td>S</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>5</td>
+      <td>0</td>
+      <td>3</td>
+      <td>Allen, Mr. William Henry</td>
+      <td>male</td>
+      <td>35.0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>373450</td>
+      <td>8.0500</td>
+      <td>NaN</td>
+      <td>S</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">survival_rates</span> <span class="o">=</span> <span class="n">titanic</span><span class="o">.</span><span class="n">pivot_table</span><span class="p">(</span><span class="n">index</span><span class="o">=</span><span class="s1">&#39;Gender&#39;</span><span class="p">,</span> <span class="n">values</span><span class="o">=</span><span class="s1">&#39;Survived&#39;</span><span class="p">,</span> <span class="n">columns</span><span class="o">=</span><span class="s1">&#39;Class&#39;</span><span class="p">)</span>
+<span class="n">survival_rates</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th>Class</th>
+      <th>1</th>
+      <th>2</th>
+      <th>3</th>
+    </tr>
+    <tr>
+      <th>Gender</th>
+      <th></th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>female</th>
+      <td>0.968085</td>
+      <td>0.921053</td>
+      <td>0.500000</td>
+    </tr>
+    <tr>
+      <th>male</th>
+      <td>0.368852</td>
+      <td>0.157407</td>
+      <td>0.135447</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<p>This sets the <code class="docutils literal notranslate"><span class="pre">Gender</span></code> column as the row index, so it is no longer part of the table data. To restore it as a column, use the <code class="docutils literal notranslate"><span class="pre">.reset_index()</span></code> function:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">survival_rates</span><span class="o">.</span><span class="n">reset_index</span><span class="p">()</span> <span class="c1">#This returns a copy!</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th>Class</th>
+      <th>Gender</th>
+      <th>1</th>
+      <th>2</th>
+      <th>3</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>female</td>
+      <td>0.968085</td>
+      <td>0.921053</td>
+      <td>0.500000</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>male</td>
+      <td>0.368852</td>
+      <td>0.157407</td>
+      <td>0.135447</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./lecture-notes"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="lecture1_intro-to-python-via-pandas.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">Lecture 1: Introduction to Pandas</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="lecture3_advanced-data-wrangling-with-pandas.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">Lecture 3: Advanced data wrangling with Pandas</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">Lecture 2: Reshaping data</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#lecture-learning-objectives">Lecture learning objectives</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#data-types">Data types</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#practice">Practice</a></li>
+</ul>
+</li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#changing-values-based-on-conditions">Changing values based on conditions</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#empty-cells-missing-values">Empty cells/missing values</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#renaming-columns">Renaming columns</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#data-type-cheatsheet">Data type cheatsheet</a></li>
+</ul>
+</li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#dataframe-reshaping">DataFrame reshaping</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#tidy-data">Tidy data</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#wide-vs-long-tables">Wide vs. long tables</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#transpose">Transpose</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#pivot">Pivot</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id1">Practice</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#pivot-table"><code class="docutils literal notranslate"><span class="pre">.pivot_table()</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#melt">Melt</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#reseting-the-index">Reseting the index</a></li>
+</ul>
+</li>
+</ul>
+
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By The Jupyter Book community
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright 2023.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b"></script>
+<script src="../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>

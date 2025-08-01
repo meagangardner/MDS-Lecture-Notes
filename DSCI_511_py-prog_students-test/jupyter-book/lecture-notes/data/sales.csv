@@ -1,0 +1,11 @@
+Total Sales: 5000, Total Customers: 300
+Average Sales per Customer: 16.67
+
+
+
+
+
+CustomerID, PurchaseAmount, PurchaseDate
+001, 150, 2024-08-01
+002, 200, 2024-08-03
+003, 250, 2024-08-07
