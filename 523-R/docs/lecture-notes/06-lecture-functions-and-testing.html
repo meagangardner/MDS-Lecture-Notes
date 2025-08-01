@@ -1,0 +1,1474 @@
+
+
+<!DOCTYPE html>
+
+
+<html lang="en" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+    <title>Lecture 6: Functions and testing &#8212; DSCI 523 Programming for Data Manipulation</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "light";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../_static/styles/theme.css?digest=ac02cc09edc035673794" rel="stylesheet" />
+<link href="../_static/styles/bootstrap.css?digest=ac02cc09edc035673794" rel="stylesheet" />
+<link href="../_static/styles/pydata-sphinx-theme.css?digest=ac02cc09edc035673794" rel="stylesheet" />
+
+  
+  <link href="../_static/vendor/fontawesome/6.1.2/css/all.min.css?digest=ac02cc09edc035673794" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.1.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.1.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.1.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
+    <link rel="stylesheet" href="../_static/styles/sphinx-book-theme.css?digest=14f4ca6b54d191a8c7657f6c759bf11a5fb86285" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/design-style.4045f2051d55cab465a707391d5b2007.min.css" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=ac02cc09edc035673794" />
+<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=ac02cc09edc035673794" />
+  <script src="../_static/vendor/fontawesome/6.1.2/js/all.min.js?digest=ac02cc09edc035673794"></script>
+
+    <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+    <script src="../_static/jquery.js"></script>
+    <script src="../_static/underscore.js"></script>
+    <script src="../_static/_sphinx_javascript_frameworks_compat.js"></script>
+    <script src="../_static/doctools.js"></script>
+    <script src="../_static/clipboard.min.js"></script>
+    <script src="../_static/copybutton.js"></script>
+    <script src="../_static/scripts/sphinx-book-theme.js?digest=5a5c038af52cf7bc1a1ec88eea08e6366ee68824"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../_static/togglebutton.js"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="../_static/design-tabs.js"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"
+const thebe_selector = ".thebe,.cell"
+const thebe_selector_input = "pre"
+const thebe_selector_output = ".output, .cell_output"
+</script>
+    <script async="async" src="../_static/sphinx-thebe.js"></script>
+    <script async="async" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'lecture-notes/06-lecture-functions-and-testing';</script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Lecture 7: Mapping and nested data frames" href="07-mapping-and-nested-data-frames.html" />
+    <link rel="prev" title="Lecture 5 - Tidy control flow in R" href="05-tidy-control-flow.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <a class="skip-link" href="#main-content">Skip to main content</a>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>
+    Back to top
+  </button>
+
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__primary"
+          id="__primary"/>
+  <label class="overlay overlay-primary" for="__primary"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__secondary"
+          id="__secondary"/>
+  <label class="overlay overlay-secondary" for="__secondary"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+  
+    <nav class="bd-header navbar navbar-expand-lg bd-navbar">
+    </nav>
+  
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+  
+
+<a class="navbar-brand logo" href="../README.html">
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="../_static/hex_sticker_small.png" class="logo__image only-light" alt="Logo image"/>
+    <script>document.write(`<img src="../_static/hex_sticker_small.png" class="logo__image only-dark" alt="Logo image"/>`);</script>
+  
+  
+</a></div>
+        <div class="sidebar-primary-item"><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="../README.html">
+                    DSCI 523: Programming for Data Manipulation
+                </a>
+            </li>
+        </ul>
+        <p aria-level="2" class="caption" role="heading"><span class="caption-text">Lectures</span></p>
+<ul class="current nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="01-intro-to-r-via-tidyverse.html">Lecture 1 -  Introduction to R via the tidyverse</a></li>
+<li class="toctree-l1"><a class="reference internal" href="02-data-types-and-operators.html">Lecture 2 -  Key datatypes &amp; operators in R</a></li>
+<li class="toctree-l1"><a class="reference internal" href="03-dates-strings-and-factors.html">Lecture 3 -  dates &amp; times, strings,  as well as factors</a></li>
+<li class="toctree-l1"><a class="reference internal" href="04-two-table-joins-and-base-control-flow.html">Lecture 4 -  Combining data frames (binds and joins) &amp; base R control flow</a></li>
+<li class="toctree-l1"><a class="reference internal" href="05-tidy-control-flow.html">Lecture 5 -  Tidy control flow in R</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">Lecture 6: Functions and testing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="07-mapping-and-nested-data-frames.html">Lecture 7: Mapping and nested data frames</a></li>
+<li class="toctree-l1"><a class="reference internal" href="08-lecture-tidy-evaluation.html">Lecture 8: Tidy evaluation</a></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><label class="sidebar-toggle primary-toggle btn btn-sm" for="__primary" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</label></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-source-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Source repositories">
+    <i class="fab fa-github"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://github.ubc.ca/mds-2023-24/DSCI_523_r-prog_students" target="_blank"
+   class="btn btn-sm btn-source-repository-button dropdown-item"
+   title="Source repository"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+<span class="btn__text-container">Repository</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://github.ubc.ca/mds-2023-24/DSCI_523_r-prog_students/issues/new?title=Issue%20on%20page%20%2Flecture-notes/06-lecture-functions-and-testing.html&body=Your%20issue%20content%20here." target="_blank"
+   class="btn btn-sm btn-source-issues-button dropdown-item"
+   title="Open an issue"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-lightbulb"></i>
+  </span>
+<span class="btn__text-container">Open issue</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="../_sources/lecture-notes/06-lecture-functions-and-testing.ipynb" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.ipynb</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="theme-switch nav-link" data-mode="light"><i class="fa-solid fa-sun fa-lg"></i></span>
+    <span class="theme-switch nav-link" data-mode="dark"><i class="fa-solid fa-moon fa-lg"></i></span>
+    <span class="theme-switch nav-link" data-mode="auto"><i class="fa-solid fa-circle-half-stroke fa-lg"></i></span>
+  </button>
+`);
+</script>
+
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+  </button>
+`);
+</script>
+<label class="sidebar-toggle secondary-toggle btn btn-sm" for="__secondary"title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</label>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>Lecture 6: Functions and testing</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#lecture-learning-objectives">Lecture learning objectives:</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#clicker-1">Clicker 1</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#functions">Functions</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#defining-functions-in-r">Defining functions in R:</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#default-function-arguments">Default function arguments</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#optional-advanced">Optional - Advanced</a><ul class="nav section-nav flex-column">
+<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#extra-arguments-via">Extra arguments via <code class="docutils literal notranslate"><span class="pre">...</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#lexical-scoping-in-r">Lexical scoping in R</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#name-masking">Name masking</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#dynamic-lookup">Dynamic lookup</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#a-fresh-start">A fresh start</a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#lazy-evaluation">Lazy evaluation</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#add-one-in-r"><code class="docutils literal notranslate"><span class="pre">add_one</span></code> in R</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#add-one-in-python"><code class="docutils literal notranslate"><span class="pre">add_one</span></code> in Python</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#the-power-of-lazy-evaluation">The power of lazy evaluation</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#clicker-2">Clicker 2</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#writing-tests-with-testthat">Writing tests with {testthat}</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#how-to-write-a-test-with-testthat">How to write a test with {testthat}</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#common-expect-statements-for-use-with-test-that">Common <code class="docutils literal notranslate"><span class="pre">expect_*</span></code> statements for use with <code class="docutils literal notranslate"><span class="pre">test_that</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#is-the-object-equal-to-a-value">Is the object equal to a value?</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#does-code-produce-an-output-message-warning-error">Does code produce an output/message/warning/error?</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#is-the-object-true-false">Is the object true/false?</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#tolerance-and-tests">Tolerance and tests:</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#unit-test-example">Unit test example</a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#test-driven-development-tdd-review">Test-driven development (TDD) review</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#toy-example-of-how-tdd-can-be-helpful">Toy example of how TDD can be helpful</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#exception-handling">Exception handling</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#we-can-test-our-exceptions-using-test-that">We can test our exceptions using test_that:</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#try-in-r"><code class="docutils literal notranslate"><span class="pre">try</span></code> in R</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#roxygen2-friendly-function-documentation">{roxygen2} friendly function documentation</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#rstudio-has-template-for-roxygen2-documentation">RStudio has template for <code class="docutils literal notranslate"><span class="pre">roxygen2</span></code> documentation</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#reading-in-functions-from-an-r-script">Reading in functions from an R script</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#introduction-to-r-packages">Introduction to R packages</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#install-the-convertemp-r-package">Install the convertemp R package:</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#packages-and-environments">Packages and environments</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#what-did-we-learn-today">What did we learn today?</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#attribution">Attribution:</a></li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article" role="main">
+                  
+  <section id="lecture-6-functions-and-testing">
+<h1>Lecture 6: Functions and testing<a class="headerlink" href="#lecture-6-functions-and-testing" title="Permalink to this heading">#</a></h1>
+<section id="lecture-learning-objectives">
+<h2>Lecture learning objectives:<a class="headerlink" href="#lecture-learning-objectives" title="Permalink to this heading">#</a></h2>
+<p>By then end of this lecture &amp; worksheet 6, students should be able to:</p>
+<ul class="simple">
+<li><p>In R, define and use a named function that accepts parameters and returns values</p></li>
+<li><p>Describe lazy evaluation and <code class="docutils literal notranslate"><span class="pre">...</span></code> (variable arguments) and how it affects functions in R</p></li>
+<li><p>explain the importance of scoping and environments in R as they relate to functions</p></li>
+<li><p>Use <code class="docutils literal notranslate"><span class="pre">testthat</span></code> to formulate a test case to prove a function design specification</p></li>
+<li><p>Use test-driven development principles to define a function that accepts parameters, returns values and passes all tests</p></li>
+<li><p>Handle errors gracefully via exception handling</p></li>
+<li><p>Use <code class="docutils literal notranslate"><span class="pre">roxygen2</span></code> friendly function documentation to describe parameters, return values, description and example(s).</p></li>
+<li><p>Write comments within a function to improve readability</p></li>
+<li><p>Evaluate the readability, complexity and performance of a function</p></li>
+<li><p>Source and use functions stored as R code in another file, as well as those in R packages/libraries</p></li>
+<li><p>Describe what R packages/libraries are, as well as explain when and why they are useful</p></li>
+</ul>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="nf">options</span><span class="p">(</span><span class="n">repr.matrix.max.rows</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">10</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="clicker-1">
+<h2>Clicker 1<a class="headerlink" href="#clicker-1" title="Permalink to this heading">#</a></h2>
+<div class="admonition-which-of-the-following-code-is-not-correct-for-finding-sum-of-all-elements-in-col-1-my-t-tibble-col-1-c-1-43-2-21-3-43-na-col-2-c-2-6-3-4-5-6-3 admonition">
+<p class="admonition-title">Which of the following code is not correct for finding sum of all elements in col_1. (<em><strong>my_t &lt;- tibble(col_1 = c(1.43, 2.21, 3.43, NA), col_2 = c(2.6, 3.4, 5, 6.3)</strong></em>)</p>
+<table class="colwidths-auto table">
+<thead>
+<tr class="row-odd"><th class="head"><p><strong>col_1</strong></p></th>
+<th class="head"><p><strong>col_2</strong></p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>1.43</p></td>
+<td><p>2.6</p></td>
+</tr>
+<tr class="row-odd"><td><p>2.21</p></td>
+<td><p>3.4</p></td>
+</tr>
+<tr class="row-even"><td><p>3.43</p></td>
+<td><p>5.0</p></td>
+</tr>
+<tr class="row-odd"><td><p>NA</p></td>
+<td><p>6.3</p></td>
+</tr>
+</tbody>
+</table>
+<p>A) my_t |&gt; summarise(sum_val = sum(col_1, na.rm = TRUE))</p>
+<p>B) my_t |&gt; summarize(sum_val = sum(col_1, na.rm = TRUE))</p>
+<p>C) my_t |&gt; summarise(sum_val = sum(col_1, is.na = TRUE))</p>
+<p>D) my_t |&gt; drop_na(col_1) |&gt; summarise(sum_val = sum(col_1))</p>
+</div>
+<div class="toggle docutils container">
+<p><em><strong>Answer: C</strong></em></p>
+<p>There is no argument called <em><strong>is.na</strong></em> that we can pass to <em><strong>sum</strong></em> function</p>
+</div>
+</section>
+<section id="functions">
+<h2>Functions<a class="headerlink" href="#functions" title="Permalink to this heading">#</a></h2>
+<section id="defining-functions-in-r">
+<h3>Defining functions in R:<a class="headerlink" href="#defining-functions-in-r" title="Permalink to this heading">#</a></h3>
+<ul class="simple">
+<li><p>Use <code class="docutils literal notranslate"><span class="pre">variable</span> <span class="pre">&lt;-</span> <span class="pre">function(…arguments…)</span> <span class="pre">{</span> <span class="pre">…body…</span> <span class="pre">}</span></code> to create a function and give it a name</p></li>
+</ul>
+<p>Example:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="n">add</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">function</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="w"> </span><span class="n">y</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="n">x</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">y</span>
+<span class="p">}</span>
+
+<span class="nf">add</span><span class="p">(</span><span class="m">5</span><span class="p">,</span><span class="w"> </span><span class="m">10</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html">15</div></div>
+</div>
+<ul class="simple">
+<li><p>As in Python, functions in R are objects. This is referred to as “first-class functions”.</p></li>
+<li><p>The last line of the function returns a value, to return a value early use the special word <code class="docutils literal notranslate"><span class="pre">return</span></code></p></li>
+</ul>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="n">add</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">function</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="w"> </span><span class="n">y</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nf">if </span><span class="p">(</span><span class="o">!</span><span class="nf">is.numeric</span><span class="p">(</span><span class="n">x</span><span class="p">)</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="o">!</span><span class="nf">is.numeric</span><span class="p">(</span><span class="n">y</span><span class="p">))</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="nf">return</span><span class="p">(</span><span class="kc">NA</span><span class="p">)</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="w">    </span><span class="n">x</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">y</span>
+<span class="p">}</span>
+
+<span class="nf">add</span><span class="p">(</span><span class="m">5</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;a&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html">&lt;NA&gt;</div></div>
+</div>
+<p><em>Note: you probably want to throw an error here instead of return NA, this example was purely for illustrating early returns</em></p>
+</section>
+<section id="default-function-arguments">
+<h3>Default function arguments<a class="headerlink" href="#default-function-arguments" title="Permalink to this heading">#</a></h3>
+<p>Same as in Python!</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="n">repeat_string</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">function</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="w"> </span><span class="n">n</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">2</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="n">repeated</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="s">&quot;&quot;</span>
+<span class="w">    </span><span class="nf">for </span><span class="p">(</span><span class="n">i</span><span class="w"> </span><span class="n">in</span><span class="w"> </span><span class="nf">seq_along</span><span class="p">(</span><span class="m">1</span><span class="o">:</span><span class="n">n</span><span class="p">))</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="n">repeated</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">paste0</span><span class="p">(</span><span class="n">repeated</span><span class="p">,</span><span class="w"> </span><span class="n">x</span><span class="p">)</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="w">    </span><span class="n">repeated</span>
+<span class="p">}</span>
+
+<span class="nf">repeat_string</span><span class="p">(</span><span class="s">&quot;MDS&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html">'MDSMDS'</div></div>
+</div>
+<section id="optional-advanced">
+<h4>Optional - Advanced<a class="headerlink" href="#optional-advanced" title="Permalink to this heading">#</a></h4>
+<section id="extra-arguments-via">
+<h5>Extra arguments via <code class="docutils literal notranslate"><span class="pre">...</span></code><a class="headerlink" href="#extra-arguments-via" title="Permalink to this heading">#</a></h5>
+<p>If we want our function to be able to take extra arguments that we don’t specify, we must explicitly convert <code class="docutils literal notranslate"><span class="pre">...</span></code> to a list:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="n">add</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">function</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="w"> </span><span class="n">y</span><span class="p">,</span><span class="w"> </span><span class="kc">...</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="n">total</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">x</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">y</span>
+<span class="w">    </span><span class="nf">for </span><span class="p">(</span><span class="n">value</span><span class="w"> </span><span class="n">in</span><span class="w"> </span><span class="nf">list</span><span class="p">(</span><span class="kc">...</span><span class="p">))</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="n">total</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">total</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">value</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="w">    </span><span class="n">total</span>
+<span class="w">    </span><span class="nf">print</span><span class="p">(</span><span class="nf">list</span><span class="p">(</span><span class="kc">...</span><span class="p">))</span>
+<span class="p">}</span>
+<span class="nf">add</span><span class="p">(</span><span class="m">1</span><span class="p">,</span><span class="w"> </span><span class="m">3</span><span class="p">,</span><span class="w"> </span><span class="m">5</span><span class="p">,</span><span class="w"> </span><span class="m">6</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[[1]]
+[1] 5
+
+[[2]]
+[1] 6
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+</section>
+</section>
+<section id="lexical-scoping-in-r">
+<h3>Lexical scoping in R<a class="headerlink" href="#lexical-scoping-in-r" title="Permalink to this heading">#</a></h3>
+<p>R’s lexical scoping follows several rules, we will cover the following 3:</p>
+<ul class="simple">
+<li><p>Name masking</p></li>
+<li><p>Dynamic lookup</p></li>
+<li><p>A fresh start</p></li>
+</ul>
+<section id="name-masking">
+<h4>Name masking<a class="headerlink" href="#name-masking" title="Permalink to this heading">#</a></h4>
+<ul class="simple">
+<li><p>Names defined inside a function mask names defined outside a function</p></li>
+</ul>
+<ul class="simple">
+<li><p>If a name isn’t defined inside a function, R looks one level up (and then all the way up into the global environment and even loaded packages!)</p></li>
+</ul>
+<p>Talk through the following code with your neighbour and predict the output, then let’s confirm the result by running the code.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="n">x</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="m">1</span>
+<span class="n">g04</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">function</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="n">y</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="m">2</span>
+<span class="w">  </span><span class="n">i</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">function</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="n">z</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="m">3</span>
+<span class="w">    </span><span class="nf">c</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="w"> </span><span class="n">y</span><span class="p">,</span><span class="w"> </span><span class="n">z</span><span class="p">)</span>
+<span class="w">  </span><span class="p">}</span>
+<span class="w">  </span><span class="nf">i</span><span class="p">()</span>
+<span class="p">}</span>
+<span class="nf">g04</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><style>
+.list-inline {list-style: none; margin:0; padding: 0}
+.list-inline>li {display: inline-block}
+.list-inline>li:not(:last-child)::after {content: "\00b7"; padding: 0 .5ex}
+</style>
+<ol class=list-inline><li>1</li><li>2</li><li>3</li></ol>
+</div></div>
+</div>
+</section>
+<section id="dynamic-lookup">
+<h4>Dynamic lookup<a class="headerlink" href="#dynamic-lookup" title="Permalink to this heading">#</a></h4>
+<ul class="simple">
+<li><p>R looks for values when the function is run, not when the function is created.</p></li>
+<li><p>This means that the output of a function can differ depending on the objects outside the function’s environment.</p></li>
+</ul>
+<p>Talk through the following code with your neighbour and predict the output, then let’s confirm the result by running the code.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="n">g12</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">function</span><span class="p">()</span><span class="w"> </span><span class="n">x</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="m">1</span>
+<span class="n">x</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="m">15</span>
+<span class="nf">g12</span><span class="p">()</span>
+
+<span class="n">x</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="m">20</span>
+<span class="nf">g12</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html">16</div><div class="output text_html">21</div></div>
+</div>
+</section>
+<section id="a-fresh-start">
+<h4>A fresh start<a class="headerlink" href="#a-fresh-start" title="Permalink to this heading">#</a></h4>
+<ul class="simple">
+<li><p>Every time a function is called a new environment is created to host its execution.</p></li>
+<li><p>This means that a function has no way to tell what happened the last time it was run; each invocation is completely independent.</p></li>
+</ul>
+<p>Talk through the following code with your neighbour and predict the output, then let’s confirm the result by running the code.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="n">g11</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">function</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="nf">if </span><span class="p">(</span><span class="o">!</span><span class="nf">exists</span><span class="p">(</span><span class="s">&quot;a&quot;</span><span class="p">))</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="n">a</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="m">1</span>
+<span class="w">  </span><span class="p">}</span><span class="w"> </span><span class="n">else</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="n">a</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">a</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="m">1</span>
+<span class="w">  </span><span class="p">}</span>
+<span class="w">  </span><span class="n">a</span>
+<span class="p">}</span>
+
+<span class="nf">g11</span><span class="p">()</span>
+<span class="nf">g11</span><span class="p">()</span>
+<span class="nf">g11</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html">1</div><div class="output text_html">1</div><div class="output text_html">1</div></div>
+</div>
+</section>
+</section>
+<section id="lazy-evaluation">
+<h3>Lazy evaluation<a class="headerlink" href="#lazy-evaluation" title="Permalink to this heading">#</a></h3>
+<p>In R, function arguments are lazily evaluated: they’re only evaluated if accessed.</p>
+<p>Knowing that, now consider the <code class="docutils literal notranslate"><span class="pre">add_one</span></code> function written in both R and Python below:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1"># R code (this would work)</span>
+<span class="n">add_one</span> <span class="o">&lt;-</span> <span class="n">function</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span> <span class="p">{</span>
+    <span class="n">x</span> <span class="o">&lt;-</span> <span class="n">x</span> <span class="o">+</span> <span class="mi">1</span>
+    <span class="k">return</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+<span class="p">}</span> 
+</pre></div>
+</div>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1"># Python code (this would not work)</span>
+<span class="k">def</span> <span class="nf">add_one</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">):</span>
+    <span class="n">x</span> <span class="o">=</span> <span class="n">x</span> <span class="o">+</span> <span class="mi">1</span>
+    <span class="k">return</span> <span class="n">x</span>
+</pre></div>
+</div>
+<p>Why will the above <code class="docutils literal notranslate"><span class="pre">add_one</span></code> function will work in R, but the equivalent version of the function in python would break?</p>
+<ul class="simple">
+<li><p>Python evaluates the function arguments before it evaluates the function and because it doesn’t know what <code class="docutils literal notranslate"><span class="pre">y</span></code> is, it will break even though it is not used in the function.</p></li>
+<li><p>R performs lazy evaluation, meaning it delays the evaluation of the function arguments until its value is needed within/inside the function. Since <code class="docutils literal notranslate"><span class="pre">y</span></code> is never referenced inside the function, R doesn’t complain, or even notice it.</p></li>
+</ul>
+<section id="add-one-in-r">
+<h4><code class="docutils literal notranslate"><span class="pre">add_one</span></code> in R<a class="headerlink" href="#add-one-in-r" title="Permalink to this heading">#</a></h4>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">add_one</span> <span class="o">&lt;-</span> <span class="n">function</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span> <span class="p">{</span>
+    <span class="n">x</span> <span class="o">&lt;-</span> <span class="n">x</span> <span class="o">+</span> <span class="mi">1</span>
+    <span class="k">return</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+<span class="p">}</span> 
+</pre></div>
+</div>
+<p>This works:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">add_one</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="mi">3</span>
+</pre></div>
+</div>
+<p>and so does this:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">add_one</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="mi">3</span>
+</pre></div>
+</div>
+</section>
+<section id="add-one-in-python">
+<h4><code class="docutils literal notranslate"><span class="pre">add_one</span></code> in Python<a class="headerlink" href="#add-one-in-python" title="Permalink to this heading">#</a></h4>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>def add_one(x, y):
+    x = x + 1
+    return x`
+</pre></div>
+</div>
+<p>This works:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">add_one</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="mi">3</span>
+</pre></div>
+</div>
+<p>This does not:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">add_one</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">---------------------------------------------------------------------------</span>
+<span class="ne">TypeError</span>                                 <span class="n">Traceback</span> <span class="p">(</span><span class="n">most</span> <span class="n">recent</span> <span class="n">call</span> <span class="n">last</span><span class="p">)</span>
+<span class="o">&lt;</span><span class="n">ipython</span><span class="o">-</span><span class="nb">input</span><span class="o">-</span><span class="mi">5</span><span class="o">-</span><span class="n">f2e542671748</span><span class="o">&gt;</span> <span class="ow">in</span> <span class="o">&lt;</span><span class="n">module</span><span class="o">&gt;</span>
+<span class="o">----&gt;</span> <span class="mi">1</span> <span class="n">add_one</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
+
+<span class="ne">TypeError</span><span class="p">:</span> <span class="n">add_one</span><span class="p">()</span> <span class="n">missing</span> <span class="mi">1</span> <span class="n">required</span> <span class="n">positional</span> <span class="n">argument</span><span class="p">:</span> <span class="s1">&#39;y&#39;</span>
+</pre></div>
+</div>
+</section>
+<section id="the-power-of-lazy-evaluation">
+<h4>The power of lazy evaluation<a class="headerlink" href="#the-power-of-lazy-evaluation" title="Permalink to this heading">#</a></h4>
+<p>Let’s you have easy to use interactive code like this:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="nf">head</span><span class="p">(</span><span class="n">mtcars</span><span class="p">,</span><span class="w"> </span><span class="n">n</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">2</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><table class="dataframe">
+<caption>A data.frame: 2 × 11</caption>
+<thead>
+	<tr><th></th><th scope=col>mpg</th><th scope=col>cyl</th><th scope=col>disp</th><th scope=col>hp</th><th scope=col>drat</th><th scope=col>wt</th><th scope=col>qsec</th><th scope=col>vs</th><th scope=col>am</th><th scope=col>gear</th><th scope=col>carb</th></tr>
+	<tr><th></th><th scope=col>&lt;dbl&gt;</th><th scope=col>&lt;dbl&gt;</th><th scope=col>&lt;dbl&gt;</th><th scope=col>&lt;dbl&gt;</th><th scope=col>&lt;dbl&gt;</th><th scope=col>&lt;dbl&gt;</th><th scope=col>&lt;dbl&gt;</th><th scope=col>&lt;dbl&gt;</th><th scope=col>&lt;dbl&gt;</th><th scope=col>&lt;dbl&gt;</th><th scope=col>&lt;dbl&gt;</th></tr>
+</thead>
+<tbody>
+	<tr><th scope=row>Mazda RX4</th><td>21</td><td>6</td><td>160</td><td>110</td><td>3.9</td><td>2.620</td><td>16.46</td><td>0</td><td>1</td><td>4</td><td>4</td></tr>
+	<tr><th scope=row>Mazda RX4 Wag</th><td>21</td><td>6</td><td>160</td><td>110</td><td>3.9</td><td>2.875</td><td>17.02</td><td>0</td><td>1</td><td>4</td><td>4</td></tr>
+</tbody>
+</table>
+</div></div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="n">dplyr</span><span class="o">::</span><span class="nf">select</span><span class="p">(</span><span class="n">mtcars</span><span class="p">,</span><span class="w"> </span><span class="n">mpg</span><span class="p">,</span><span class="w"> </span><span class="n">cyl</span><span class="p">,</span><span class="w"> </span><span class="n">hp</span><span class="p">,</span><span class="w"> </span><span class="n">qsec</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><table class="dataframe">
+<caption>A data.frame: 32 × 4</caption>
+<thead>
+	<tr><th></th><th scope=col>mpg</th><th scope=col>cyl</th><th scope=col>hp</th><th scope=col>qsec</th></tr>
+	<tr><th></th><th scope=col>&lt;dbl&gt;</th><th scope=col>&lt;dbl&gt;</th><th scope=col>&lt;dbl&gt;</th><th scope=col>&lt;dbl&gt;</th></tr>
+</thead>
+<tbody>
+	<tr><th scope=row>Mazda RX4</th><td>21.0</td><td>6</td><td>110</td><td>16.46</td></tr>
+	<tr><th scope=row>Mazda RX4 Wag</th><td>21.0</td><td>6</td><td>110</td><td>17.02</td></tr>
+	<tr><th scope=row>Datsun 710</th><td>22.8</td><td>4</td><td> 93</td><td>18.61</td></tr>
+	<tr><th scope=row>Hornet 4 Drive</th><td>21.4</td><td>6</td><td>110</td><td>19.44</td></tr>
+	<tr><th scope=row>Hornet Sportabout</th><td>18.7</td><td>8</td><td>175</td><td>17.02</td></tr>
+	<tr><th scope=row>⋮</th><td>⋮</td><td>⋮</td><td>⋮</td><td>⋮</td></tr>
+	<tr><th scope=row>Lotus Europa</th><td>30.4</td><td>4</td><td>113</td><td>16.9</td></tr>
+	<tr><th scope=row>Ford Pantera L</th><td>15.8</td><td>8</td><td>264</td><td>14.5</td></tr>
+	<tr><th scope=row>Ferrari Dino</th><td>19.7</td><td>6</td><td>175</td><td>15.5</td></tr>
+	<tr><th scope=row>Maserati Bora</th><td>15.0</td><td>8</td><td>335</td><td>14.6</td></tr>
+	<tr><th scope=row>Volvo 142E</th><td>21.4</td><td>4</td><td>109</td><td>18.6</td></tr>
+</tbody>
+</table>
+</div></div>
+</div>
+<p>Notes:</p>
+<ul class="simple">
+<li><p>There’s more than just lazy evaluation happening in the code above, but lazy evaluation is part of it.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">package::function()</span></code> is a way to use a function from an R package without loading the entire library.</p></li>
+</ul>
+</section>
+</section>
+</section>
+<section id="clicker-2">
+<h2>Clicker 2<a class="headerlink" href="#clicker-2" title="Permalink to this heading">#</a></h2>
+<a class="reference internal image-reference" href="lecture-notes/img/fries.jpeg"><img alt="lecture-notes/img/fries.jpeg" src="lecture-notes/img/fries.jpeg" style="width: 300px;" /></a>
+<div class="admonition-what-will-be-the-output-of-following admonition">
+<p class="admonition-title">What will be the output of following </p>
+<a class="reference internal image-reference" href="../_images/clickerl6.png"><img alt="../_images/clickerl6.png" src="../_images/clickerl6.png" style="width: 800px;" /></a>
+</div>
+<div class="toggle docutils container">
+<p><em><strong>Answer: A</strong></em>
+Clear concepts on</p>
+<ul class="simple">
+<li><p>Name masking</p></li>
+<li><p>Dynamic lookup</p></li>
+<li><p>A fresh start</p></li>
+<li><p>Lazy evaluation</p></li>
+<li><p>return statement</p></li>
+<li><p>Positional &amp; keyword arguments</p></li>
+<li><p>Why we use try</p></li>
+</ul>
+</div>
+</section>
+<section id="writing-tests-with-testthat">
+<h2>Writing tests with {testthat}<a class="headerlink" href="#writing-tests-with-testthat" title="Permalink to this heading">#</a></h2>
+<ul class="simple">
+<li><p>Industry standard tool for writing tests in R is the <a class="reference external" href="https://testthat.r-lib.org/">{testthat} package</a>.</p></li>
+<li><p>To use an R package, we typically load the package into R using the <code class="docutils literal notranslate"><span class="pre">library</span></code> function:</p></li>
+</ul>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="nf">library</span><span class="p">(</span><span class="n">testthat</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<section id="how-to-write-a-test-with-testthat">
+<h3>How to write a test with {testthat}<a class="headerlink" href="#how-to-write-a-test-with-testthat" title="Permalink to this heading">#</a></h3>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">test_that</span><span class="p">(</span><span class="s2">&quot;Message to print if test fails&quot;</span><span class="p">,</span> <span class="n">expect_</span><span class="o">*</span><span class="p">(</span><span class="o">...</span><span class="p">))</span>
+</pre></div>
+</div>
+<p>Often our <code class="docutils literal notranslate"><span class="pre">test_that</span></code> function calls are longer than 80 characters, so we use <code class="docutils literal notranslate"><span class="pre">{</span></code> to split the code across multiple lines, for example:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="n">x</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">c</span><span class="p">(</span><span class="m">3.5</span><span class="p">,</span><span class="w"> </span><span class="m">3.5</span><span class="p">,</span><span class="w"> </span><span class="m">3.5</span><span class="p">)</span>
+<span class="n">y</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">c</span><span class="p">(</span><span class="m">3.5</span><span class="p">,</span><span class="w"> </span><span class="m">3.5</span><span class="p">,</span><span class="w"> </span><span class="m">3.5</span><span class="p">)</span>
+<span class="nf">test_that</span><span class="p">(</span><span class="s">&quot;x and y should contain the same values&quot;</span><span class="p">,</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nf">expect_equal</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="w"> </span><span class="n">y</span><span class="p">)</span>
+<span class="p">})</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span><span class=" -Color -Color-Green">Test passed</span> 🌈
+</pre></div>
+</div>
+</div>
+</div>
+<p>Are you starting to see a pattern with <code class="docutils literal notranslate"><span class="pre">{</span></code> yet…</p>
+<section id="common-expect-statements-for-use-with-test-that">
+<h4>Common <code class="docutils literal notranslate"><span class="pre">expect_*</span></code> statements for use with <code class="docutils literal notranslate"><span class="pre">test_that</span></code><a class="headerlink" href="#common-expect-statements-for-use-with-test-that" title="Permalink to this heading">#</a></h4>
+</section>
+<section id="is-the-object-equal-to-a-value">
+<h4>Is the object equal to a value?<a class="headerlink" href="#is-the-object-equal-to-a-value" title="Permalink to this heading">#</a></h4>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">expect_identical</span></code> - test two objects for being exactly equal</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">expect_equal</span></code> - compare R objects x and y testing ‘near equality’ (can set a tolerance)</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">expect_equivalent</span></code> - compare R objects x and y testing ‘near equality’ (can set a tolerance) and does not assess attributes</p></li>
+</ul>
+</section>
+<section id="does-code-produce-an-output-message-warning-error">
+<h4>Does code produce an output/message/warning/error?<a class="headerlink" href="#does-code-produce-an-output-message-warning-error" title="Permalink to this heading">#</a></h4>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">expect_error</span></code> - tests if an expression throws an error</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">expect_warning</span></code> - tests whether an expression outputs a warning</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">expect_output</span></code> - tests that print output matches a specified value</p></li>
+</ul>
+</section>
+<section id="is-the-object-true-false">
+<h4>Is the object true/false?<a class="headerlink" href="#is-the-object-true-false" title="Permalink to this heading">#</a></h4>
+<p>These are fall-back expectations that you can use when none of the other more specific expectations apply. The disadvantage is that you may get a less informative error message.</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">expect_true</span></code> - tests if the object returns <code class="docutils literal notranslate"><span class="pre">TRUE</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">expect_false</span></code> - tests if the object returns <code class="docutils literal notranslate"><span class="pre">FALSE</span></code></p></li>
+</ul>
+</section>
+<section id="tolerance-and-tests">
+<h4>Tolerance and tests:<a class="headerlink" href="#tolerance-and-tests" title="Permalink to this heading">#</a></h4>
+<p>Below we add a tolerance arguement to the <code class="docutils literal notranslate"><span class="pre">expect_equal</span></code> statement such that the observed difference between these very similar vectors doesn’t cause the test to fail.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">x</span> <span class="o">&lt;-</span> <span class="n">c</span><span class="p">(</span><span class="mf">3.5</span><span class="p">,</span> <span class="mf">3.5</span><span class="p">,</span> <span class="mf">3.5</span><span class="p">)</span>
+<span class="n">y</span> <span class="o">&lt;-</span> <span class="n">c</span><span class="p">(</span><span class="mf">3.5</span><span class="p">,</span> <span class="mf">3.5</span><span class="p">,</span> <span class="mf">3.49999</span><span class="p">)</span>
+<span class="n">test_that</span><span class="p">(</span><span class="s2">&quot;x and y should contain the same values&quot;</span><span class="p">,</span> <span class="p">{</span>
+    <span class="n">expect_equal</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span>
+<span class="p">})</span>
+</pre></div>
+</div>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>Error: Test failed: &#39;x and y should contain the same values&#39;
+* &lt;text&gt;:4: `x` not equal to `y`.
+1/3 mismatches
+[3] 3.5 - 3.5 == 1e-05
+Traceback:
+
+1. test_that(&quot;x and y should contain the same values&quot;, {
+ .     expect_equal(x, y)
+ . })
+2. test_code(desc, code, env = parent.frame())
+3. get_reporter()$end_test(context = get_reporter()$.context, test = test)
+4. stop(message, call. = FALSE)
+</pre></div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="n">x</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">c</span><span class="p">(</span><span class="m">3.5</span><span class="p">,</span><span class="w"> </span><span class="m">3.5</span><span class="p">,</span><span class="w"> </span><span class="m">3.5</span><span class="p">)</span>
+<span class="n">y</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">c</span><span class="p">(</span><span class="m">3.5</span><span class="p">,</span><span class="w"> </span><span class="m">3.5</span><span class="p">,</span><span class="w"> </span><span class="m">3.49999</span><span class="p">)</span>
+<span class="nf">test_that</span><span class="p">(</span><span class="s">&quot;x and y should contain the same values&quot;</span><span class="p">,</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nf">expect_equal</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="w"> </span><span class="n">y</span><span class="p">,</span><span class="w"> </span><span class="n">tolerance</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">0.00001</span><span class="p">)</span>
+<span class="p">})</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span><span class=" -Color -Color-Green">Test passed</span> 🎊
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="unit-test-example">
+<h4>Unit test example<a class="headerlink" href="#unit-test-example" title="Permalink to this heading">#</a></h4>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="n">celsius_to_fahr</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">function</span><span class="p">(</span><span class="n">temp</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="p">(</span><span class="n">temp</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="p">(</span><span class="m">9</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="m">5</span><span class="p">))</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="m">32</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="nf">test_that</span><span class="p">(</span><span class="s">&quot;Temperature should be the same in Celcius and Fahrenheit at -40&quot;</span><span class="p">,</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="nf">expect_identical</span><span class="p">(</span><span class="nf">celsius_to_fahr</span><span class="p">(</span><span class="m">-40</span><span class="p">),</span><span class="w"> </span><span class="m">-40</span><span class="p">)</span>
+<span class="w">    </span><span class="p">})</span>
+<span class="nf">test_that</span><span class="p">(</span><span class="s">&quot;Room temperature should be about 23 degrees in Celcius and 73 degrees Fahrenheit&quot;</span><span class="p">,</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="nf">expect_equal</span><span class="p">(</span><span class="nf">celsius_to_fahr</span><span class="p">(</span><span class="m">23</span><span class="p">),</span><span class="w"> </span><span class="m">73</span><span class="p">,</span><span class="w"> </span><span class="n">tolerance</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">1</span><span class="p">)</span>
+<span class="w">    </span><span class="p">})</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span><span class=" -Color -Color-Green">Test passed</span> 🌈
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span><span class=" -Color -Color-Green">Test passed</span> 🥇
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+</section>
+<section id="test-driven-development-tdd-review">
+<h3>Test-driven development (TDD) review<a class="headerlink" href="#test-driven-development-tdd-review" title="Permalink to this heading">#</a></h3>
+<ol class="arabic simple">
+<li><p>Write your tests first (that call the function you haven’t yet written), based on edge cases you expect or can calculate by hand</p></li>
+<li><p>If necessary, create some “helper” data to test your function with (this might be done in conjunction with step 1)</p></li>
+<li><p>Write your function to make the tests pass (in this process you might think of more tests that you want to add)</p></li>
+</ol>
+<section id="toy-example-of-how-tdd-can-be-helpful">
+<h4>Toy example of how TDD can be helpful<a class="headerlink" href="#toy-example-of-how-tdd-can-be-helpful" title="Permalink to this heading">#</a></h4>
+<p>Let’s create a function called <code class="docutils literal notranslate"><span class="pre">fahr_to_celsius</span></code> that converts temperatures from Fahrenheit to Celsius.</p>
+<p>First we’ll write the tests (which will fail):</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="n">test_fahr_to_celsius</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">function</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nf">test_that</span><span class="p">(</span><span class="s">&quot;Temperature should be the same in Celcius and Fahrenheit at -40&quot;</span><span class="p">,</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="nf">expect_identical</span><span class="p">(</span><span class="nf">fahr_to_celsius</span><span class="p">(</span><span class="m">-40</span><span class="p">),</span><span class="w"> </span><span class="m">-40</span><span class="p">)</span>
+<span class="w">    </span><span class="p">})</span>
+<span class="w">    </span><span class="nf">test_that</span><span class="p">(</span><span class="s">&quot;Room temperature should be about 73 degrees Fahrenheit and 23 degrees in Celcius&quot;</span><span class="p">,</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="nf">expect_equal</span><span class="p">(</span><span class="nf">fahr_to_celsius</span><span class="p">(</span><span class="m">73</span><span class="p">),</span><span class="w"> </span><span class="m">23</span><span class="p">,</span><span class="w"> </span><span class="n">tolerance</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">1</span><span class="p">)</span>
+<span class="w">    </span><span class="p">})</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Then we write our function to pass the tests:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="n">fahr_to_celsius</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">function</span><span class="p">(</span><span class="n">temp</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="p">(</span><span class="n">temp</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="m">32</span><span class="p">)</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="m">5</span><span class="o">/</span><span class="m">9</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Then we call our tests to check it:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">test_fahr_to_celsius</span><span class="p">()</span>
+</pre></div>
+</div>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>Error: Test failed: &#39;Temperature should be the same in Celcius and Fahrenheit at -40&#39;
+* &lt;text&gt;:3: fahr_to_celsius(-40) not identical to -40.
+1/1 mismatches
+[1] -4.44 - -40 == 35.6
+Traceback:
+
+1. test_fahr_to_celsius()
+2. test_that(&quot;Temperature should be the same in Celcius and Fahrenheit at -40&quot;, 
+ .     {
+ .         expect_identical(fahr_to_celsius(-40), -40)
+ .     })   # at line 2-4 of file &lt;text&gt;
+3. test_code(desc, code, env = parent.frame())
+4. get_reporter()$end_test(context = get_reporter()$.context, test = test)
+5. stop(message, call. = FALSE)
+</pre></div>
+</div>
+<p>We found an error - so we go back and edit our function:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="n">fahr_to_celsius</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">function</span><span class="p">(</span><span class="n">temp</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="p">(</span><span class="n">temp</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="m">32</span><span class="p">)</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="m">5</span><span class="o">/</span><span class="m">9</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>And then call our tests again to see if we got it right!</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="nf">test_fahr_to_celsius</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span><span class=" -Color -Color-Green">Test passed</span> 🥇
+<span class=" -Color -Color-Green">Test passed</span> 🎊
+</pre></div>
+</div>
+</div>
+</div>
+<p>No message from the test, means we got it this time!</p>
+<img alt="https://media.giphy.com/media/EXFAJtutz5Ig8/giphy.gif" src="https://media.giphy.com/media/EXFAJtutz5Ig8/giphy.gif" />
+</section>
+</section>
+</section>
+<section id="exception-handling">
+<h2>Exception handling<a class="headerlink" href="#exception-handling" title="Permalink to this heading">#</a></h2>
+<p>How to check type and throw an error if not the expected type:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>if (!is.numeric(c(1, 2, &quot;c&quot;)))
+  stop(&quot;Cannot compute of a vector of characters.&quot;)
+</pre></div>
+</div>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">Error</span> <span class="ow">in</span> <span class="nb">eval</span><span class="p">(</span><span class="n">expr</span><span class="p">,</span> <span class="n">envir</span><span class="p">,</span> <span class="n">enclos</span><span class="p">):</span> <span class="n">Cannot</span> <span class="n">compute</span> <span class="n">of</span> <span class="n">a</span> <span class="n">vector</span> <span class="n">of</span> <span class="n">characters</span><span class="o">.</span>
+<span class="n">Traceback</span><span class="p">:</span>
+
+<span class="mf">1.</span> <span class="n">stop</span><span class="p">(</span><span class="s2">&quot;Cannot compute of a vector of characters.&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Example of defensive programming at the beginning of a function:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="n">fahr_to_celsius</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">function</span><span class="p">(</span><span class="n">temp</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nf">if</span><span class="p">(</span><span class="o">!</span><span class="nf">is.numeric</span><span class="p">(</span><span class="n">temp</span><span class="p">)){</span>
+<span class="w">        </span><span class="nf">stop</span><span class="p">(</span><span class="s">&quot;Cannot calculate temperature in Farenheit for non-numerical values&quot;</span><span class="p">)</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="w">    </span><span class="p">(</span><span class="n">temp</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="m">32</span><span class="p">)</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="m">5</span><span class="o">/</span><span class="m">9</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">fahr_to_celsius</span><span class="p">(</span><span class="s2">&quot;thirty&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">Error</span> <span class="ow">in</span> <span class="n">fahr_to_celsius</span><span class="p">(</span><span class="s2">&quot;thirty&quot;</span><span class="p">):</span> <span class="n">Cannot</span> <span class="n">calculate</span> <span class="n">temperature</span> <span class="ow">in</span> <span class="n">Farenheit</span> <span class="k">for</span> <span class="n">non</span><span class="o">-</span><span class="n">numerical</span> <span class="n">values</span>
+<span class="n">Traceback</span><span class="p">:</span>
+
+<span class="mf">1.</span> <span class="n">fahr_to_celsius</span><span class="p">(</span><span class="s2">&quot;thirty&quot;</span><span class="p">)</span>
+<span class="mf">2.</span> <span class="n">stop</span><span class="p">(</span><span class="s2">&quot;Cannot calculate temperature in Farenheit for non-numerical values&quot;</span><span class="p">)</span>   <span class="c1"># at line 3 of file &lt;text&gt;</span>
+</pre></div>
+</div>
+<p>If you wanted to issue a warning instead of an error, you could use <code class="docutils literal notranslate"><span class="pre">warning</span></code> in place of <code class="docutils literal notranslate"><span class="pre">stop</span></code> in the example above. However, in most cases it is better practice to throw an error than to print a warning…</p>
+<section id="we-can-test-our-exceptions-using-test-that">
+<h3>We can test our exceptions using test_that:<a class="headerlink" href="#we-can-test-our-exceptions-using-test-that" title="Permalink to this heading">#</a></h3>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="nf">test_that</span><span class="p">(</span><span class="s">&quot;Non-numeric values for temp should throw an error&quot;</span><span class="p">,</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nf">expect_error</span><span class="p">(</span><span class="nf">fahr_to_celsius</span><span class="p">(</span><span class="s">&quot;thirty&quot;</span><span class="p">))</span>
+<span class="w">    </span><span class="nf">expect_error</span><span class="p">(</span><span class="nf">fahr_to_celsius</span><span class="p">(</span><span class="nf">list</span><span class="p">(</span><span class="m">4</span><span class="p">)))</span>
+<span class="w">    </span><span class="p">})</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span><span class=" -Color -Color-Green">Test passed</span> 😸
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="try-in-r">
+<h3><code class="docutils literal notranslate"><span class="pre">try</span></code> in R<a class="headerlink" href="#try-in-r" title="Permalink to this heading">#</a></h3>
+<p>Similar to Python, R has a <code class="docutils literal notranslate"><span class="pre">try</span></code> function to attempt to run code, and continue running subsequent code even if code in the try block does not work:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="k">try</span><span class="p">({</span>
+    <span class="c1"># some code</span>
+    <span class="c1"># that can be </span>
+    <span class="c1"># split across several</span>
+    <span class="c1"># lines</span>
+<span class="p">})</span>
+
+<span class="c1"># code to continue even if error in code </span>
+<span class="c1"># in try code block above</span>
+</pre></div>
+</div>
+<p>This code normally results in an error that stops following code from running:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">x</span> <span class="o">&lt;-</span> <span class="n">data</span><span class="o">.</span><span class="n">frame</span><span class="p">(</span><span class="n">col1</span> <span class="o">=</span> <span class="n">c</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">1</span><span class="p">),</span> 
+                <span class="n">col2</span> <span class="o">=</span> <span class="n">c</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span> <span class="p">,</span> <span class="mi">1</span><span class="p">))</span>
+<span class="n">x</span><span class="p">[</span><span class="mi">3</span><span class="p">]</span>
+<span class="n">dim</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>Error in `[.data.frame`(x, 3): undefined columns selected
+Traceback:
+
+1. x[3]
+2. `[.data.frame`(x, 3)
+3. stop(&quot;undefined columns selected&quot;)
+</pre></div>
+</div>
+<p>Try let’s the code following the error run:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="nf">try</span><span class="p">({</span><span class="n">x</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">data.frame</span><span class="p">(</span><span class="n">col1</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">c</span><span class="p">(</span><span class="m">1</span><span class="p">,</span><span class="w"> </span><span class="m">2</span><span class="p">,</span><span class="w"> </span><span class="m">3</span><span class="p">,</span><span class="w"> </span><span class="m">2</span><span class="p">,</span><span class="w"> </span><span class="m">1</span><span class="p">),</span><span class="w"> </span>
+<span class="w">                     </span><span class="n">col2</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">c</span><span class="p">(</span><span class="m">0</span><span class="p">,</span><span class="w"> </span><span class="m">1</span><span class="p">,</span><span class="w"> </span><span class="m">0</span><span class="p">,</span><span class="w"> </span><span class="m">0</span><span class="w"> </span><span class="p">,</span><span class="w"> </span><span class="m">1</span><span class="p">))</span>
+<span class="w">     </span><span class="n">x</span><span class="p">[</span><span class="m">3</span><span class="p">]</span>
+<span class="p">})</span>
+<span class="nf">dim</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Error in `[.data.frame`(x, 3) : undefined columns selected
+</pre></div>
+</div>
+<div class="output text_html"><style>
+.list-inline {list-style: none; margin:0; padding: 0}
+.list-inline>li {display: inline-block}
+.list-inline>li:not(:last-child)::after {content: "\00b7"; padding: 0 .5ex}
+</style>
+<ol class=list-inline><li>5</li><li>2</li></ol>
+</div></div>
+</div>
+<p>Sensibly (IMHO) <code class="docutils literal notranslate"><span class="pre">try</span></code> has a default of <code class="docutils literal notranslate"><span class="pre">silent=FALSE</span></code>, which you can change if you find good reason too.</p>
+</section>
+</section>
+<section id="roxygen2-friendly-function-documentation">
+<h2>{roxygen2} friendly function documentation<a class="headerlink" href="#roxygen2-friendly-function-documentation" title="Permalink to this heading">#</a></h2>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="c1">#&#39; Converts temperatures from Fahrenheit to Celsius.</span>
+<span class="c1">#&#39;    </span>
+<span class="c1">#&#39; @param temp a vector of temperatures in Fahrenheit</span>
+<span class="c1">#&#39; </span>
+<span class="c1">#&#39; @return a vector of temperatures in Celsius</span>
+<span class="c1">#&#39; </span>
+<span class="c1">#&#39; @examples</span>
+<span class="c1">#&#39; fahr_to_celsius(-20)</span>
+<span class="n">fahr_to_celsius</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">function</span><span class="p">(</span><span class="n">temp</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="p">(</span><span class="n">temp</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="m">32</span><span class="p">)</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="m">5</span><span class="o">/</span><span class="m">9</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Why <code class="docutils literal notranslate"><span class="pre">roxygen2</span></code> documentation? If you document your functions like this, <em>when</em> you create an R package to share them they will be set up to have the fancy documentation that we get using <code class="docutils literal notranslate"><span class="pre">?function_name</span></code>.</p>
+<section id="rstudio-has-template-for-roxygen2-documentation">
+<h3>RStudio has template for <code class="docutils literal notranslate"><span class="pre">roxygen2</span></code> documentation<a class="headerlink" href="#rstudio-has-template-for-roxygen2-documentation" title="Permalink to this heading">#</a></h3>
+<a class="reference internal image-reference" href="../_images/insert_roxygen.png"><img alt="../_images/insert_roxygen.png" src="../_images/insert_roxygen.png" style="width: 500px;" /></a>
+</section>
+</section>
+<section id="reading-in-functions-from-an-r-script">
+<h2>Reading in functions from an R script<a class="headerlink" href="#reading-in-functions-from-an-r-script" title="Permalink to this heading">#</a></h2>
+<p>Usually the step before packaging your code, is having some functions in another script that you want to read into your analysis. We use the <code class="docutils literal notranslate"><span class="pre">source</span></code> function to do this:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="nf">source</span><span class="p">(</span><span class="s">&quot;src/kelvin_to_celsius.R&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Once you do this, you have access to all functions contained within that script:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="nf">kelvin_to_celsius</span><span class="p">(</span><span class="m">273.15</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html">0</div></div>
+</div>
+<p><em>Note - this is how the <code class="docutils literal notranslate"><span class="pre">test_*</span></code> functions are brought into your Jupyter notebooks for the autograding part of your lab3 homework.</em></p>
+</section>
+<section id="introduction-to-r-packages">
+<h2>Introduction to R packages<a class="headerlink" href="#introduction-to-r-packages" title="Permalink to this heading">#</a></h2>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">source(&quot;script_with_functions.R&quot;)</span></code> is useful, but when you start using these functions in different projects you need to keep copying the script, or having overly specific paths…</p></li>
+</ul>
+<ul class="simple">
+<li><p>The next step is packaging your R code so that it can be installed and then used across multiple projects on your (and others) machines without directly pointing to where the code is stored, but instead accessed using the <code class="docutils literal notranslate"><span class="pre">library</span></code> function.</p></li>
+</ul>
+<ul class="simple">
+<li><p>You will learn how to do this in Collaborative Software Development (term 2), but for now, let’s tour a simple R package to get a better understanding of what they are: https://github.com/ttimbers/convertemp</p></li>
+</ul>
+<section id="install-the-convertemp-r-package">
+<h3>Install the convertemp R package:<a class="headerlink" href="#install-the-convertemp-r-package" title="Permalink to this heading">#</a></h3>
+<p>In RStudio, type: <code class="docutils literal notranslate"><span class="pre">devtools::install_github(&quot;ttimbers/convertemp&quot;)</span></code></p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="nf">library</span><span class="p">(</span><span class="n">convertempr</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Attaching package: ‘convertempr’
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>The following objects are masked _by_ ‘.GlobalEnv’:
+
+    celsius_to_fahr, fahr_to_celsius, kelvin_to_celsius
+</pre></div>
+</div>
+</div>
+</div>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>?celsius_to_kelvin
+</pre></div>
+</div>
+<img alt="../_images/celsius_to_kelvin-help.png" src="../_images/celsius_to_kelvin-help.png" />
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="nf">celsius_to_kelvin</span><span class="p">(</span><span class="m">0</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html">273.15</div></div>
+</div>
+</section>
+<section id="packages-and-environments">
+<h3>Packages and environments<a class="headerlink" href="#packages-and-environments" title="Permalink to this heading">#</a></h3>
+<ul class="simple">
+<li><p>Each package attached by library() becomes one of the parents of the global environment</p></li>
+<li><p>The immediate parent of the global environment is the last package you attached, the parent of that package is the second to last package you attached, …</p></li>
+</ul>
+<a class="reference internal image-reference" href="https://d33wubrfki0l68.cloudfront.net/038b2da4f5db1d2a8acaf4ee1e7d08d04ab36ebc/ac22a/diagrams/environments/search-path.png"><img alt="https://d33wubrfki0l68.cloudfront.net/038b2da4f5db1d2a8acaf4ee1e7d08d04ab36ebc/ac22a/diagrams/environments/search-path.png" src="https://d33wubrfki0l68.cloudfront.net/038b2da4f5db1d2a8acaf4ee1e7d08d04ab36ebc/ac22a/diagrams/environments/search-path.png" style="width: 800px;" /></a>
+<p><em>Source: <a class="reference external" href="https://adv-r.hadley.nz/">Advanced R</a> by Hadley Wickham</em></p>
+<p>When you attach another package with library(), the parent environment of the global environment changes:</p>
+<a class="reference internal image-reference" href="https://d33wubrfki0l68.cloudfront.net/7c87a5711e92f0269cead3e59fc1e1e45f3667e9/0290f/diagrams/environments/search-path-2.png"><img alt="https://d33wubrfki0l68.cloudfront.net/7c87a5711e92f0269cead3e59fc1e1e45f3667e9/0290f/diagrams/environments/search-path-2.png" src="https://d33wubrfki0l68.cloudfront.net/7c87a5711e92f0269cead3e59fc1e1e45f3667e9/0290f/diagrams/environments/search-path-2.png" style="width: 800px;" /></a>
+<p><em>Source: <a class="reference external" href="https://adv-r.hadley.nz/">Advanced R</a> by Hadley Wickham</em></p>
+</section>
+<section id="what-did-we-learn-today">
+<h3>What did we learn today?<a class="headerlink" href="#what-did-we-learn-today" title="Permalink to this heading">#</a></h3>
+<ul class="simple">
+<li><p>How to write and test functions in R</p></li>
+<li><p>How to handle exceptions</p></li>
+<li><p>How to source functions from other files</p></li>
+<li><p>A little bit about what R packages are</p></li>
+</ul>
+</section>
+</section>
+<section id="attribution">
+<h2>Attribution:<a class="headerlink" href="#attribution" title="Permalink to this heading">#</a></h2>
+<ul class="simple">
+<li><p><a class="reference external" href="https://adv-r.hadley.nz/">Advanced R</a> by Hadley Wickham</p></li>
+<li><p><a class="reference external" href="http://tidynomicon.tech/">The Tidynomicon</a> by Greg Wilson</p></li>
+</ul>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "r"
+        },
+        kernelOptions: {
+            name: "ir",
+            path: "./lecture-notes"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'ir'</script>
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer">
+                  <!-- Previous / next buttons -->
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="05-tidy-control-flow.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">Lecture 5 -  Tidy control flow in R</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="07-mapping-and-nested-data-frames.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">Lecture 7: Mapping and nested data frames</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#lecture-learning-objectives">Lecture learning objectives:</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#clicker-1">Clicker 1</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#functions">Functions</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#defining-functions-in-r">Defining functions in R:</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#default-function-arguments">Default function arguments</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#optional-advanced">Optional - Advanced</a><ul class="nav section-nav flex-column">
+<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#extra-arguments-via">Extra arguments via <code class="docutils literal notranslate"><span class="pre">...</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#lexical-scoping-in-r">Lexical scoping in R</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#name-masking">Name masking</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#dynamic-lookup">Dynamic lookup</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#a-fresh-start">A fresh start</a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#lazy-evaluation">Lazy evaluation</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#add-one-in-r"><code class="docutils literal notranslate"><span class="pre">add_one</span></code> in R</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#add-one-in-python"><code class="docutils literal notranslate"><span class="pre">add_one</span></code> in Python</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#the-power-of-lazy-evaluation">The power of lazy evaluation</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#clicker-2">Clicker 2</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#writing-tests-with-testthat">Writing tests with {testthat}</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#how-to-write-a-test-with-testthat">How to write a test with {testthat}</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#common-expect-statements-for-use-with-test-that">Common <code class="docutils literal notranslate"><span class="pre">expect_*</span></code> statements for use with <code class="docutils literal notranslate"><span class="pre">test_that</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#is-the-object-equal-to-a-value">Is the object equal to a value?</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#does-code-produce-an-output-message-warning-error">Does code produce an output/message/warning/error?</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#is-the-object-true-false">Is the object true/false?</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#tolerance-and-tests">Tolerance and tests:</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#unit-test-example">Unit test example</a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#test-driven-development-tdd-review">Test-driven development (TDD) review</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#toy-example-of-how-tdd-can-be-helpful">Toy example of how TDD can be helpful</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#exception-handling">Exception handling</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#we-can-test-our-exceptions-using-test-that">We can test our exceptions using test_that:</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#try-in-r"><code class="docutils literal notranslate"><span class="pre">try</span></code> in R</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#roxygen2-friendly-function-documentation">{roxygen2} friendly function documentation</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#rstudio-has-template-for-roxygen2-documentation">RStudio has template for <code class="docutils literal notranslate"><span class="pre">roxygen2</span></code> documentation</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#reading-in-functions-from-an-r-script">Reading in functions from an R script</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#introduction-to-r-packages">Introduction to R packages</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#install-the-convertemp-r-package">Install the convertemp R package:</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#packages-and-environments">Packages and environments</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#what-did-we-learn-today">What did we learn today?</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#attribution">Attribution:</a></li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By The Jupyter Book community
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  <p class="copyright">
+    
+      © Copyright 2022.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../_static/scripts/bootstrap.js?digest=ac02cc09edc035673794"></script>
+<script src="../_static/scripts/pydata-sphinx-theme.js?digest=ac02cc09edc035673794"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>
