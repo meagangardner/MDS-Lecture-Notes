@@ -6,5 +6,6 @@
 | 571           | Machine Learning 1     | [https://meagangardner.github.io/MDS-Lecture-Notes-513-SQL/README.html](https://meagangardner.github.io/MDS-Lecture-Notes-571-Machine-Learning-1/README.html) |
 | 513           | SQL                    | https://meagangardner.github.io/MDS-Lecture-Notes-513-SQL/README.html |
 | 561           | Regression 1           | https://meagangardner.github.io/MDS-Lecture-Notes-561-Regression-1/README.html |
+| 554           | Experimentation and Causal Inference | https://meagangardner.github.io/MDS-Lecture-Notes-554-Experimentation-and-Causal-Inference/README.html |
 
 
